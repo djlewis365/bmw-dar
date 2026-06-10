@@ -433,11 +433,9 @@ function renderLeaderboard(){
       <div class="av" style="background:${a.bg};color:${a.fg}">${a.ini}</div>
       <div class="rl">
         <div class="rm">${a.name}</div>
-        <div style="display:flex;align-items:center;gap:3px;margin-top:3px;flex-wrap:wrap">
-          <span style="font-size:10px;color:var(--tm)">New</span>
-          <input class="ca-inp" id="a${a.i}n" type="number" min="0" value="${a.newU}" oninput="onAdvisorChange()" aria-label="${a.name} new sales">
-          <span style="font-size:10px;color:var(--tm)">Used</span>
-          <input class="ca-inp" id="a${a.i}u" type="number" min="0" value="${a.used}" oninput="onAdvisorChange()" aria-label="${a.name} used sales">
+        <div style="display:flex;align-items:center;gap:6px;margin-top:3px;flex-wrap:wrap">
+          <span style="display:flex;align-items:center;gap:3px"><span style="font-size:10px;color:var(--tm)">New</span><input class="ca-inp" id="a${a.i}n" type="number" min="0" value="${a.newU}" oninput="onAdvisorChange()" aria-label="${a.name} new sales"></span>
+          <span style="display:flex;align-items:center;gap:3px"><span style="font-size:10px;color:var(--tm)">Used</span><input class="ca-inp" id="a${a.i}u" type="number" min="0" value="${a.used}" oninput="onAdvisorChange()" aria-label="${a.name} used sales"></span>
           <span style="font-size:10px;color:var(--tm)">${goalLabel}</span>
         </div>
       </div>
