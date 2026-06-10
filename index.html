@@ -115,6 +115,7 @@ body{font-family:var(--ff);font-size:14px;background:var(--bg);color:var(--tp);m
 <body>
 <!-- AUTO-SEED-START -->
 <script>
+window.SCRAPE_SEED={suv:6,sedan:3,ev:1,advisors:[{"newU":2,"used":5},{"newU":2,"used":3},{"newU":2,"used":3},{"newU":1,"used":0},{"newU":0,"used":1},{"newU":1,"used":2},{"newU":3,"used":2}]};
 (function(){
   var today='2026-06-10';
   var key='dar_v7';
@@ -192,6 +193,7 @@ body{font-family:var(--ff);font-size:14px;background:var(--bg);color:var(--tp);m
     <div class="ig"><label>Sedans sold</label><input id="i-sedan" type="number" value="0" style="width:68px" oninput="saveSettings();renderSales()"></div>
     <div class="ig"><label>EVs sold</label><input id="i-ev" type="number" value="0" style="width:68px" oninput="saveSettings();renderSales()"></div>
     <button class="btn-sm" onclick="resetAll()">New month</button>
+    <button class="btn-sm" onclick="syncLatest()">Sync latest</button>
   </div>
   <div class="mg" id="salesMetrics"></div>
   <div class="g2">
@@ -297,6 +299,16 @@ function saveSettings(){STATE.goal=+document.getElementById('i-goal').value||60;
 function saveAdvisors(){ADVISOR_DEFS.forEach((_,i)=>{const ni=document.getElementById('a'+i+'n');const ui=document.getElementById('a'+i+'u');if(ni)STATE.advisors[i].newU=+ni.value||0;if(ui)STATE.advisors[i].used=+ui.value||0;});saveState(STATE);}
 function onAdvisorChange(){saveAdvisors();renderLeaderboard();renderSales();}
 function resetAll(){if(!confirm('Clear all advisor numbers for a new month?'))return;STATE.advisors=ADVISOR_DEFS.map(()=>({newU:0,used:0}));STATE.suv=0;STATE.sedan=0;STATE.ev=0;saveState(STATE);document.getElementById('i-suv').value=0;document.getElementById('i-sedan').value=0;document.getElementById('i-ev').value=0;renderLeaderboard();renderSales();}
+function syncLatest(){
+  const seed=window.SCRAPE_SEED;
+  if(!seed){alert('No scrape data found on this page.');return;}
+  STATE.suv=seed.suv;STATE.sedan=seed.sedan;STATE.ev=seed.ev;STATE.advisors=seed.advisors.map(a=>({...a}));
+  saveState(STATE);
+  document.getElementById('i-suv').value=STATE.suv;
+  document.getElementById('i-sedan').value=STATE.sedan;
+  document.getElementById('i-ev').value=STATE.ev;
+  renderLeaderboard();renderSales();
+}
 
 const INV=[
   {model:"M4CmpxDrCp",s:"4",ch:"BM240",d:218,p:100700,suv:false,av:true},
