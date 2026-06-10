@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>DAR Sales Command — BMW</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap');
+:root {
+  --blue:#1C69D3;--blue-dk:#0A2F6B;--blue-lt:#E8F0FB;
+  --green:#1E7A3C;--green-lt:#EAF3DE;
+  --amber:#854F0B;--amber-lt:#FAEEDA;
+  --red:#A32D2D;--red-lt:#FCEBEB;
+  --bg:#0f1117;--panel:#16191f;--card:#1c1f27;--border:rgba(255,255,255,0.08);
+  --tp:#f0f2f5;--ts:#8a909c;--tm:#4a5060;
+  --radius:8px;--radius-lg:12px;
+  --ff:'DM Sans',sans-serif;--fm:'DM Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--ff);font-size:14px;background:var(--bg);color:var(--tp);min-height:100vh}
+.app{max-width:1100px;margin:0 auto;padding:20px 16px 40px}
+.nav{display:flex;align-items:center;justify-content:space-between;padding-bottom:14px;border-bottom:.5px solid var(--border);margin-bottom:16px;gap:8px;flex-wrap:wrap}
+.nav-l{display:flex;align-items:center;gap:10px}
+.roundel{width:32px;height:32px;border-radius:50%;border:2px solid #fff;background:var(--blue);position:relative;overflow:hidden;flex-shrink:0}
+.roundel::after{content:'';position:absolute;top:0;left:50%;right:0;bottom:0;background:#fff}
+.roundel::before{content:'';position:absolute;top:50%;left:0;right:0;height:2px;background:#111;transform:translateY(-50%)}
+.nav-title{font-size:15px;font-weight:500;letter-spacing:-.01em}
+.nav-sub{font-size:11px;color:var(--ts);font-family:var(--fm)}
+.tabs{display:flex;gap:2px;background:var(--panel);border-radius:var(--radius);padding:3px;flex-wrap:wrap}
+.tab{font-size:12px;font-weight:500;padding:5px 13px;border-radius:6px;border:none;background:none;color:var(--ts);cursor:pointer;white-space:nowrap;transition:.15s}
+.tab.on{background:var(--card);color:var(--tp);border:.5px solid var(--border)}
+.pg{display:none}.pg.on{display:block}
+.mg{display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:8px;margin-bottom:14px}
+.mc{background:var(--panel);border:.5px solid var(--border);border-radius:var(--radius);padding:11px 13px}
+.mc-l{font-size:11px;color:var(--tm);margin-bottom:3px;text-transform:uppercase;letter-spacing:.07em}
+.mc-v{font-size:22px;font-weight:500;line-height:1;letter-spacing:-.02em}
+.mc-s{font-size:11px;color:var(--ts);margin-top:2px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.card{background:var(--card);border:.5px solid var(--border);border-radius:var(--radius-lg);padding:13px 15px}
+.ct{font-size:10px;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:var(--tm);margin-bottom:11px}
+.row{display:flex;align-items:center;gap:6px;padding:7px 0;border-bottom:.5px solid var(--border)}
+.row:last-child{border-bottom:none;padding-bottom:0}
+.rl{flex:1;min-width:0}
+.rm{font-size:13px;font-weight:500;color:var(--tp)}
+.bw{flex:1;height:5px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;margin:0 4px}
+.bf{height:100%;border-radius:3px}
+.badge{font-size:10px;font-weight:500;padding:2px 7px;border-radius:10px;flex-shrink:0}
+.b-red{background:rgba(161,45,45,.2);color:#F09595}
+.b-amb{background:rgba(133,79,11,.2);color:#FAC775}
+.b-grn{background:rgba(30,122,60,.2);color:#C0DD97}
+.b-blue{background:rgba(28,105,211,.2);color:#85B7EB}
+.b-gray{background:rgba(255,255,255,.06);color:var(--ts)}
+.b-hold{background:rgba(161,45,45,.15);color:#F09595;border:.5px solid rgba(161,45,45,.3)}
+.b-flex{background:rgba(133,79,11,.15);color:#FAC775;border:.5px solid rgba(133,79,11,.3)}
+.b-std{background:rgba(30,122,60,.15);color:#C0DD97;border:.5px solid rgba(30,122,60,.3)}
+.ig{display:flex;flex-direction:column;gap:4px}
+.ig label{font-size:11px;color:var(--ts)}
+.ig input{font-size:13px;padding:6px 10px;border:.5px solid var(--border);border-radius:var(--radius);background:var(--panel);color:var(--tp);font-family:var(--ff)}
+.ig input:focus{outline:none;border-color:var(--blue)}
+.btn-p{font-size:12px;font-weight:500;padding:7px 14px;border-radius:var(--radius);border:.5px solid var(--blue);background:var(--blue);color:#fff;cursor:pointer;align-self:flex-end;font-family:var(--ff)}
+.btn-p:hover{background:#1559b8}
+.btn-sm{font-size:11px;padding:5px 11px;border-radius:var(--radius);border:.5px solid var(--border);background:none;color:var(--ts);cursor:pointer;align-self:flex-end;font-family:var(--ff)}
+.btn-sm:hover{background:var(--panel)}
+.av{display:flex;width:28px;height:28px;border-radius:50%;align-items:center;justify-content:center;font-size:10px;font-weight:500;flex-shrink:0}
+.rn{font-size:11px;color:var(--tm);width:14px;text-align:center;flex-shrink:0}
+.proj-g{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pt{background:var(--panel);border-radius:var(--radius);padding:10px 12px}
+.pt-l{font-size:11px;color:var(--tm);margin-bottom:3px}
+.pt-v{font-size:18px;font-weight:500;line-height:1}
+.pt-s{font-size:11px;color:var(--ts);margin-top:2px}
+.good{color:#3aaa6e}.warn{color:#e8a020}.bad{color:#e05252}
+.frow{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.fchip{font-size:11px;padding:4px 10px;border-radius:20px;border:.5px solid var(--border);background:none;color:var(--ts);cursor:pointer;font-family:var(--ff)}
+.fchip.on{background:var(--blue);color:#fff;border-color:var(--blue)}
+.inv-tbl{width:100%;border-collapse:collapse;font-size:12px;table-layout:fixed}
+.inv-tbl th{font-size:10px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--tm);padding:6px 8px;border-bottom:.5px solid var(--border);text-align:left}
+.inv-tbl td{padding:7px 8px;border-bottom:.5px solid var(--border);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ts)}
+.inv-tbl tr:last-child td{border-bottom:none}
+.inv-tbl tr:hover td{background:rgba(255,255,255,.02)}
+.age-hot{color:#e05252;font-weight:500}.age-warn{color:#e8a020}.age-ok{color:var(--ts)}
+.alert{font-size:12px;padding:8px 12px;border-radius:var(--radius);margin-bottom:12px;background:rgba(28,105,211,.12);color:#85B7EB;border:.5px solid rgba(28,105,211,.25)}
+.ca-inp{width:38px;font-size:12px;padding:3px 5px;border:.5px solid var(--border);border-radius:6px;background:var(--panel);color:var(--tp);text-align:center;font-family:var(--fm)}
+.ca-inp:focus{outline:none;border-color:var(--blue)}
+.ttl{font-size:13px;font-weight:500;min-width:26px;text-align:right;flex-shrink:0;color:var(--tp)}
+.p-sec{margin-bottom:16px}
+.p-hdr{display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--panel);border:.5px solid var(--border);border-bottom:none;border-radius:var(--radius) var(--radius) 0 0}
+.p-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.p-title{font-size:10px;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:var(--ts)}
+.p-ct{margin-left:auto;font-size:10px;color:var(--tm)}
+.p-tw{border:.5px solid var(--border);border-radius:0 0 var(--radius) var(--radius);overflow:hidden}
+.p-tbl{width:100%;border-collapse:collapse;font-size:12px;table-layout:fixed}
+.p-tbl th{font-size:10px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--tm);padding:6px 10px;border-bottom:.5px solid var(--border);text-align:right}
+.p-tbl th:first-child{text-align:left}
+.p-tbl td{padding:8px 10px;border-bottom:.5px solid var(--border);text-align:right;font-size:12px;color:var(--ts)}
+.p-tbl tr:last-child td{border-bottom:none}
+.p-tbl tr:hover td{background:rgba(255,255,255,.02)}
+.p-tbl td:first-child{text-align:left}
+.p-mn{font-weight:500;font-size:12px;color:var(--tp)}
+.p-uc{display:inline-block;font-size:9px;color:var(--tm);background:rgba(255,255,255,.04);border-radius:3px;padding:1px 5px;margin-left:4px}
+.p-ask{font-size:13px;font-weight:500;color:var(--tp)}
+.p-vs{font-size:12px;color:#3aaa6e;font-weight:500}
+.p-fn{padding:7px 12px;font-size:11px;color:var(--tm);background:rgba(255,255,255,.015);border-top:.5px solid var(--border);line-height:1.6}
+.p-footer{margin-top:12px;padding:10px 14px;background:var(--card);border:.5px solid var(--border);border-left:2px solid var(--blue);border-radius:4px;font-size:11px;color:var(--ts);line-height:1.7}
+.p-statbar{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin-bottom:16px}
+.house-row{background:rgba(255,255,255,.03);border-radius:var(--radius);padding:7px 6px;margin-top:6px}
+</style>
+</head>
+<body>
+<!-- AUTO-SEED-START -->
+<script>
+(function(){
+  var today='2026-06-10';
+  var key='dar_v7';
+  var stored;
+  try{stored=JSON.parse(localStorage.getItem(key));}catch(e){}
+  if(!stored||stored._scraped!==today||stored.ev===undefined){
+    var prev=stored||{};
+    localStorage.setItem(key,JSON.stringify({
+      goal:prev.goal||60,suv:6,sedan:3,ev:0,wd:prev.wd||25,
+      _scraped:today,advisors:[{"newU":1,"used":5},{"newU":2,"used":3},{"newU":2,"used":3},{"newU":1,"used":0},{"newU":0,"used":1},{"newU":0,"used":2},{"newU":3,"used":2}]
+    }));
+  }
+  document.addEventListener('DOMContentLoaded',function(){
+    var sub=document.getElementById('navSub');
+    if(sub&&!sub.textContent.includes('Updated')){sub.textContent+=' · Updated Jun 10, 8:52 AM';}
+  });
+})();
+</script>
+<!-- AUTO-SEED-END -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="app">
+<div class="nav">
+  <div class="nav-l">
+    <div class="roundel"></div>
+    <div>
+      <div class="nav-title">DAR Sales Command</div>
+      <div class="nav-sub" id="navSub"></div>
+    </div>
+  </div>
+  <div class="tabs">
+    <button class="tab on" onclick="show('sales')">Sales</button>
+    <button class="tab" onclick="show('pipeline')">Pipeline</button>
+    <button class="tab" onclick="show('aging')">Aging</button>
+    <button class="tab" onclick="show('inventory')">All units</button>
+    <button class="tab" onclick="show('pricing')">Pricing</button>
+    <button class="tab" onclick="show('profit')">Profit</button>
+  </div>
+</div>
+
+<div id="pg-sales" class="pg on">
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;align-items:flex-end">
+    <div class="ig"><label>Monthly goal (new)</label><input id="i-goal" type="number" value="60" style="width:80px" oninput="saveSettings();renderSales()"></div>
+    <div class="ig"><label>SUVs sold</label><input id="i-suv" type="number" value="0" style="width:68px" oninput="saveSettings();renderSales()"></div>
+    <div class="ig"><label>Sedans sold</label><input id="i-sedan" type="number" value="0" style="width:68px" oninput="saveSettings();renderSales()"></div>
+    <div class="ig"><label>EVs sold</label><input id="i-ev" type="number" value="0" style="width:68px" oninput="saveSettings();renderSales()"></div>
+    <button class="btn-sm" onclick="resetAll()">New month</button>
+  </div>
+  <div class="mg" id="salesMetrics"></div>
+  <div class="g2">
+    <div class="card"><div class="ct">Goal tracking — new cars</div><div id="goalBars"></div></div>
+    <div class="card"><div class="ct">Model mix</div><div id="mixBars"></div></div>
+  </div>
+  <div class="g2">
+    <div class="card"><div class="ct">Month-end projection</div><div class="proj-g" id="projGrid"></div></div>
+    <div class="card">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+        <span class="ct" style="margin-bottom:0">Client advisor leaderboard</span>
+        <div style="display:flex;gap:4px">
+          <button class="fchip on" id="vt" onclick="setLbView('total',this)">Total</button>
+          <button class="fchip" id="vn" onclick="setLbView('new',this)">New</button>
+          <button class="fchip" id="vu" onclick="setLbView('used',this)">Used</button>
+        </div>
+      </div>
+      <div id="leaderboard"></div>
+    </div>
+  </div>
+</div>
+
+<div id="pg-pipeline" class="pg">
+  <div class="alert">New car inventory from DCS — 96 units. Used sales tracked via advisor leaderboard only.</div>
+  <div class="mg">
+    <div class="mc"><div class="mc-l">In stock</div><div class="mc-v" id="pinstock"></div><div class="mc-s">new units</div></div>
+    <div class="mc"><div class="mc-l">Pipeline value</div><div class="mc-v" id="pv"></div><div class="mc-s">list price</div></div>
+    <div class="mc"><div class="mc-l">Avg days on lot</div><div class="mc-v" id="pavg"></div></div>
+    <div class="mc"><div class="mc-l">Aged 90+</div><div class="mc-v bad" id="paged"></div><div class="mc-s">need action</div></div>
+    <div class="mc"><div class="mc-l">Avg list</div><div class="mc-v" id="pavgp"></div><div class="mc-s">per unit</div></div>
+  </div>
+  <div class="g2">
+    <div class="card"><div class="ct">Top models in stock</div><div id="topModels"></div></div>
+    <div class="card"><div class="ct">Series breakdown</div><div id="seriesBreak"></div></div>
+  </div>
+</div>
+
+<div id="pg-aging" class="pg">
+  <div class="mg" style="margin-bottom:14px">
+    <div class="mc"><div class="mc-l">0–30 days</div><div class="mc-v good" id="a0"></div><div class="mc-s">fresh</div></div>
+    <div class="mc"><div class="mc-l">31–60 days</div><div class="mc-v" id="a31"></div><div class="mc-s">monitor</div></div>
+    <div class="mc"><div class="mc-l">61–90 days</div><div class="mc-v warn" id="a61"></div><div class="mc-s">at risk</div></div>
+    <div class="mc"><div class="mc-l">91–180 days</div><div class="mc-v bad" id="a91"></div><div class="mc-s">aged</div></div>
+    <div class="mc"><div class="mc-l">180+ days</div><div class="mc-v bad" id="a180"></div><div class="mc-s">critical</div></div>
+  </div>
+  <div class="card"><div class="ct">Units needing action — 61+ days on lot</div><div id="agingList"></div></div>
+</div>
+
+<div id="pg-inventory" class="pg">
+  <div class="frow" id="filterRow"></div>
+  <div style="overflow-x:auto">
+    <table class="inv-tbl">
+      <thead><tr>
+        <th style="width:130px">Model</th><th style="width:100px">Chassis</th>
+        <th style="width:50px">Days</th><th style="width:60px">Series</th>
+        <th style="width:90px">List price</th><th style="width:90px">Status</th>
+      </tr></thead>
+      <tbody id="invBody"></tbody>
+    </table>
+  </div>
+</div>
+
+<div id="pg-pricing" class="pg">
+  <div class="p-statbar">
+    <div class="mc"><div class="mc-l">Invoice basis</div><div class="mc-v">94%</div><div class="mc-s">of MSRP</div></div>
+    <div class="mc"><div class="mc-l">Fixed costs / unit</div><div class="mc-v">$650</div><div class="mc-s">Process · Fuel · Pack</div></div>
+    <div class="mc"><div class="mc-l">Avg FE target</div><div class="mc-v">$1,200</div><div class="mc-s">some above, some below</div></div>
+    <div class="mc"><div class="mc-l">Target ask formula</div><div class="mc-v" style="font-size:15px">Invoice + $1,850</div><div class="mc-s">costs + $1,200 FE</div></div>
+  </div>
+  <div id="pricingGuide"></div>
+  <div class="p-footer">
+    <strong>Target ask</strong> = Invoice (MSRP × 94%) + $650 fixed costs + $1,200 FE target. BMW holdback, dealer cash, and regional incentives are not reflected and improve your true cost basis further.
+  </div>
+</div>
+</div>
+
+<div id="pg-profit" class="pg">
+  <div class="alert" id="profitAlert"></div>
+  <div class="mg" id="profitCards"></div>
+  <div class="g2" style="margin-bottom:10px">
+    <div class="card"><div class="ct">F / L / C breakdown</div><div id="profitFLC"></div></div>
+    <div class="card"><div class="ct">Per unit averages</div><div id="profitPU"></div></div>
+  </div>
+  <div class="card" style="margin-bottom:10px"><div class="ct">By advisor — MTD</div><div id="profitAdv"></div></div>
+  <div class="card"><div class="ct">Finance products — MTD</div><div id="profitFin"></div></div>
+</div>
+
+<script>
+const ADVISOR_DEFS=[
+  {name:'Adam',  ini:'AD',bg:'#1a2f5c',fg:'#85B7EB',goal:14,house:false},
+  {name:'Zach',  ini:'ZA',bg:'#1a3d2b',fg:'#C0DD97',goal:14,house:false},
+  {name:'Ian',   ini:'IA',bg:'#3d2e10',fg:'#FAC775',goal:14,house:false},
+  {name:'Dennis',ini:'DE',bg:'#2d1f5e',fg:'#AFA9EC',goal:20,house:false},
+  {name:'House', ini:'HO',bg:'#2a2a2a',fg:'#888780',goal:null,house:true},
+  {name:'Brady', ini:'BR',bg:'#3d1a1a',fg:'#F09595',goal:21,house:false},
+  {name:'Scott', ini:'SC',bg:'#2a2a2a',fg:'#B4B2A9',goal:21,house:false},
+];
+const SK='dar_v7';
+function loadState(){try{const r=localStorage.getItem(SK);if(r)return JSON.parse(r);}catch(e){}return null;}
+function saveState(s){try{localStorage.setItem(SK,JSON.stringify(s));}catch(e){}}
+let STATE=loadState()||{goal:60,suv:0,sedan:0,ev:0,wd:25,advisors:ADVISOR_DEFS.map(()=>({newU:0,used:0}))};
+function saveSettings(){STATE.goal=+document.getElementById('i-goal').value||60;STATE.suv=+document.getElementById('i-suv').value||0;STATE.sedan=+document.getElementById('i-sedan').value||0;STATE.ev=+document.getElementById('i-ev').value||0;saveState(STATE);}
+function saveAdvisors(){ADVISOR_DEFS.forEach((_,i)=>{const ni=document.getElementById('a'+i+'n');const ui=document.getElementById('a'+i+'u');if(ni)STATE.advisors[i].newU=+ni.value||0;if(ui)STATE.advisors[i].used=+ui.value||0;});saveState(STATE);}
+function onAdvisorChange(){saveAdvisors();renderLeaderboard();renderSales();}
+function resetAll(){if(!confirm('Clear all advisor numbers for a new month?'))return;STATE.advisors=ADVISOR_DEFS.map(()=>({newU:0,used:0}));STATE.suv=0;STATE.sedan=0;STATE.ev=0;saveState(STATE);document.getElementById('i-suv').value=0;document.getElementById('i-sedan').value=0;document.getElementById('i-ev').value=0;renderLeaderboard();renderSales();}
+
+const INV=[
+  {model:"M240xi Cp",s:"2",ch:"BM559",d:48,p:64905,suv:false,av:true},
+  {model:"228xi GC",s:"2",ch:"BM515",d:70,p:46235,suv:false,av:true},
+  {model:"228xi GC",s:"2",ch:"BM568",d:41,p:47735,suv:false,av:true},
+  {model:"228xi GC",s:"2",ch:"BM615",d:19,p:47785,suv:false,av:true},
+  {model:"228xi GC",s:"2",ch:"BM538",d:62,p:47035,suv:false,av:true},
+  {model:"M235xi GC",s:"2",ch:"BM453",d:109,p:56175,suv:false,av:true},
+  {model:"M235xi GC",s:"2",ch:"BM493",d:83,p:57860,suv:false,av:true},
+  {model:"M235xi GC",s:"2",ch:"BM512",d:74,p:57135,suv:false,av:true},
+  {model:"330i xDriv",s:"3",ch:"BM281",d:202,p:58290,suv:false,av:true},
+  {model:"330i xDriv",s:"3",ch:"BM567",d:41,p:54765,suv:false,av:true},
+  {model:"330i xDriv",s:"3",ch:"BM574",d:38,p:58865,suv:false,av:true},
+  {model:"330i xDriv",s:"3",ch:"BM626",d:8,p:53915,suv:false,av:true},
+  {model:"330i xDriv",s:"3",ch:"BM625",d:8,p:55415,suv:false,av:true},
+  {model:"330i xDriv",s:"3",ch:"BM614",d:19,p:55865,suv:false,av:true},
+  {model:"330xi",s:"3",ch:"BM446",d:114,p:55540,suv:false,av:true},
+  {model:"330xi",s:"3",ch:"BM622",d:13,p:59290,suv:false,av:true},
+  {model:"330xi",s:"3",ch:"BM619",d:18,p:61440,suv:false,av:true},
+  {model:"330xi",s:"3",ch:"BM620",d:18,p:56140,suv:false,av:true},
+  {model:"430xi Cp",s:"4",ch:"BM058",d:347,p:58950,suv:false,av:true},
+  {model:"430xi GC",s:"4",ch:"BM469",d:94,p:61565,suv:false,av:true},
+  {model:"530ix",s:"5",ch:"BM052",d:343,p:71760,suv:false,av:true},
+  {model:"530ix",s:"5",ch:"BM053",d:346,p:67310,suv:false,av:true},
+  {model:"530ix",s:"5",ch:"BM170",d:265,p:72110,suv:false,av:true},
+  {model:"530ix",s:"5",ch:"BM210",d:248,p:73440,suv:false,av:true},
+  {model:"550ex",s:"5",ch:"BM086",d:311,p:83665,suv:false,av:true},
+  {model:"550ex",s:"5",ch:"BM089",d:306,p:80515,suv:false,av:true},
+  {model:"M5",s:"5",ch:"BM528",d:70,p:135330,suv:false,av:true},
+  {model:"M5 Tour",s:"5",ch:"BM585",d:32,p:140850,suv:false,av:true},
+  {model:"M5 Tour",s:"5",ch:"BM495",d:82,p:132170,suv:false,av:true},
+  {model:"M5 Tour",s:"5",ch:"BM545",d:55,p:137890,suv:false,av:true},
+  {model:"i5 M60",s:"i5",ch:"BM569",d:41,p:92965,suv:false,av:true},
+  {model:"i5 M60",s:"i5",ch:"BM624",d:11,p:96015,suv:false,av:true},
+  {model:"750xe",s:"7",ch:"BM249",d:214,p:119500,suv:false,av:true},
+  {model:"M850xi Cp",s:"8",ch:"BM116",d:298,p:124470,suv:false,av:true},
+  {model:"M850xiCv",s:"8",ch:"BM511",d:75,p:140100,suv:false,av:true},
+  {model:"M850xi GC",s:"8",ch:"BM412",d:129,p:131950,suv:false,av:true},
+  {model:"i4 M60",s:"i4",ch:"BM467",d:94,p:76965,suv:false,av:true},
+  {model:"M4CmpxDrCp",s:"4",ch:"BM240",d:217,p:100700,suv:false,av:true},
+  {model:"i4 xDr40",s:"i4",ch:"BM468",d:94,p:68165,suv:false,av:true},
+  {model:"i4 xDr40",s:"i4",ch:"BM540",d:62,p:67965,suv:false,av:true},
+  {model:"X5 M60i",s:"X5",ch:"BM384",d:144,p:108220,suv:true,av:true},
+  {model:"X5 M60i",s:"X5",ch:"BM385",d:144,p:105770,suv:true,av:true},
+  {model:"X5 M60i",s:"X5",ch:"BM457",d:101,p:103350,suv:true,av:true},
+  {model:"X5 M60i",s:"X5",ch:"BM476",d:93,p:106100,suv:true,av:true},
+  {model:"X5 M60i",s:"X5",ch:"BM474",d:93,p:103350,suv:true,av:true},
+  {model:"X5 M60i",s:"X5",ch:"BM475",d:93,p:99900,suv:true,av:true},
+  {model:"X1 xDr28i",s:"X1",ch:"BM409",d:129,p:51470,suv:true,av:true},
+  {model:"X1 xDr28i",s:"X1",ch:"BM419",d:129,p:51520,suv:true,av:true},
+  {model:"X1 xDr28i",s:"X1",ch:"BM500",d:80,p:51020,suv:true,av:true},
+  {model:"X1 xDr28i",s:"X1",ch:"BM513",d:74,p:50720,suv:true,av:true},
+  {model:"X1 xDr28i",s:"X1",ch:"BM491",d:83,p:49870,suv:true,av:true},
+  {model:"X1 xDr28i",s:"X1",ch:"BM628",d:0,p:42868,suv:true,av:true},
+  {model:"X3 30",s:"X3",ch:"BM586",d:31,p:62000,suv:true,av:true},
+  {model:"X3 30",s:"X3",ch:"BM532",d:69,p:62465,suv:true,av:true},
+  {model:"X3 30",s:"X3",ch:"BM548",d:58,p:61265,suv:true,av:true},
+  {model:"X3 30",s:"X3",ch:"BM546",d:58,p:61665,suv:true,av:true},
+  {model:"X3 30",s:"X3",ch:"BM557",d:49,p:60165,suv:true,av:true},
+  {model:"X3 30",s:"X3",ch:"BM597",d:30,p:63215,suv:true,av:true},
+  {model:"X3 30",s:"X3",ch:"BM600",d:26,p:62315,suv:true,av:true},
+  {model:"X3 30",s:"X3",ch:"BM606",d:0,p:61565,suv:true,av:true},
+  {model:"X3 30",s:"X3",ch:"BM587",d:0,p:63215,suv:true,av:true},
+  {model:"X3 30",s:"X3",ch:"BM601",d:26,p:58465,suv:true,av:true},
+  {model:"X3 30",s:"X3",ch:"BM616",d:18,p:62550,suv:true,av:true},
+  {model:"X3 30",s:"X3",ch:"BM612",d:21,p:57800,suv:true,av:true},
+  {model:"X3 30",s:"X3",ch:"BM611",d:21,p:60200,suv:true,av:true},
+  {model:"X3 30",s:"X3",ch:"BM627",d:0,p:58315,suv:true,av:true},
+  {model:"X3 M50",s:"X3",ch:"BM372",d:149,p:72065,suv:true,av:true},
+  {model:"X5 xDr40i",s:"X5",ch:"BM373",d:149,p:80025,suv:true,av:true},
+  {model:"X5 xDr40i",s:"X5",ch:"BM496",d:82,p:83350,suv:true,av:true},
+  {model:"X5 xDr40i",s:"X5",ch:"BM518",d:71,p:83900,suv:true,av:true},
+  {model:"X5 xDr40i",s:"X5",ch:"BM484",d:89,p:80050,suv:true,av:true},
+  {model:"X5 xDr40i",s:"X5",ch:"BM610",d:20,p:83550,suv:true,av:true},
+  {model:"X5 xDr40i",s:"X5",ch:"BM591",d:0,p:81350,suv:true,av:true},
+  {model:"X5 xDr40i",s:"X5",ch:"BM609",d:0,p:82600,suv:true,av:true},
+  {model:"X5 xDr40i",s:"X5",ch:"BM603",d:0,p:82350,suv:true,av:true},
+  {model:"X5 xDr40i",s:"X5",ch:"BM602",d:26,p:86500,suv:true,av:true},
+  {model:"X5 xDr40i",s:"X5",ch:"BM604",d:24,p:77950,suv:true,av:true},
+  {model:"X5 xDr40i",s:"X5",ch:"BM605",d:24,p:82600,suv:true,av:true},
+  {model:"X5 xDr40i",s:"X5",ch:"BM595",d:30,p:80100,suv:true,av:true},
+  {model:"X5 xDr40i",s:"X5",ch:"BM593",d:30,p:78200,suv:true,av:true},
+  {model:"X5 M",s:"X5",ch:"BM229",d:230,p:143220,suv:true,av:true},
+  {model:"X5 xDr50e",s:"X5",ch:"BM396",d:141,p:85765,suv:true,av:true},
+  {model:"X5 xDr50e",s:"X5",ch:"BM580",d:36,p:90900,suv:true,av:true},
+  {model:"X5 xDr50e",s:"X5",ch:"BM579",d:36,p:88600,suv:true,av:true},
+  {model:"X5 xDr50e",s:"X5",ch:"BM590",d:32,p:86950,suv:true,av:true},
+  {model:"X2 xDr28i",s:"X2",ch:"BM326",d:179,p:54620,suv:true,av:true},
+  {model:"M440i xDri",s:"4",ch:"BN004",d:46,p:75330,suv:false,av:true},
+  {model:"430i xDrCv",s:"4",ch:"BN003",d:46,p:71830,suv:false,av:true},
+  {model:"M4 CompxDr",s:"4",ch:"BN014",d:19,p:102680,suv:false,av:true},
+  {model:"X7 xDr 40i",s:"X7",ch:"BN010",d:35,p:95105,suv:true,av:true},
+  {model:"X7 xDr 40i",s:"X7",ch:"BN005",d:45,p:102750,suv:true,av:true},
+  {model:"X7 xDr 40i",s:"X7",ch:"BN022",d:0,p:97805,suv:true,av:true},
+  {model:"X7 M60i",s:"X7",ch:"BN021",d:0,p:131430,suv:true,av:true},
+  {model:"M3 Competi",s:"3",ch:"BN007",d:41,p:108050,suv:false,av:true},
+  {model:"X6 xDr4",s:"X6",ch:"BN016",d:18,p:88700,suv:true,av:true},
+  {model:"X6 M Comp",s:"X6",ch:"BN012",d:35,p:146300,suv:true,av:false},
+];
+const SC={'X5':'#1C69D3','X3':'#378ADD','X1':'#85B7EB','X2':'#B5D4F4','X6':'#0C447C','X7':'#042C53','5':'#1E7A3C','3':'#3B6D11','4':'#639922','2':'#97C459','i4':'#1D9E75','7':'#9A5F00','8':'#BA7517','Z4':'#5D3FD3'};
+const SO=['X5','X3','X1','X2','X6','X7','5','3','4','2','Z4','i4','7','8'];
+let activeFilter='All',lbView='total';
+
+function show(p){
+  document.querySelectorAll('.pg').forEach(x=>x.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
+  document.getElementById('pg-'+p).classList.add('on');
+  document.querySelectorAll('.tab')[{sales:0,pipeline:1,aging:2,inventory:3,pricing:4,profit:5}[p]].classList.add('on');
+}
+function setLbView(v,el){lbView=v;['vt','vn','vu'].forEach(id=>document.getElementById(id).classList.remove('on'));el.classList.add('on');renderLeaderboard();}
+function barEl(pct,color){return`<div class="bw"><div class="bf" style="width:${Math.min(100,Math.round(pct))}%;background:${color}"></div></div>`;}
+function ageBadge(d){
+  if(d>=180)return'<span class="badge b-red">'+d+'d critical</span>';
+  if(d>=90)return'<span class="badge b-red">'+d+'d aged</span>';
+  if(d>=61)return'<span class="badge b-amb">'+d+'d at risk</span>';
+  if(d>=31)return'<span class="badge b-blue">'+d+'d</span>';
+  return'<span class="badge b-grn">'+d+'d</span>';
+}
+function fmtK(v){return'$'+Math.round(v/1000)+'k';}
+function fmtFull(v){return'$'+v.toLocaleString();}
+
+function renderLeaderboard(){
+  const advisors=ADVISOR_DEFS.map((def,i)=>({...def,i,...STATE.advisors[i]}));
+  const ranked=advisors.filter(a=>!a.house).sort((a,b)=>{
+    const va=lbView==='new'?a.newU:lbView==='used'?a.used:a.newU+a.used;
+    const vb=lbView==='new'?b.newU:lbView==='used'?b.used:b.newU+b.used;
+    return vb-va;
+  });
+  const house=advisors.find(a=>a.house);
+  const mkRow=(a,rank,isHouse)=>{
+    const total=a.newU+a.used;
+    const displayed=lbView==='new'?a.newU:lbView==='used'?a.used:total;
+    const goalPct=a.goal?Math.round(a.newU/a.goal*100):0;
+    const barColor=goalPct>=100?'#3aaa6e':goalPct>=75?'#e8a020':'#e05252';
+    const goalLabel=a.goal?`· goal ${a.goal}`:'· no goal';
+    const rowStyle=isHouse?'background:rgba(255,255,255,.03);border-radius:8px;padding:7px 6px;margin-top:6px':'';
+    return`<div class="row" style="gap:5px;${rowStyle}">
+      <span class="rn">${isHouse?'—':rank+1}</span>
+      <div class="av" style="background:${a.bg};color:${a.fg}">${a.ini}</div>
+      <div class="rl">
+        <div class="rm">${a.name}</div>
+        <div style="display:flex;align-items:center;gap:3px;margin-top:3px;flex-wrap:wrap">
+          <span style="font-size:10px;color:var(--tm)">New</span>
+          <input class="ca-inp" id="a${a.i}n" type="number" min="0" value="${a.newU}" oninput="onAdvisorChange()" aria-label="${a.name} new sales">
+          <span style="font-size:10px;color:var(--tm)">Used</span>
+          <input class="ca-inp" id="a${a.i}u" type="number" min="0" value="${a.used}" oninput="onAdvisorChange()" aria-label="${a.name} used sales">
+          <span style="font-size:10px;color:var(--tm)">${goalLabel}</span>
+        </div>
+      </div>
+      ${(!isHouse&&lbView!=='used')?barEl(goalPct,barColor):'<div style="flex:1"></div>'}
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:1px;flex-shrink:0">
+        <span class="ttl">${displayed}</span>
+        <span style="font-size:10px;color:var(--tm)">ttl ${total}</span>
+      </div>
+    </div>`;
+  };
+  document.getElementById('leaderboard').innerHTML=ranked.map((a,rank)=>mkRow(a,rank,false)).join('')+(house?mkRow(house,0,true):'');
+}
+
+function workingDaysInfo(){
+  const now=new Date(),y=now.getFullYear(),m=now.getMonth();
+  const todayDom=now.getDate();
+  const lastDom=new Date(y,m+1,0).getDate();
+  const lastDow=new Date(y,m,lastDom).getDay();
+  // Extend past month-end: Sat→+2 (Mon), Sun→+1 (Mon)
+  const ext=(lastDow===6)?2:(lastDow===0)?1:0;
+  let total=0,elapsed=0,remaining=0;
+  for(let d=2;d<=lastDom;d++){
+    if(new Date(y,m,d).getDay()===0) continue;
+    total++;
+    if(d<todayDom) elapsed++; else remaining++;
+  }
+  for(let d=1;d<=ext;d++){
+    if(new Date(y,m+1,d).getDay()===0) continue;
+    total++;
+    remaining++;
+  }
+  return{total,elapsed,remaining};
+}
+
+function renderSales(){
+  const goal=STATE.goal,suvs=STATE.suv,sedans=STATE.sedan,evs=STATE.ev||0;
+  const {total:wd,elapsed,remaining}=workingDaysInfo();
+  const sold=STATE.advisors.reduce((s,a)=>s+a.newU,0);
+  const totalUsed=STATE.advisors.reduce((s,a)=>s+a.used,0);
+  const pace=sold/Math.max(1,elapsed),needed=Math.max(0,goal-sold);
+  const req=remaining>0?needed/remaining:0;
+  const proj=Math.round(pace*wd);
+  const pct=Math.min(100,Math.round(sold/goal*100));
+  const tpct=Math.min(100,Math.round((wd-remaining)/wd*100));
+  const pc=proj>=goal?'good':proj>=goal*.88?'warn':'bad';
+  const rc=req<=pace?'good':'warn';
+  document.getElementById('salesMetrics').innerHTML=`
+    <div class="mc"><div class="mc-l">New sold MTD</div><div class="mc-v">${sold}</div><div class="mc-s">of ${goal} goal</div></div>
+    <div class="mc"><div class="mc-l">Used sold MTD</div><div class="mc-v" style="color:var(--ts)">${totalUsed}</div><div class="mc-s">all advisors</div></div>
+    <div class="mc"><div class="mc-l">Daily pace</div><div class="mc-v ${pc}">${pace.toFixed(1)}</div><div class="mc-s">new/day</div></div>
+    <div class="mc"><div class="mc-l">Need/day</div><div class="mc-v ${rc}">${req.toFixed(1)}</div><div class="mc-s">to hit goal</div></div>
+    <div class="mc"><div class="mc-l">Days left</div><div class="mc-v">${remaining}</div><div class="mc-s">working days</div></div>
+    <div class="mc"><div class="mc-l">Projection</div><div class="mc-v ${pc}">${proj}</div><div class="mc-s">${proj>=goal?'on track':'new cars'}</div></div>`;
+  const gc=pct>=100?'#3aaa6e':pct>=75?'#e8a020':'#e05252';
+  document.getElementById('goalBars').innerHTML=`
+    <div class="row"><span style="font-size:12px;color:var(--ts);width:64px;flex-shrink:0">New sold</span>${barEl(pct,gc)}<span style="font-size:11px;font-family:var(--fm);width:30px;text-align:right">${pct}%</span></div>
+    <div class="row"><span style="font-size:12px;color:var(--ts);width:64px;flex-shrink:0">Days used</span>${barEl(tpct,'#1C69D3')}<span style="font-size:11px;font-family:var(--fm);width:30px;text-align:right">${tpct}%</span></div>
+    <div style="margin-top:10px;padding:9px 10px;background:var(--panel);border-radius:var(--radius);font-size:12px">
+      <span style="font-weight:500;color:var(--tp)">${pct>=tpct?'↑ Ahead of pace':'↓ Behind pace'}</span>
+      <span style="color:var(--ts)"> — ${pace.toFixed(1)}/day now, need ${req.toFixed(1)}/day</span></div>`;
+  const tot=(suvs+sedans+evs)||1,sp=Math.round(suvs/tot*100),evp=Math.round(evs/tot*100),sep=100-sp-evp;
+  document.getElementById('mixBars').innerHTML=`
+    <div class="row"><span style="font-size:12px;color:var(--ts);width:52px;flex-shrink:0">SUVs</span>${barEl(sp,'#1C69D3')}<span style="font-size:12px;font-weight:500;width:24px;text-align:right;color:var(--tp)">${suvs}</span></div>
+    <div class="row"><span style="font-size:12px;color:var(--ts);width:52px;flex-shrink:0">Sedans</span>${barEl(sep,'#1E7A3C')}<span style="font-size:12px;font-weight:500;width:24px;text-align:right;color:var(--tp)">${sedans}</span></div>
+    <div class="row"><span style="font-size:12px;color:var(--ts);width:52px;flex-shrink:0">EVs</span>${barEl(evp,'#7C3AED')}<span style="font-size:12px;font-weight:500;width:24px;text-align:right;color:var(--tp)">${evs}</span></div>
+    <div style="height:10px;border-radius:3px;overflow:hidden;display:flex;margin:10px 0 4px"><div style="width:${sp}%;background:#1C69D3"></div><div style="width:${sep}%;background:#1E7A3C"></div><div style="width:${evp}%;background:#7C3AED"></div></div>
+    <div style="display:flex;justify-content:space-between;font-size:11px"><span style="color:#378ADD">${sp}% SUV</span><span style="color:#3B6D11">${sep}% Sedan</span><span style="color:#9F7AEA">${evp}% EV</span></div>`;
+  const gap=proj-goal;
+  document.getElementById('projGrid').innerHTML=`
+    <div class="pt"><div class="pt-l">Projected</div><div class="pt-v ${pc}">${proj}</div><div class="pt-s">${gap>=0?'+'+gap+' over goal':Math.abs(gap)+' under goal'}</div></div>
+    <div class="pt"><div class="pt-l">Goal</div><div class="pt-v">${goal}</div><div class="pt-s">${remaining} days left</div></div>
+    <div class="pt"><div class="pt-l">Current pace</div><div class="pt-v">${pace.toFixed(1)}<span style="font-size:12px;font-weight:400"> /day</span></div><div class="pt-s">${elapsed} days in</div></div>
+    <div class="pt"><div class="pt-l">Required pace</div><div class="pt-v ${rc}">${req.toFixed(1)}<span style="font-size:12px;font-weight:400"> /day</span></div><div class="pt-s">to reach ${goal}</div></div>`;
+}
+
+function renderPipeline(){
+  const n=INV.length,aged=INV.filter(v=>v.d>=90).length,totalVal=INV.reduce((s,v)=>s+v.p,0),avgAge=Math.round(INV.reduce((s,v)=>s+v.d,0)/n);
+  document.getElementById('pinstock').textContent=n;
+  document.getElementById('pv').textContent='$'+Math.round(totalVal/100000)/10+'M';
+  document.getElementById('pavg').textContent=avgAge+'d';
+  document.getElementById('paged').textContent=aged;
+  document.getElementById('pavgp').textContent=fmtK(totalVal/n);
+  const byCt={};INV.forEach(v=>{byCt[v.model]=(byCt[v.model]||0)+1});
+  const top=Object.entries(byCt).sort((a,b)=>b[1]-a[1]).slice(0,8),mx=top[0][1];
+  document.getElementById('topModels').innerHTML=top.map(([m,c],i)=>`<div class="row"><span class="rn">${i+1}</span><div class="rl"><div class="rm">${m}</div></div>${barEl(Math.round(c/mx*100),SC[INV.find(x=>x.model===m).s]||'#888')}<span style="font-size:13px;font-weight:500;color:var(--tp)">${c}</span></div>`).join('');
+  const bySeries={};INV.forEach(v=>{if(!bySeries[v.s])bySeries[v.s]={ct:0,val:0};bySeries[v.s].ct++;bySeries[v.s].val+=v.p});
+  document.getElementById('seriesBreak').innerHTML=SO.filter(s=>bySeries[s]).map(s=>`<div class="row"><div style="width:3px;height:26px;border-radius:2px;background:${SC[s]||'#888'};flex-shrink:0"></div><div class="rl"><div class="rm">${s} Series</div><div style="font-size:11px;color:var(--ts)">${fmtK(bySeries[s].val/bySeries[s].ct)} avg list</div></div>${barEl(Math.round(bySeries[s].ct/n*100),SC[s]||'#888')}<span style="font-size:13px;font-weight:500;color:var(--tp)">${bySeries[s].ct}</span></div>`).join('');
+}
+
+function renderAging(){
+  document.getElementById('a0').textContent=INV.filter(v=>v.d<=30).length;
+  document.getElementById('a31').textContent=INV.filter(v=>v.d>30&&v.d<=60).length;
+  document.getElementById('a61').textContent=INV.filter(v=>v.d>60&&v.d<=90).length;
+  document.getElementById('a91').textContent=INV.filter(v=>v.d>90&&v.d<=180).length;
+  document.getElementById('a180').textContent=INV.filter(v=>v.d>180).length;
+  document.getElementById('agingList').innerHTML=INV.filter(v=>v.d>=61).sort((a,b)=>b.d-a.d).map(v=>`<div class="row"><div class="rl"><div class="rm">${v.model} <span style="font-weight:400;color:var(--tm);font-size:11px;font-family:var(--fm)">${v.ch}</span></div><div style="font-size:11px;color:var(--ts)">${v.s} Series · ${fmtFull(v.p)}${!v.av?' · <span style="color:#e8a020">not avail retail</span>':''}</div></div>${ageBadge(v.d)}</div>`).join('');
+}
+
+function renderInventory(filter){
+  const series=[...new Set(INV.map(v=>v.s))].sort();
+  document.getElementById('filterRow').innerHTML=['All',...series].map(s=>`<button class="fchip${s===activeFilter?' on':''}" onclick="setFilter('${s}')">${s==='All'?'All models':s}</button>`).join('');
+  const list=filter==='All'?INV:INV.filter(v=>v.s===filter);
+  document.getElementById('invBody').innerHTML=[...list].sort((a,b)=>b.d-a.d).map(v=>`<tr><td style="font-weight:500;color:var(--tp)">${v.model}</td><td style="font-family:var(--fm);font-size:11px">${v.ch}</td><td class="${v.d>=90?'age-hot':v.d>=61?'age-warn':'age-ok'}">${v.d}</td><td>${v.s}</td><td style="font-family:var(--fm);color:var(--tp)">${fmtFull(v.p)}</td><td>${v.av?ageBadge(v.d):'<span class="badge b-gray">not avail</span>'}</td></tr>`).join('');
+}
+
+function setFilter(s){activeFilter=s;renderInventory(s);}
+
+function renderPricing(){
+  const FIXED=650,FE=1200;
+  // Group INV by model name, accumulate prices
+  const byModel={};
+  INV.forEach(v=>{
+    if(!byModel[v.model])byModel[v.model]={s:v.s,suv:v.suv,prices:[]};
+    byModel[v.model].prices.push(v.p);
+  });
+  // Compute per-model stats
+  const models=Object.entries(byModel).map(([name,d])=>{
+    const avg=Math.round(d.prices.reduce((a,b)=>a+b,0)/d.prices.length);
+    const invoice=Math.round(avg*0.94);
+    const target=invoice+FIXED+FE;
+    const vs=target-avg;
+    return{name,count:d.prices.length,s:d.s,suv:d.suv,avg,invoice,target,vs};
+  });
+  // Classifiers
+  const isMCar =m=>(/^M[3-7](?!\d)|^M85/.test(m.name)&&!m.suv)||/^X[56] M(?!\d)/.test(m.name);
+  const isElec =m=>/^i/.test(m.s);
+  const isZ4   =m=>m.s==='Z4';
+  const isX    =m=>m.suv;
+  // Strategy
+  const strat=m=>{
+    if(/^M[35](?!\d)|^M85/.test(m.name)||/^X[56] M(?!\d)/.test(m.name)) return 'hold';
+    if(/^M4(?!\d)|M440|Z4/.test(m.name)||/M Comp|M50/.test(m.name)) return 'flex';
+    if(m.avg>=125000) return 'hold';
+    return 'std';
+  };
+  const badge=s=>s==='hold'?'<span class="badge b-hold">Hold firm</span>':s==='flex'?'<span class="badge b-flex">Flex</span>':'<span class="badge b-std">Standard</span>';
+  const f$=n=>'$'+n.toLocaleString();
+  const fVs=n=>(n<0?'−$':'+')+Math.abs(n).toLocaleString();
+  const row=m=>`<tr><td><span class="p-mn">${m.name}</span><span class="p-uc">${m.count} unit${m.count>1?'s':''}</span></td><td>${f$(m.avg)}</td><td>${f$(m.invoice)}</td><td class="p-ask">${f$(m.target)}</td><td class="p-vs">${fVs(m.vs)}</td><td>${badge(strat(m))}</td></tr>`;
+  const thead='<thead><tr><th style="width:200px">Model</th><th>Avg MSRP</th><th>Invoice (94%)</th><th>Target ask</th><th>vs MSRP</th><th>Strategy</th></tr></thead>';
+  const sec=(dot,title,items,fn)=>{
+    if(!items.length)return'';
+    const total=items.reduce((s,m)=>s+m.count,0);
+    return`<div class="p-sec"><div class="p-hdr"><span class="p-dot" style="background:${dot}"></span><span class="p-title">${title}</span><span class="p-ct">${total} unit${total>1?'s':''}</span></div><div class="p-tw"><table class="p-tbl">${thead}<tbody>${items.map(row).join('')}</tbody></table>${fn?`<div class="p-fn">${fn}</div>`:''}</div></div>`;
+  };
+  const xOrder=['X1','X2','X3','X4','X5','X6','X7'];
+  const mCars   =models.filter(isMCar).sort((a,b)=>b.avg-a.avg);
+  const xSeries =models.filter(m=>isX(m)&&!isMCar(m)).sort((a,b)=>(xOrder.indexOf(a.s)-xOrder.indexOf(b.s))||a.name.localeCompare(b.name));
+  const numZ4   =models.filter(m=>!isMCar(m)&&!isElec(m)&&!isZ4(m)&&!isX(m)).concat(models.filter(isZ4)).sort((a,b)=>a.name.localeCompare(b.name));
+  const electric=models.filter(isElec).sort((a,b)=>a.name.localeCompare(b.name));
+  const x3ct=xSeries.filter(m=>m.s==='X3').reduce((s,m)=>s+m.count,0);
+  const x5ct=xSeries.filter(m=>m.s==='X5'&&/xDr40/.test(m.name)).reduce((s,m)=>s+m.count,0);
+  const xFn=x3ct+x5ct>0?`X3 (${x3ct} units) and X5 40i (${x5ct} units) are your volume anchors — discipline on these two drives your monthly average.`:'';
+  const numTitle=[...new Set(numZ4.map(m=>m.s))].filter(s=>s!=='Z4').join(' / ')+(numZ4.some(m=>m.s==='Z4')?' / Z4':'');
+  document.getElementById('pricingGuide').innerHTML=
+    sec('#e05252','M cars',mCars,'M3 holds — no exceptions. M4 flex window applies. On halo units ($125K+) there is significant room above this number — premium gross opportunities, not a ceiling.')+
+    sec('#1C69D3','X Series — SAVs',xSeries,xFn)+
+    sec('#1E7A3C',numTitle||'Sedans / Coupes',numZ4,'')+
+    sec('#7C3AED','Electric',electric,'EVs face cross-brand pricing pressure — monitor comp market.');
+}
+
+document.getElementById('i-goal').value=STATE.goal;
+document.getElementById('i-suv').value=STATE.suv;
+document.getElementById('i-sedan').value=STATE.sedan;
+document.getElementById('i-ev').value=STATE.ev||0;
+const now=new Date();
+const {total:_wdTotal,elapsed:_wdElapsed}=workingDaysInfo();
+const _wdDay=now.getDay()===0?_wdElapsed:_wdElapsed+1;
+document.getElementById('navSub').textContent=now.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'})+' · Day '+_wdDay+' of '+_wdTotal+' · DAR BMW';
+const PROFIT={"month":"June 2026","updated":"6/9/2026","deals":6,"totalGross":36597,"frontGross":3595,"holdback":28365,"finProds":4637,"perUnit":{"front":599,"holdback":4728,"back":773,"total":6100},"flc":{"F":5,"L":0,"C":1},"advisors":[{"ini":"IK","name":"Ian","units":2,"front":2789,"holdback":8328,"back":1327,"total":12444},{"ini":"ZT","name":"Zach","units":1,"front":5605,"holdback":5864,"back":0,"total":11469},{"ini":"SH","name":"Scott","units":2,"front":-4117,"holdback":10731,"back":3018,"total":9631},{"ini":"AB","name":"Adam","units":1,"front":-681,"holdback":3442,"back":292,"total":3053}],"finBreak":{"fi":3880,"nsd":0,"ceramic":757,"gap":0,"bmwwt":0,"xpel":0,"other":0}};
+function renderProfit(){
+  if(!PROFIT.deals){
+    document.getElementById('profitAlert').textContent='No profit data yet — run node profit-import.js to load this month\'s spreadsheet.';
+    return;
+  }
+  document.getElementById('profitAlert').textContent=PROFIT.month+' · '+PROFIT.deals+' deals · Last updated '+PROFIT.updated;
+  const f$=n=>(n<0?'−$':'$')+Math.abs(Math.round(n)).toLocaleString();
+  const fmtC=n=>'<span style="color:'+(n<0?'#e05252':'#3aaa6e')+'">'+f$(n)+'</span>';
+  // Metric cards
+  document.getElementById('profitCards').innerHTML=[
+    ['Deals MTD',PROFIT.deals,'new car'],
+    ['Total Gross',f$(PROFIT.totalGross),'all in'],
+    ['Per Unit',f$(PROFIT.perUnit.total),'avg'],
+    ['Front End',f$(PROFIT.perUnit.front),'per unit avg'],
+    ['Holdback',f$(PROFIT.perUnit.holdback),'per unit avg'],
+    ['F&I / Back',f$(PROFIT.perUnit.back),'per unit avg'],
+  ].map(([l,v,s])=>`<div class="mc"><div class="mc-l">${l}</div><div class="mc-v" style="font-size:18px">${v}</div><div class="mc-s">${s}</div></div>`).join('');
+  // F/L/C
+  const {F,L,C}=PROFIT.flc, tot=F+L+C||1;
+  const fp=Math.round(F/tot*100), lp=Math.round(L/tot*100), cp=100-fp-lp;
+  document.getElementById('profitFLC').innerHTML=
+    `<div style="height:10px;border-radius:3px;overflow:hidden;display:flex;margin:8px 0 6px">
+      <div style="width:${fp}%;background:#1C69D3"></div>
+      <div style="width:${lp}%;background:#1E7A3C"></div>
+      <div style="width:${cp}%;background:#854F0B"></div>
+    </div>
+    <div style="display:flex;gap:14px;font-size:12px">
+      <span><span style="color:#85B7EB">■</span> Finance ${F} (${fp}%)</span>
+      <span><span style="color:#3B6D11">■</span> Lease ${L} (${lp}%)</span>
+      <span><span style="color:#FAC775">■</span> Cash ${C} (${cp}%)</span>
+    </div>`;
+  // Per unit detail
+  document.getElementById('profitPU').innerHTML=[
+    ['Front end',PROFIT.perUnit.front],
+    ['Holdback',PROFIT.perUnit.holdback],
+    ['F&I / back',PROFIT.perUnit.back],
+    ['Total gross',PROFIT.perUnit.total],
+  ].map(([l,v])=>`<div class="row"><div class="rl"><div class="rm">${l}</div></div><span style="font-size:13px;font-weight:500">${fmtC(v)}</span></div>`).join('');
+  // By advisor
+  const maxT=Math.max(...PROFIT.advisors.map(a=>Math.abs(a.total)),1);
+  document.getElementById('profitAdv').innerHTML=`
+    <table style="width:100%;border-collapse:collapse;font-size:12px">
+      <thead><tr style="border-bottom:.5px solid var(--border)">
+        <th style="text-align:left;padding:4px 6px;font-size:10px;color:var(--tm);font-weight:500;text-transform:uppercase;letter-spacing:.06em">Advisor</th>
+        <th style="text-align:right;padding:4px 6px;font-size:10px;color:var(--tm);font-weight:500;text-transform:uppercase;letter-spacing:.06em">Units</th>
+        <th style="text-align:right;padding:4px 6px;font-size:10px;color:var(--tm);font-weight:500;text-transform:uppercase;letter-spacing:.06em">Front</th>
+        <th style="text-align:right;padding:4px 6px;font-size:10px;color:var(--tm);font-weight:500;text-transform:uppercase;letter-spacing:.06em">Holdback</th>
+        <th style="text-align:right;padding:4px 6px;font-size:10px;color:var(--tm);font-weight:500;text-transform:uppercase;letter-spacing:.06em">F&amp;I</th>
+        <th style="text-align:right;padding:4px 6px;font-size:10px;color:var(--tm);font-weight:500;text-transform:uppercase;letter-spacing:.06em">Total</th>
+      </tr></thead>
+      <tbody>${PROFIT.advisors.map(a=>`<tr style="border-bottom:.5px solid var(--border)">
+        <td style="padding:8px 6px;font-weight:500;color:var(--tp)">${a.name}<span style="font-size:10px;color:var(--tm);margin-left:5px">${a.ini}</span></td>
+        <td style="text-align:right;padding:8px 6px;color:var(--ts)">${a.units}</td>
+        <td style="text-align:right;padding:8px 6px">${fmtC(a.front)}</td>
+        <td style="text-align:right;padding:8px 6px;color:#3aaa6e">$${a.holdback.toLocaleString()}</td>
+        <td style="text-align:right;padding:8px 6px;color:var(--ts)">$${a.back.toLocaleString()}</td>
+        <td style="text-align:right;padding:8px 6px;font-weight:500">${fmtC(a.total)}</td>
+      </tr>`).join('')}
+      <tr style="border-top:.5px solid rgba(255,255,255,.15)">
+        <td style="padding:8px 6px;font-weight:500;color:var(--ts)">Total</td>
+        <td style="text-align:right;padding:8px 6px;font-weight:500;color:var(--tp)">${PROFIT.deals}</td>
+        <td style="text-align:right;padding:8px 6px;font-weight:500">${fmtC(PROFIT.frontGross)}</td>
+        <td style="text-align:right;padding:8px 6px;font-weight:500;color:#3aaa6e">$${PROFIT.holdback.toLocaleString()}</td>
+        <td style="text-align:right;padding:8px 6px;font-weight:500;color:var(--ts)">$${PROFIT.finProds.toLocaleString()}</td>
+        <td style="text-align:right;padding:8px 6px;font-weight:500">${fmtC(PROFIT.totalGross)}</td>
+      </tr>
+      </tbody>
+    </table>`;
+  // Finance products
+  const fb=PROFIT.finBreak, fbTot=Object.values(fb).reduce((s,v)=>s+v,0)||1;
+  const finItems=[['F&I',fb.fi],['NSD W/T',fb.nsd],['Ceramic',fb.ceramic],['GAP',fb.gap],['BMW W/T',fb.bmwwt],['XPEL',fb.xpel],['Other',fb.other]].filter(([,v])=>v>0);
+  document.getElementById('profitFin').innerHTML=finItems.length
+    ? finItems.map(([l,v])=>`<div class="row"><div class="rl"><div class="rm">${l}</div></div>${barEl(Math.round(v/fbTot*100),'#7C3AED')}<span style="font-size:13px;font-weight:500;color:var(--tp)">$${v.toLocaleString()}</span></div>`).join('')
+    : '<div style="color:var(--tm);font-size:12px;padding:8px 0">No finance product data</div>';
+}
+renderLeaderboard();renderSales();renderPipeline();renderAging();renderInventory('All');renderPricing();renderProfit();
+</script>
+</body>
+</html>
