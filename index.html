@@ -115,7 +115,7 @@ body{font-family:var(--ff);font-size:14px;background:var(--bg);color:var(--tp);m
 <body>
 <!-- AUTO-SEED-START -->
 <script>
-window.SCRAPE_SEED={suv:6,sedan:3,ev:1,advisors:[{"newU":1,"used":6},{"newU":2,"used":3},{"newU":2,"used":3},{"newU":1,"used":0},{"newU":0,"used":1},{"newU":1,"used":2},{"newU":3,"used":2}]};
+window.SCRAPE_SEED={suv:8,sedan:3,ev:1,advisors:[{"newU":1,"used":7},{"newU":3,"used":3},{"newU":2,"used":3},{"newU":1,"used":0},{"newU":0,"used":1},{"newU":2,"used":2},{"newU":3,"used":2}]};
 (function(){
   var today='2026-06-11';
   var key='dar_v7';
@@ -124,17 +124,18 @@ window.SCRAPE_SEED={suv:6,sedan:3,ev:1,advisors:[{"newU":1,"used":6},{"newU":2,"
   if(!stored||stored._scraped!==today||stored.ev===undefined){
     var prev=stored||{};
     localStorage.setItem(key,JSON.stringify({
-      goal:prev.goal||60,suv:6,sedan:3,ev:1,wd:prev.wd||25,
-      _scraped:today,advisors:[{"newU":1,"used":6},{"newU":2,"used":3},{"newU":2,"used":3},{"newU":1,"used":0},{"newU":0,"used":1},{"newU":1,"used":2},{"newU":3,"used":2}]
+      goal:prev.goal||60,suv:8,sedan:3,ev:1,wd:prev.wd||25,
+      _scraped:today,advisors:[{"newU":1,"used":7},{"newU":3,"used":3},{"newU":2,"used":3},{"newU":1,"used":0},{"newU":0,"used":1},{"newU":2,"used":2},{"newU":3,"used":2}]
     }));
   }
   document.addEventListener('DOMContentLoaded',function(){
     var sub=document.getElementById('navSub');
-    if(sub&&!sub.textContent.includes('Updated')){sub.textContent+=' · Updated Jun 11, 8:51 AM';}
+    if(sub&&!sub.textContent.includes('Updated')){sub.textContent+=' · Updated Jun 11, 1:09 PM';}
   });
 })();
 </script>
 <!-- AUTO-SEED-END -->
+
 
 
 
