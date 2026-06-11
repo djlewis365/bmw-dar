@@ -115,7 +115,7 @@ body{font-family:var(--ff);font-size:14px;background:var(--bg);color:var(--tp);m
 <body>
 <!-- AUTO-SEED-START -->
 <script>
-window.SCRAPE_SEED={suv:8,sedan:3,ev:1,advisors:[{"newU":1,"used":7},{"newU":3,"used":3},{"newU":2,"used":3},{"newU":1,"used":0},{"newU":0,"used":1},{"newU":2,"used":2},{"newU":3,"used":2}]};
+window.SCRAPE_SEED={suv:8,sedan:3,ev:1,advisors:[{"newU":1,"used":7},{"newU":3,"used":3},{"newU":2,"used":3},{"newU":1,"used":0},{"newU":0,"used":1},{"newU":2,"used":2},{"newU":3,"used":2}],visits:{"total":37,"sold":12,"advisors":[{"visits":9,"sold":3},{"visits":8,"sold":1},{"visits":6,"sold":2},{"visits":4,"sold":1},{"visits":0,"sold":0},{"visits":6,"sold":3},{"visits":4,"sold":2}]}};
 (function(){
   var today='2026-06-11';
   var key='dar_v7';
@@ -125,16 +125,18 @@ window.SCRAPE_SEED={suv:8,sedan:3,ev:1,advisors:[{"newU":1,"used":7},{"newU":3,"
     var prev=stored||{};
     localStorage.setItem(key,JSON.stringify({
       goal:prev.goal||60,suv:8,sedan:3,ev:1,wd:prev.wd||25,
-      _scraped:today,advisors:[{"newU":1,"used":7},{"newU":3,"used":3},{"newU":2,"used":3},{"newU":1,"used":0},{"newU":0,"used":1},{"newU":2,"used":2},{"newU":3,"used":2}]
+      _scraped:today,advisors:[{"newU":1,"used":7},{"newU":3,"used":3},{"newU":2,"used":3},{"newU":1,"used":0},{"newU":0,"used":1},{"newU":2,"used":2},{"newU":3,"used":2}],
+      visits:{"total":37,"sold":12,"advisors":[{"visits":9,"sold":3},{"visits":8,"sold":1},{"visits":6,"sold":2},{"visits":4,"sold":1},{"visits":0,"sold":0},{"visits":6,"sold":3},{"visits":4,"sold":2}]}||prev.visits
     }));
   }
   document.addEventListener('DOMContentLoaded',function(){
     var sub=document.getElementById('navSub');
-    if(sub&&!sub.textContent.includes('Updated')){sub.textContent+=' · Updated Jun 11, 1:09 PM';}
+    if(sub&&!sub.textContent.includes('Updated')){sub.textContent+=' · Updated Jun 11, 2:50 PM';}
   });
 })();
 </script>
 <!-- AUTO-SEED-END -->
+
 
 
 
@@ -188,6 +190,7 @@ window.SCRAPE_SEED={suv:8,sedan:3,ev:1,advisors:[{"newU":1,"used":7},{"newU":3,"
     <button class="tab" onclick="show('inventory')">All units</button>
     <button class="tab" onclick="show('pricing')">Pricing</button>
     <button class="tab" onclick="show('profit')">Profit</button>
+    <button class="tab" onclick="show('visits')">Visits</button>
   </div>
 </div>
 
@@ -286,6 +289,15 @@ window.SCRAPE_SEED={suv:8,sedan:3,ev:1,advisors:[{"newU":1,"used":7},{"newU":3,"
   <div class="card"><div class="ct">Finance products — MTD</div><div id="profitFin"></div></div>
 </div>
 
+<div id="pg-visits" class="pg">
+  <div class="mg" style="margin-bottom:14px">
+    <div class="mc"><div class="mc-l">Showroom visits</div><div class="mc-v" id="vTotal"></div><div class="mc-s">MTD</div></div>
+    <div class="mc"><div class="mc-l">Sold</div><div class="mc-v good" id="vSold"></div><div class="mc-s">of visits</div></div>
+    <div class="mc"><div class="mc-l">Close ratio</div><div class="mc-v" id="vRatio"></div><div class="mc-s">sold / visits</div></div>
+  </div>
+  <div class="card"><div class="ct">By advisor — MTD</div><div id="visitsByAdvisor"></div></div>
+</div>
+
 <script>
 const ADVISOR_DEFS=[
   {name:'Adam',  ini:'AD',bg:'#1a2f5c',fg:'#85B7EB',goal:14,house:false},
@@ -299,7 +311,8 @@ const ADVISOR_DEFS=[
 const SK='dar_v7';
 function loadState(){try{const r=localStorage.getItem(SK);if(r)return JSON.parse(r);}catch(e){}return null;}
 function saveState(s){try{localStorage.setItem(SK,JSON.stringify(s));}catch(e){}}
-let STATE=loadState()||{goal:60,suv:0,sedan:0,ev:0,wd:25,advisors:ADVISOR_DEFS.map(()=>({newU:0,used:0}))};
+let STATE=loadState()||{goal:60,suv:0,sedan:0,ev:0,wd:25,advisors:ADVISOR_DEFS.map(()=>({newU:0,used:0})),visits:{total:0,sold:0,advisors:ADVISOR_DEFS.map(()=>({visits:0,sold:0}))}};
+if(!STATE.visits)STATE.visits={total:0,sold:0,advisors:ADVISOR_DEFS.map(()=>({visits:0,sold:0}))};
 function saveSettings(){STATE.goal=+document.getElementById('i-goal').value||60;STATE.suv=+document.getElementById('i-suv').value||0;STATE.sedan=+document.getElementById('i-sedan').value||0;STATE.ev=+document.getElementById('i-ev').value||0;saveState(STATE);}
 function saveAdvisors(){ADVISOR_DEFS.forEach((_,i)=>{const ni=document.getElementById('a'+i+'n');const ui=document.getElementById('a'+i+'u');if(ni)STATE.advisors[i].newU=+ni.value||0;if(ui)STATE.advisors[i].used=+ui.value||0;});saveState(STATE);}
 function onAdvisorChange(){saveAdvisors();renderLeaderboard();renderSales();}
@@ -308,11 +321,12 @@ function syncLatest(){
   const seed=window.SCRAPE_SEED;
   if(!seed){alert('No scrape data found on this page.');return;}
   STATE.suv=seed.suv;STATE.sedan=seed.sedan;STATE.ev=seed.ev;STATE.advisors=seed.advisors.map(a=>({...a}));
+  if(seed.visits)STATE.visits={total:seed.visits.total,sold:seed.visits.sold,advisors:seed.visits.advisors.map(a=>({...a}))};
   saveState(STATE);
   document.getElementById('i-suv').value=STATE.suv;
   document.getElementById('i-sedan').value=STATE.sedan;
   document.getElementById('i-ev').value=STATE.ev;
-  renderLeaderboard();renderSales();
+  renderLeaderboard();renderSales();renderVisits();
 }
 
 const INV=[
@@ -419,7 +433,7 @@ function show(p){
   document.querySelectorAll('.pg').forEach(x=>x.classList.remove('on'));
   document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
   document.getElementById('pg-'+p).classList.add('on');
-  document.querySelectorAll('.tab')[{sales:0,pipeline:1,aging:2,inventory:3,pricing:4,profit:5}[p]].classList.add('on');
+  document.querySelectorAll('.tab')[{sales:0,pipeline:1,aging:2,inventory:3,pricing:4,profit:5,visits:6}[p]].classList.add('on');
 }
 function setLbView(v,el){lbView=v;['vt','vn','vu'].forEach(id=>document.getElementById(id).classList.remove('on'));el.classList.add('on');renderLeaderboard();}
 function barEl(pct,color){return`<div class="bw"><div class="bf" style="width:${Math.min(100,Math.round(pct))}%;background:${color}"></div></div>`;}
@@ -467,6 +481,33 @@ function renderLeaderboard(){
     </div>`;
   };
   document.getElementById('leaderboard').innerHTML=ranked.map((a,rank)=>mkRow(a,rank,false)).join('')+(house?mkRow(house,0,true):'');
+}
+
+function renderVisits(){
+  const v=STATE.visits||{total:0,sold:0,advisors:ADVISOR_DEFS.map(()=>({visits:0,sold:0}))};
+  const ratio=v.total?Math.round(v.sold/v.total*100):0;
+  document.getElementById('vTotal').textContent=v.total;
+  document.getElementById('vSold').textContent=v.sold;
+  document.getElementById('vRatio').textContent=ratio+'%';
+
+  const advisors=ADVISOR_DEFS.map((def,i)=>({...def,...(v.advisors[i]||{visits:0,sold:0})}));
+  const ranked=advisors.filter(a=>!a.house).sort((a,b)=>b.visits-a.visits);
+  const house=advisors.find(a=>a.house);
+  const mkRow=(a,isHouse)=>{
+    const r=a.visits?Math.round(a.sold/a.visits*100):0;
+    const barColor=r>=50?'#3aaa6e':r>=25?'#e8a020':'#e05252';
+    const rowStyle=isHouse?'background:rgba(255,255,255,.03);border-radius:8px;padding:7px 6px;margin-top:6px':'';
+    return`<div class="row" style="gap:5px;${rowStyle}">
+      <div class="av" style="background:${a.bg};color:${a.fg}">${a.ini}</div>
+      <div class="rl">
+        <div class="rm">${a.name}</div>
+        <div style="font-size:10px;color:var(--tm);margin-top:3px">${a.sold} sold / ${a.visits} visit${a.visits===1?'':'s'}</div>
+      </div>
+      ${barEl(r,barColor)}
+      <span class="ttl">${r}%</span>
+    </div>`;
+  };
+  document.getElementById('visitsByAdvisor').innerHTML=ranked.map(a=>mkRow(a,false)).join('')+(house?mkRow(house,true):'');
 }
 
 function workingDaysInfo(){
@@ -701,7 +742,7 @@ function renderProfit(){
     ? finItems.map(([l,v])=>`<div class="row"><div class="rl"><div class="rm">${l}</div></div>${barEl(Math.round(v/fbTot*100),'#7C3AED')}<span style="font-size:13px;font-weight:500;color:var(--tp)">$${v.toLocaleString()}</span></div>`).join('')
     : '<div style="color:var(--tm);font-size:12px;padding:8px 0">No finance product data</div>';
 }
-renderLeaderboard();renderSales();renderPipeline();renderAging();renderInventory('All');renderPricing();renderProfit();
+renderLeaderboard();renderSales();renderPipeline();renderAging();renderInventory('All');renderPricing();renderProfit();renderVisits();
 </script>
 </body>
 </html>
