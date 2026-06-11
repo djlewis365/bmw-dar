@@ -121,7 +121,7 @@ window.SCRAPE_SEED={suv:8,sedan:3,ev:1,advisors:[{"newU":1,"used":7},{"newU":3,"
   var key='dar_v7';
   var stored;
   try{stored=JSON.parse(localStorage.getItem(key));}catch(e){}
-  if(!stored||stored._scraped!==today||stored.ev===undefined){
+  if(!stored||stored._scraped!==today||stored.ev===undefined||stored.visits===undefined){
     var prev=stored||{};
     localStorage.setItem(key,JSON.stringify({
       goal:prev.goal||60,suv:8,sedan:3,ev:1,wd:prev.wd||25,
@@ -131,11 +131,12 @@ window.SCRAPE_SEED={suv:8,sedan:3,ev:1,advisors:[{"newU":1,"used":7},{"newU":3,"
   }
   document.addEventListener('DOMContentLoaded',function(){
     var sub=document.getElementById('navSub');
-    if(sub&&!sub.textContent.includes('Updated')){sub.textContent+=' · Updated Jun 11, 2:50 PM';}
+    if(sub&&!sub.textContent.includes('Updated')){sub.textContent+=' · Updated Jun 11, 2:57 PM';}
   });
 })();
 </script>
 <!-- AUTO-SEED-END -->
+
 
 
 
@@ -290,6 +291,9 @@ window.SCRAPE_SEED={suv:8,sedan:3,ev:1,advisors:[{"newU":1,"used":7},{"newU":3,"
 </div>
 
 <div id="pg-visits" class="pg">
+  <div style="display:flex;justify-content:flex-end;margin-bottom:10px">
+    <button class="btn-sm" onclick="syncLatest()">Sync latest</button>
+  </div>
   <div class="mg" style="margin-bottom:14px">
     <div class="mc"><div class="mc-l">Showroom visits</div><div class="mc-v" id="vTotal"></div><div class="mc-s">MTD</div></div>
     <div class="mc"><div class="mc-l">Sold</div><div class="mc-v good" id="vSold"></div><div class="mc-s">of visits</div></div>
