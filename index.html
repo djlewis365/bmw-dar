@@ -221,7 +221,7 @@ window.SCRAPE_SEED={suv:6,sedan:3,ev:1,advisors:[{"newU":1,"used":6},{"newU":2,"
 </div>
 
 <div id="pg-pipeline" class="pg">
-  <div class="alert">New car inventory from DCS — 95 units. Used sales tracked via advisor leaderboard only.</div>
+  <div class="alert">New car inventory from DCS — 94 units. Used sales tracked via advisor leaderboard only.</div>
   <div class="mg">
     <div class="mc"><div class="mc-l">In stock</div><div class="mc-v" id="pinstock"></div><div class="mc-s">new units</div></div>
     <div class="mc"><div class="mc-l">Pipeline value</div><div class="mc-v" id="pv"></div><div class="mc-s">list price</div></div>
@@ -349,7 +349,6 @@ const INV=[
   {model:"X5 xDr40i",s:"X5",ch:"BM496",d:84,p:83350,suv:true,av:true},
   {model:"X5 xDr40i",s:"X5",ch:"BM518",d:73,p:83900,suv:true,av:true},
   {model:"X5 xDr40i",s:"X5",ch:"BM591",d:0,p:81350,suv:true,av:true},
-  {model:"X5 xDr40i",s:"X5",ch:"BM602",d:28,p:86500,suv:true,av:true},
   {model:"X5 xDr40i",s:"X5",ch:"BM603",d:0,p:82350,suv:true,av:true},
   {model:"X5 xDr40i",s:"X5",ch:"BM595",d:32,p:80100,suv:true,av:true},
   {model:"X5 xDr40i",s:"X5",ch:"BM593",d:32,p:78200,suv:true,av:true},
@@ -625,7 +624,7 @@ const now=new Date();
 const {total:_wdTotal,elapsed:_wdElapsed}=workingDaysInfo();
 const _wdDay=now.getDay()===0?_wdElapsed:_wdElapsed+1;
 document.getElementById('navSub').textContent=now.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'})+' · Day '+_wdDay+' of '+_wdTotal+' · DAR BMW';
-const PROFIT={"month":"June 2026","updated":"6/11/2026","deals":6,"totalGross":36597,"frontGross":3595,"holdback":28365,"finProds":4637,"perUnit":{"front":599,"holdback":4728,"back":773,"total":6100},"flc":{"F":5,"L":0,"C":1},"advisors":[{"ini":"IK","name":"Ian","units":2,"front":2789,"holdback":8328,"back":1327,"total":12444},{"ini":"ZT","name":"Zach","units":1,"front":5605,"holdback":5864,"back":0,"total":11469},{"ini":"SH","name":"Scott","units":2,"front":-4117,"holdback":10731,"back":3018,"total":9631},{"ini":"AB","name":"Adam","units":1,"front":-681,"holdback":3442,"back":292,"total":3053}],"finBreak":{"fi":3880,"nsd":0,"ceramic":757,"gap":0,"bmwwt":0,"xpel":0,"other":0}};
+const PROFIT={"month":"June 2026","updated":"6/11/2026","deals":7,"totalGross":39088,"frontGross":1549,"holdback":32902,"finProds":4637,"perUnit":{"front":221,"holdback":4700,"back":662,"total":5584},"flc":{"F":5,"L":1,"C":1},"advisors":[{"ini":"IK","name":"Ian","units":2,"front":2789,"holdback":8328,"back":1327,"total":12444},{"ini":"ZT","name":"Zach","units":1,"front":5605,"holdback":5864,"back":0,"total":11469},{"ini":"SH","name":"Scott","units":2,"front":-4117,"holdback":10731,"back":3018,"total":9631},{"ini":"AB","name":"Adam","units":1,"front":-681,"holdback":3442,"back":292,"total":3053},{"ini":"BM","name":"Brady","units":1,"front":-2046,"holdback":4537,"back":0,"total":2491}],"finBreak":{"fi":3880,"nsd":0,"ceramic":757,"gap":0,"bmwwt":0,"xpel":0,"other":0}};
 function renderProfit(){
   if(!PROFIT.deals){
     document.getElementById('profitAlert').textContent='No profit data yet — run node profit-import.js to load this month\'s spreadsheet.';
