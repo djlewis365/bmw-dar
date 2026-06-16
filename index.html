@@ -115,7 +115,7 @@ body{font-family:var(--ff);font-size:14px;background:var(--bg);color:var(--tp);m
 <body>
 <!-- AUTO-SEED-START -->
 <script>
-window.SCRAPE_SEED={suv:12,sedan:7,ev:1,advisors:[{"newU":2,"used":9},{"newU":4,"used":3},{"newU":3,"used":5},{"newU":4,"used":2},{"newU":0,"used":1},{"newU":4,"used":2},{"newU":4,"used":3}],visits:{"total":47,"sold":19,"advisors":[{"visits":10,"sold":5},{"visits":11,"sold":3},{"visits":7,"sold":4},{"visits":7,"sold":3},{"visits":0,"sold":0},{"visits":6,"sold":2},{"visits":6,"sold":2}]}};
+window.SCRAPE_SEED={suv:12,sedan:8,ev:1,advisors:[{"newU":2,"used":9},{"newU":4,"used":3},{"newU":4,"used":5},{"newU":4,"used":2},{"newU":0,"used":1},{"newU":4,"used":2},{"newU":4,"used":4}],visits:{"total":49,"sold":20,"advisors":[{"visits":10,"sold":5},{"visits":11,"sold":3},{"visits":8,"sold":4},{"visits":8,"sold":3},{"visits":0,"sold":0},{"visits":6,"sold":2},{"visits":6,"sold":3}]}};
 (function(){
   var today='2026-06-16';
   var key='dar_v7';
@@ -124,18 +124,19 @@ window.SCRAPE_SEED={suv:12,sedan:7,ev:1,advisors:[{"newU":2,"used":9},{"newU":4,
   if(!stored||stored._scraped!==today||stored.ev===undefined||stored.visits===undefined){
     var prev=stored||{};
     localStorage.setItem(key,JSON.stringify({
-      goal:prev.goal||60,suv:12,sedan:7,ev:1,wd:prev.wd||25,
-      _scraped:today,advisors:[{"newU":2,"used":9},{"newU":4,"used":3},{"newU":3,"used":5},{"newU":4,"used":2},{"newU":0,"used":1},{"newU":4,"used":2},{"newU":4,"used":3}],
-      visits:{"total":47,"sold":19,"advisors":[{"visits":10,"sold":5},{"visits":11,"sold":3},{"visits":7,"sold":4},{"visits":7,"sold":3},{"visits":0,"sold":0},{"visits":6,"sold":2},{"visits":6,"sold":2}]}||prev.visits
+      goal:prev.goal||60,suv:12,sedan:8,ev:1,wd:prev.wd||25,
+      _scraped:today,advisors:[{"newU":2,"used":9},{"newU":4,"used":3},{"newU":4,"used":5},{"newU":4,"used":2},{"newU":0,"used":1},{"newU":4,"used":2},{"newU":4,"used":4}],
+      visits:{"total":49,"sold":20,"advisors":[{"visits":10,"sold":5},{"visits":11,"sold":3},{"visits":8,"sold":4},{"visits":8,"sold":3},{"visits":0,"sold":0},{"visits":6,"sold":2},{"visits":6,"sold":3}]}||prev.visits
     }));
   }
   document.addEventListener('DOMContentLoaded',function(){
     var sub=document.getElementById('navSub');
-    if(sub&&!sub.textContent.includes('Updated')){sub.textContent+=' · Updated Jun 16, 11:00 AM';}
+    if(sub&&!sub.textContent.includes('Updated')){sub.textContent+=' · Updated Jun 16, 2:48 PM';}
   });
 })();
 </script>
 <!-- AUTO-SEED-END -->
+
 
 
 
@@ -240,7 +241,7 @@ window.SCRAPE_SEED={suv:12,sedan:7,ev:1,advisors:[{"newU":2,"used":9},{"newU":4,
 </div>
 
 <div id="pg-pipeline" class="pg">
-  <div class="alert">New car inventory from DCS — 95 units. Used sales tracked via advisor leaderboard only.</div>
+  <div class="alert">New car inventory from DCS — 94 units. Used sales tracked via advisor leaderboard only.</div>
   <div class="mg">
     <div class="mc"><div class="mc-l">In stock</div><div class="mc-v" id="pinstock"></div><div class="mc-s">new units</div></div>
     <div class="mc"><div class="mc-l">Pipeline value</div><div class="mc-v" id="pv"></div><div class="mc-s">list price</div></div>
@@ -415,7 +416,6 @@ const INV=[
   {model:"330xi",s:"3",ch:"BM619",d:25,p:61440,suv:false,av:true},
   {model:"330xi",s:"3",ch:"BM620",d:25,p:56140,suv:false,av:true},
   {model:"330xi",s:"3",ch:"BM622",d:20,p:59290,suv:false,av:true},
-  {model:"430xi Cp",s:"4",ch:"BM058",d:354,p:58950,suv:false,av:true},
   {model:"430xi GC",s:"4",ch:"BM469",d:101,p:61565,suv:false,av:true},
   {model:"530ix",s:"5",ch:"BM052",d:350,p:71760,suv:false,av:true},
   {model:"530ix",s:"5",ch:"BM210",d:255,p:73440,suv:false,av:true},
