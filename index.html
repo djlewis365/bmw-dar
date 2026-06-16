@@ -115,7 +115,7 @@ body{font-family:var(--ff);font-size:14px;background:var(--bg);color:var(--tp);m
 <body>
 <!-- AUTO-SEED-START -->
 <script>
-window.SCRAPE_SEED={suv:12,sedan:8,ev:1,advisors:[{"newU":2,"used":9},{"newU":4,"used":3},{"newU":4,"used":5},{"newU":4,"used":2},{"newU":0,"used":1},{"newU":4,"used":2},{"newU":4,"used":4}],visits:{"total":52,"sold":20,"advisors":[{"visits":11,"sold":5},{"visits":11,"sold":3},{"visits":8,"sold":4},{"visits":9,"sold":3},{"visits":0,"sold":0},{"visits":6,"sold":2},{"visits":7,"sold":3}]}};
+window.SCRAPE_SEED={suv:0,sedan:0,ev:0,advisors:[{"newU":0,"used":0},{"newU":0,"used":0},{"newU":0,"used":0},{"newU":0,"used":0},{"newU":0,"used":0},{"newU":0,"used":0},{"newU":0,"used":0}],visits:null};
 (function(){
   var today='2026-06-16';
   var key='dar_v7';
@@ -124,18 +124,19 @@ window.SCRAPE_SEED={suv:12,sedan:8,ev:1,advisors:[{"newU":2,"used":9},{"newU":4,
   if(!stored||stored._scraped!==today||stored.ev===undefined||stored.visits===undefined){
     var prev=stored||{};
     localStorage.setItem(key,JSON.stringify({
-      goal:prev.goal||60,suv:12,sedan:8,ev:1,wd:prev.wd||25,
-      _scraped:today,advisors:[{"newU":2,"used":9},{"newU":4,"used":3},{"newU":4,"used":5},{"newU":4,"used":2},{"newU":0,"used":1},{"newU":4,"used":2},{"newU":4,"used":4}],
-      visits:{"total":52,"sold":20,"advisors":[{"visits":11,"sold":5},{"visits":11,"sold":3},{"visits":8,"sold":4},{"visits":9,"sold":3},{"visits":0,"sold":0},{"visits":6,"sold":2},{"visits":7,"sold":3}]}||prev.visits
+      goal:prev.goal||60,suv:0,sedan:0,ev:0,wd:prev.wd||25,
+      _scraped:today,advisors:[{"newU":0,"used":0},{"newU":0,"used":0},{"newU":0,"used":0},{"newU":0,"used":0},{"newU":0,"used":0},{"newU":0,"used":0},{"newU":0,"used":0}],
+      visits:null||prev.visits
     }));
   }
   document.addEventListener('DOMContentLoaded',function(){
     var sub=document.getElementById('navSub');
-    if(sub&&!sub.textContent.includes('Updated')){sub.textContent+=' · Updated Jun 16, 5:00 PM';}
+    if(sub&&!sub.textContent.includes('Updated')){sub.textContent+=' · Updated Jun 16, 7:01 PM';}
   });
 })();
 </script>
 <!-- AUTO-SEED-END -->
+
 
 
 
