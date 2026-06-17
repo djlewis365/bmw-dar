@@ -115,7 +115,7 @@ body{font-family:var(--ff);font-size:14px;background:var(--bg);color:var(--tp);m
 <body>
 <!-- AUTO-SEED-START -->
 <script>
-window.SCRAPE_SEED={suv:14,sedan:8,ev:1,advisors:[{"newU":2,"used":10},{"newU":4,"used":3},{"newU":4,"used":5},{"newU":6,"used":2},{"newU":0,"used":1},{"newU":4,"used":2},{"newU":4,"used":5}],visits:{"total":53,"sold":23,"advisors":[{"visits":12,"sold":6},{"visits":11,"sold":3},{"visits":8,"sold":4},{"visits":9,"sold":4},{"visits":0,"sold":0},{"visits":6,"sold":2},{"visits":7,"sold":4}]}};
+window.SCRAPE_SEED={suv:16,sedan:8,ev:1,advisors:[{"newU":2,"used":10},{"newU":5,"used":3},{"newU":4,"used":5},{"newU":6,"used":2},{"newU":0,"used":1},{"newU":5,"used":2},{"newU":4,"used":5}],visits:{"total":54,"sold":24,"advisors":[{"visits":12,"sold":6},{"visits":11,"sold":4},{"visits":8,"sold":4},{"visits":9,"sold":4},{"visits":0,"sold":0},{"visits":7,"sold":2},{"visits":7,"sold":4}]}};
 (function(){
   var today='2026-06-17';
   var key='dar_v7';
@@ -124,18 +124,19 @@ window.SCRAPE_SEED={suv:14,sedan:8,ev:1,advisors:[{"newU":2,"used":10},{"newU":4
   if(!stored||stored._scraped!==today||stored.ev===undefined||stored.visits===undefined){
     var prev=stored||{};
     localStorage.setItem(key,JSON.stringify({
-      goal:prev.goal||60,suv:14,sedan:8,ev:1,wd:prev.wd||25,
-      _scraped:today,advisors:[{"newU":2,"used":10},{"newU":4,"used":3},{"newU":4,"used":5},{"newU":6,"used":2},{"newU":0,"used":1},{"newU":4,"used":2},{"newU":4,"used":5}],
-      visits:{"total":53,"sold":23,"advisors":[{"visits":12,"sold":6},{"visits":11,"sold":3},{"visits":8,"sold":4},{"visits":9,"sold":4},{"visits":0,"sold":0},{"visits":6,"sold":2},{"visits":7,"sold":4}]}||prev.visits
+      goal:prev.goal||60,suv:16,sedan:8,ev:1,wd:prev.wd||25,
+      _scraped:today,advisors:[{"newU":2,"used":10},{"newU":5,"used":3},{"newU":4,"used":5},{"newU":6,"used":2},{"newU":0,"used":1},{"newU":5,"used":2},{"newU":4,"used":5}],
+      visits:{"total":54,"sold":24,"advisors":[{"visits":12,"sold":6},{"visits":11,"sold":4},{"visits":8,"sold":4},{"visits":9,"sold":4},{"visits":0,"sold":0},{"visits":7,"sold":2},{"visits":7,"sold":4}]}||prev.visits
     }));
   }
   document.addEventListener('DOMContentLoaded',function(){
     var sub=document.getElementById('navSub');
-    if(sub&&!sub.textContent.includes('Updated')){sub.textContent+=' · Updated Jun 17, 1:00 PM';}
+    if(sub&&!sub.textContent.includes('Updated')){sub.textContent+=' · Updated Jun 17, 2:48 PM';}
   });
 })();
 </script>
 <!-- AUTO-SEED-END -->
+
 
 
 
@@ -359,37 +360,6 @@ function syncLatest(){
 }
 
 const INV=[
-  {model:"M240xi Cp",s:"2",ch:"BM559",d:56,p:64905,suv:false,av:true},
-  {model:"228xi GC",s:"2",ch:"BM515",d:78,p:46235,suv:false,av:true},
-  {model:"228xi GC",s:"2",ch:"BM568",d:49,p:47735,suv:false,av:true},
-  {model:"228xi GC",s:"2",ch:"BM615",d:27,p:47785,suv:false,av:true},
-  {model:"228xi GC",s:"2",ch:"BM538",d:70,p:47035,suv:false,av:true},
-  {model:"M235xi GC",s:"2",ch:"BM453",d:117,p:56175,suv:false,av:true},
-  {model:"M235xi GC",s:"2",ch:"BM493",d:91,p:57860,suv:false,av:true},
-  {model:"M235xi GC",s:"2",ch:"BM512",d:82,p:57135,suv:false,av:true},
-  {model:"330i xDriv",s:"3",ch:"BM281",d:210,p:58290,suv:false,av:true},
-  {model:"330i xDriv",s:"3",ch:"BM567",d:49,p:54765,suv:false,av:true},
-  {model:"330i xDriv",s:"3",ch:"BM626",d:16,p:53915,suv:false,av:true},
-  {model:"330i xDriv",s:"3",ch:"BM625",d:16,p:55415,suv:false,av:true},
-  {model:"330i xDriv",s:"3",ch:"BM614",d:27,p:55865,suv:false,av:true},
-  {model:"330xi",s:"3",ch:"BM446",d:122,p:55540,suv:false,av:true},
-  {model:"330xi",s:"3",ch:"BM622",d:21,p:59290,suv:false,av:true},
-  {model:"330xi",s:"3",ch:"BM619",d:26,p:61440,suv:false,av:true},
-  {model:"330xi",s:"3",ch:"BM620",d:26,p:56140,suv:false,av:true},
-  {model:"430xi GC",s:"4",ch:"BM469",d:102,p:61565,suv:false,av:true},
-  {model:"530ix",s:"5",ch:"BM052",d:351,p:71760,suv:false,av:true},
-  {model:"530ix",s:"5",ch:"BM170",d:273,p:72110,suv:false,av:true},
-  {model:"530ix",s:"5",ch:"BM210",d:256,p:73440,suv:false,av:true},
-  {model:"550ex",s:"5",ch:"BM089",d:314,p:80515,suv:false,av:true},
-  {model:"M5",s:"5",ch:"BM528",d:78,p:135330,suv:false,av:true},
-  {model:"M5 Tour",s:"5",ch:"BM585",d:40,p:140850,suv:false,av:true},
-  {model:"M5 Tour",s:"5",ch:"BM495",d:90,p:132170,suv:false,av:true},
-  {model:"M5 Tour",s:"5",ch:"BM545",d:63,p:137890,suv:false,av:true},
-  {model:"i5 M60",s:"i5",ch:"BM569",d:49,p:92965,suv:false,av:true},
-  {model:"i5 M60",s:"i5",ch:"BM624",d:19,p:96015,suv:false,av:true},
-  {model:"750xe",s:"7",ch:"BM249",d:222,p:119500,suv:false,av:true},
-  {model:"M850xi Cp",s:"8",ch:"BM116",d:306,p:124470,suv:false,av:true},
-  {model:"M850xi GC",s:"8",ch:"BM412",d:137,p:131950,suv:false,av:true},
   {model:"i4 xDr40",s:"i4",ch:"BM468",d:102,p:68165,suv:false,av:true},
   {model:"i4 xDr40",s:"i4",ch:"BM540",d:70,p:67965,suv:false,av:true},
   {model:"X5 M60i",s:"X5",ch:"BM384",d:152,p:108220,suv:true,av:true},
@@ -400,56 +370,87 @@ const INV=[
   {model:"X5 M60i",s:"X5",ch:"BM475",d:101,p:99900,suv:true,av:true},
   {model:"X1 xDr28i",s:"X1",ch:"BM409",d:137,p:51470,suv:true,av:true},
   {model:"X1 xDr28i",s:"X1",ch:"BM419",d:137,p:51520,suv:true,av:true},
-  {model:"X1 xDr28i",s:"X1",ch:"BM513",d:82,p:50720,suv:true,av:true},
   {model:"X1 xDr28i",s:"X1",ch:"BM491",d:91,p:49870,suv:true,av:true},
+  {model:"X1 xDr28i",s:"X1",ch:"BM513",d:82,p:50720,suv:true,av:true},
   {model:"X3 30",s:"X3",ch:"BM586",d:39,p:62000,suv:true,av:true},
-  {model:"X3 30",s:"X3",ch:"BM548",d:66,p:61265,suv:true,av:true},
   {model:"X3 30",s:"X3",ch:"BM546",d:66,p:61665,suv:true,av:true},
-  {model:"X3 30",s:"X3",ch:"BM557",d:57,p:60165,suv:true,av:true},
-  {model:"X3 30",s:"X3",ch:"BM597",d:38,p:63215,suv:true,av:true},
-  {model:"X3 30",s:"X3",ch:"BM600",d:34,p:62315,suv:true,av:true},
-  {model:"X3 30",s:"X3",ch:"BM606",d:0,p:61565,suv:true,av:true},
-  {model:"X3 30",s:"X3",ch:"BM587",d:0,p:63215,suv:true,av:true},
+  {model:"X3 30",s:"X3",ch:"BM548",d:66,p:61265,suv:true,av:true},
   {model:"X3 30",s:"X3",ch:"BM601",d:34,p:58465,suv:true,av:true},
-  {model:"X3 30",s:"X3",ch:"BM616",d:26,p:62550,suv:true,av:true},
-  {model:"X3 30",s:"X3",ch:"BM612",d:29,p:57800,suv:true,av:true},
+  {model:"X3 30",s:"X3",ch:"BM587",d:0,p:63215,suv:true,av:true},
+  {model:"X3 30",s:"X3",ch:"BM600",d:34,p:62315,suv:true,av:true},
+  {model:"X3 30",s:"X3",ch:"BM597",d:38,p:63215,suv:true,av:true},
   {model:"X3 30",s:"X3",ch:"BM611",d:29,p:60200,suv:true,av:true},
-  {model:"X3 30",s:"X3",ch:"BM630",d:5,p:59715,suv:true,av:true},
+  {model:"X3 30",s:"X3",ch:"BM612",d:29,p:57800,suv:true,av:true},
+  {model:"X3 30",s:"X3",ch:"BM616",d:26,p:62550,suv:true,av:true},
   {model:"X3 30",s:"X3",ch:"BM627",d:8,p:58315,suv:true,av:true},
+  {model:"X3 30",s:"X3",ch:"BM630",d:5,p:59715,suv:true,av:true},
+  {model:"X3 30",s:"X3",ch:"BM639",d:0,p:58200,suv:true,av:true},
+  {model:"X3 30",s:"X3",ch:"BM638",d:0,p:59800,suv:true,av:true},
   {model:"X5 xDr40i",s:"X5",ch:"BM373",d:157,p:80025,suv:true,av:true},
+  {model:"X5 xDr40i",s:"X5",ch:"BM484",d:97,p:80050,suv:true,av:true},
   {model:"X5 xDr40i",s:"X5",ch:"BM496",d:90,p:83350,suv:true,av:true},
   {model:"X5 xDr40i",s:"X5",ch:"BM518",d:79,p:83900,suv:true,av:true},
-  {model:"X5 xDr40i",s:"X5",ch:"BM484",d:97,p:80050,suv:true,av:true},
-  {model:"X5 xDr40i",s:"X5",ch:"BM610",d:28,p:83550,suv:true,av:true},
-  {model:"X5 xDr40i",s:"X5",ch:"BM636",d:0,p:88300,suv:true,av:true},
   {model:"X5 xDr40i",s:"X5",ch:"BM591",d:0,p:81350,suv:true,av:true},
-  {model:"X5 xDr40i",s:"X5",ch:"BM609",d:0,p:82600,suv:true,av:true},
   {model:"X5 xDr40i",s:"X5",ch:"BM603",d:0,p:82350,suv:true,av:true},
-  {model:"X5 xDr40i",s:"X5",ch:"BM604",d:32,p:77950,suv:true,av:true},
   {model:"X5 xDr40i",s:"X5",ch:"BM595",d:38,p:80100,suv:true,av:true},
   {model:"X5 xDr40i",s:"X5",ch:"BM593",d:38,p:78200,suv:true,av:true},
-  {model:"X5 xDr40i",s:"X5",ch:"BM632",d:0,p:86550,suv:true,av:true},
+  {model:"X5 xDr40i",s:"X5",ch:"BM609",d:0,p:82600,suv:true,av:true},
+  {model:"X5 xDr40i",s:"X5",ch:"BM604",d:32,p:77950,suv:true,av:true},
+  {model:"X5 xDr40i",s:"X5",ch:"BM610",d:28,p:83550,suv:true,av:true},
+  {model:"X5 xDr40i",s:"X5",ch:"BM636",d:0,p:88300,suv:true,av:true},
   {model:"X5 M",s:"X5",ch:"BM229",d:238,p:143220,suv:true,av:true},
   {model:"X5 xDr50e",s:"X5",ch:"BM396",d:149,p:85765,suv:true,av:true},
   {model:"X5 xDr50e",s:"X5",ch:"BM580",d:44,p:90900,suv:true,av:true},
   {model:"X5 xDr50e",s:"X5",ch:"BM579",d:44,p:88600,suv:true,av:true},
   {model:"X5 xDr50e",s:"X5",ch:"BM590",d:40,p:86950,suv:true,av:true},
-  {model:"X5 xDr50e",s:"X5",ch:"BM634",d:4,p:81500,suv:true,av:true},
+  {model:"X5 xDr50e",s:"X5",ch:"BM637",d:0,p:89900,suv:true,av:true},
   {model:"X5 xDr50e",s:"X5",ch:"BM633",d:0,p:87400,suv:true,av:true},
+  {model:"X5 xDr50e",s:"X5",ch:"BM634",d:4,p:81500,suv:true,av:true},
   {model:"X2 xDr28i",s:"X2",ch:"BM326",d:187,p:54620,suv:true,av:true},
-  {model:"M440i xDri",s:"4",ch:"BN004",d:54,p:75330,suv:false,av:true},
-  {model:"430i xDrCv",s:"4",ch:"BN003",d:54,p:71830,suv:false,av:true},
+  {model:"M240xi Cp",s:"2",ch:"BM559",d:56,p:64905,suv:false,av:true},
+  {model:"228xi GC",s:"2",ch:"BM515",d:78,p:46235,suv:false,av:true},
+  {model:"228xi GC",s:"2",ch:"BM538",d:70,p:47035,suv:false,av:true},
+  {model:"228xi GC",s:"2",ch:"BM568",d:49,p:47735,suv:false,av:true},
+  {model:"228xi GC",s:"2",ch:"BM615",d:27,p:47785,suv:false,av:true},
+  {model:"M235xi GC",s:"2",ch:"BM453",d:117,p:56175,suv:false,av:true},
+  {model:"M235xi GC",s:"2",ch:"BM493",d:91,p:57860,suv:false,av:true},
+  {model:"M235xi GC",s:"2",ch:"BM512",d:82,p:57135,suv:false,av:true},
+  {model:"330i xDriv",s:"3",ch:"BM281",d:210,p:58290,suv:false,av:true},
+  {model:"330i xDriv",s:"3",ch:"BM567",d:49,p:54765,suv:false,av:true},
+  {model:"330i xDriv",s:"3",ch:"BM614",d:27,p:55865,suv:false,av:true},
+  {model:"330i xDriv",s:"3",ch:"BM626",d:16,p:53915,suv:false,av:true},
+  {model:"330i xDriv",s:"3",ch:"BM625",d:16,p:55415,suv:false,av:true},
+  {model:"330xi",s:"3",ch:"BM446",d:122,p:55540,suv:false,av:true},
+  {model:"330xi",s:"3",ch:"BM619",d:26,p:61440,suv:false,av:true},
+  {model:"330xi",s:"3",ch:"BM620",d:26,p:56140,suv:false,av:true},
+  {model:"330xi",s:"3",ch:"BM622",d:21,p:59290,suv:false,av:true},
+  {model:"430xi GC",s:"4",ch:"BM469",d:102,p:61565,suv:false,av:true},
+  {model:"530ix",s:"5",ch:"BM052",d:351,p:71760,suv:false,av:true},
+  {model:"530ix",s:"5",ch:"BM210",d:256,p:73440,suv:false,av:true},
+  {model:"530ix",s:"5",ch:"BM170",d:273,p:72110,suv:false,av:true},
+  {model:"550ex",s:"5",ch:"BM089",d:314,p:80515,suv:false,av:true},
+  {model:"M5",s:"5",ch:"BM528",d:78,p:135330,suv:false,av:true},
+  {model:"M5 Tour",s:"5",ch:"BM495",d:90,p:132170,suv:false,av:true},
+  {model:"M5 Tour",s:"5",ch:"BM585",d:40,p:140850,suv:false,av:true},
+  {model:"M5 Tour",s:"5",ch:"BM545",d:63,p:137890,suv:false,av:true},
+  {model:"i5 M60",s:"i5",ch:"BM569",d:49,p:92965,suv:false,av:true},
+  {model:"i5 M60",s:"i5",ch:"BM624",d:19,p:96015,suv:false,av:true},
+  {model:"750xe",s:"7",ch:"BM249",d:222,p:119500,suv:false,av:true},
+  {model:"M850xi Cp",s:"8",ch:"BM116",d:306,p:124470,suv:false,av:true},
+  {model:"M850xi GC",s:"8",ch:"BM412",d:137,p:131950,suv:false,av:true},
   {model:"M4 CompxDr",s:"4",ch:"BN014",d:27,p:102680,suv:false,av:true},
-  {model:"X7 xDr 40i",s:"X7",ch:"BN010",d:43,p:95105,suv:true,av:true},
   {model:"X7 xDr 40i",s:"X7",ch:"BN005",d:53,p:102750,suv:true,av:true},
-  {model:"X7 xDr 40i",s:"X7",ch:"BN026",d:5,p:101450,suv:true,av:true},
+  {model:"X7 xDr 40i",s:"X7",ch:"BN010",d:43,p:95105,suv:true,av:true},
   {model:"X7 xDr 40i",s:"X7",ch:"BN022",d:8,p:97805,suv:true,av:true},
+  {model:"X7 xDr 40i",s:"X7",ch:"BN026",d:5,p:101450,suv:true,av:true},
   {model:"X7 M60i",s:"X7",ch:"BN024",d:7,p:124050,suv:true,av:true},
   {model:"M3 Competi",s:"3",ch:"BN028",d:4,p:99350,suv:false,av:true},
   {model:"X6 xDr4",s:"X6",ch:"BN016",d:26,p:88700,suv:true,av:true},
   {model:"X6 M60i",s:"X6",ch:"BN023",d:0,p:107000,suv:true,av:true},
   {model:"X6 M Comp",s:"X6",ch:"BN012",d:43,p:146300,suv:true,av:true},
   {model:"X6 M Comp",s:"X6",ch:"BN025",d:0,p:149800,suv:true,av:true},
+  {model:"M440i xDri",s:"4",ch:"BN004",d:54,p:75330,suv:false,av:true},
+  {model:"430i xDrCv",s:"4",ch:"BN003",d:54,p:71830,suv:false,av:true},
 ];
 const SC={'X5':'#1C69D3','X3':'#378ADD','X1':'#85B7EB','X2':'#B5D4F4','X6':'#0C447C','X7':'#042C53','5':'#1E7A3C','3':'#3B6D11','4':'#639922','2':'#97C459','i4':'#1D9E75','7':'#9A5F00','8':'#BA7517','Z4':'#5D3FD3'};
 const SO=['X5','X3','X1','X2','X6','X7','5','3','4','2','Z4','i4','7','8'];
