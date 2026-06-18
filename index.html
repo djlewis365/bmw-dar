@@ -131,11 +131,12 @@ window.SCRAPE_SEED={suv:18,sedan:9,ev:1,advisors:[{"newU":2,"used":10},{"newU":5
   }
   document.addEventListener('DOMContentLoaded',function(){
     var sub=document.getElementById('navSub');
-    if(sub&&!sub.textContent.includes('Updated')){sub.textContent+=' · Updated Jun 18, 3:00 PM';}
+    if(sub&&!sub.textContent.includes('Updated')){sub.textContent+=' · Updated Jun 18, 5:00 PM';}
   });
 })();
 </script>
 <!-- AUTO-SEED-END -->
+
 
 
 
@@ -264,7 +265,7 @@ window.SCRAPE_SEED={suv:18,sedan:9,ev:1,advisors:[{"newU":2,"used":10},{"newU":5
 </div>
 
 <div id="pg-pipeline" class="pg">
-  <div class="alert">New car inventory from DCS — 88 units. Used sales tracked via advisor leaderboard only.</div>
+  <div class="alert">New car inventory from DCS — 90 units. Used sales tracked via advisor leaderboard only.</div>
   <div class="mg">
     <div class="mc"><div class="mc-l">In stock</div><div class="mc-v" id="pinstock"></div><div class="mc-s">new units</div></div>
     <div class="mc"><div class="mc-l">Pipeline value</div><div class="mc-v" id="pv"></div><div class="mc-s">list price</div></div>
@@ -398,6 +399,7 @@ const INV=[
   {model:"X3 30",s:"X3",ch:"BM630",d:6,p:59715,suv:true,av:true},
   {model:"X3 30",s:"X3",ch:"BM639",d:0,p:58200,suv:true,av:true},
   {model:"X3 30",s:"X3",ch:"BM638",d:0,p:59800,suv:true,av:true},
+  {model:"X3 30",s:"X3",ch:"BM642",d:0,p:62050,suv:true,av:true},
   {model:"X5 xDr40i",s:"X5",ch:"BM373",d:158,p:80025,suv:true,av:true},
   {model:"X5 xDr40i",s:"X5",ch:"BM484",d:98,p:80050,suv:true,av:true},
   {model:"X5 xDr40i",s:"X5",ch:"BM496",d:91,p:83350,suv:true,av:true},
@@ -437,6 +439,7 @@ const INV=[
   {model:"330xi",s:"3",ch:"BM620",d:27,p:56140,suv:false,av:true},
   {model:"330xi",s:"3",ch:"BM622",d:22,p:59290,suv:false,av:true},
   {model:"430xi GC",s:"4",ch:"BM469",d:103,p:61565,suv:false,av:true},
+  {model:"430xi GC",s:"4",ch:"BM643",d:0,p:61440,suv:false,av:true},
   {model:"530ix",s:"5",ch:"BM052",d:352,p:71760,suv:false,av:true},
   {model:"530ix",s:"5",ch:"BM210",d:257,p:73440,suv:false,av:true},
   {model:"530ix",s:"5",ch:"BM170",d:274,p:72110,suv:false,av:true},
@@ -702,7 +705,7 @@ const now=new Date();
 const {total:_wdTotal,elapsed:_wdElapsed}=workingDaysInfo();
 const _wdDay=now.getDay()===0?_wdElapsed:_wdElapsed+1;
 document.getElementById('navSub').textContent=now.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'})+' · Day '+_wdDay+' of '+_wdTotal+' · DAR BMW';
-const PROFIT={"month":"June 2026","updated":"6/18/2026","deals":14,"totalGross":88347,"frontGross":6672,"holdback":70215,"finProds":11459,"perUnit":{"front":477,"holdback":5015,"back":819,"total":6310},"flc":{"F":12,"L":1,"C":1},"advisors":[{"ini":"BM","name":"Brady","units":4,"front":764,"holdback":22567,"back":1921,"total":25251},{"ini":"ZT","name":"Zach","units":2,"front":11674,"holdback":12266,"back":415,"total":24355},{"ini":"IK","name":"Ian","units":4,"front":-2056,"holdback":17970,"back":4320,"total":20234},{"ini":"SH","name":"Scott","units":2,"front":-4117,"holdback":10731,"back":3018,"total":9631},{"ini":"DF","name":"Dennis","units":1,"front":1089,"holdback":3240,"back":1493,"total":5823},{"ini":"AB","name":"Adam","units":1,"front":-681,"holdback":3442,"back":292,"total":3053}],"finBreak":{"fi":7340,"nsd":0,"ceramic":2271,"gap":848,"bmwwt":0,"xpel":1000,"other":0}};
+const PROFIT={"month":"June 2026","updated":"6/18/2026","deals":15,"totalGross":93147,"frontGross":8201,"holdback":73336,"finProds":11609,"perUnit":{"front":547,"holdback":4889,"back":774,"total":6210},"flc":{"F":13,"L":1,"C":1},"advisors":[{"ini":"ZT","name":"Zach","units":4,"front":16367,"holdback":20001,"back":715,"total":37083},{"ini":"IK","name":"Ian","units":4,"front":-2056,"holdback":17970,"back":4320,"total":20234},{"ini":"BM","name":"Brady","units":3,"front":-2401,"holdback":17953,"back":1771,"total":17322},{"ini":"SH","name":"Scott","units":2,"front":-4117,"holdback":10731,"back":3018,"total":9631},{"ini":"DF","name":"Dennis","units":1,"front":1089,"holdback":3240,"back":1493,"total":5823},{"ini":"AB","name":"Adam","units":1,"front":-681,"holdback":3442,"back":292,"total":3053}],"finBreak":{"fi":7490,"nsd":0,"ceramic":2271,"gap":848,"bmwwt":0,"xpel":1000,"other":0}};
 function renderProfit(){
   if(!PROFIT.deals){
     document.getElementById('profitAlert').textContent='No profit data yet — run node profit-import.js to load this month\'s spreadsheet.';
