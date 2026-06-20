@@ -115,7 +115,7 @@ body{font-family:var(--ff);font-size:14px;background:var(--bg);color:var(--tp);m
 <body>
 <!-- AUTO-SEED-START -->
 <script>
-window.SCRAPE_SEED={suv:0,sedan:0,ev:0,advisors:[{"newU":0,"used":0},{"newU":0,"used":0},{"newU":0,"used":0},{"newU":0,"used":0},{"newU":0,"used":0},{"newU":0,"used":0},{"newU":0,"used":0}],visits:{"total":65,"sold":30,"advisors":[{"visits":13,"sold":6},{"visits":14,"sold":5},{"visits":11,"sold":5},{"visits":10,"sold":5},{"visits":0,"sold":0},{"visits":10,"sold":5},{"visits":7,"sold":4}]}};
+window.SCRAPE_SEED={suv:22,sedan:9,ev:1,advisors:[{"newU":2,"used":10},{"newU":6,"used":4},{"newU":4,"used":6},{"newU":8,"used":2},{"newU":0,"used":1},{"newU":8,"used":2},{"newU":4,"used":6}],visits:{"total":65,"sold":30,"advisors":[{"visits":13,"sold":6},{"visits":14,"sold":5},{"visits":11,"sold":5},{"visits":10,"sold":5},{"visits":0,"sold":0},{"visits":10,"sold":5},{"visits":7,"sold":4}]}};
 (function(){
   var today='2026-06-20';
   var key='dar_v7';
@@ -124,18 +124,19 @@ window.SCRAPE_SEED={suv:0,sedan:0,ev:0,advisors:[{"newU":0,"used":0},{"newU":0,"
   if(!stored||stored._scraped!==today||stored.ev===undefined||stored.visits===undefined){
     var prev=stored||{};
     localStorage.setItem(key,JSON.stringify({
-      goal:prev.goal||60,suv:0,sedan:0,ev:0,wd:prev.wd||25,
-      _scraped:today,advisors:[{"newU":0,"used":0},{"newU":0,"used":0},{"newU":0,"used":0},{"newU":0,"used":0},{"newU":0,"used":0},{"newU":0,"used":0},{"newU":0,"used":0}],
+      goal:prev.goal||60,suv:22,sedan:9,ev:1,wd:prev.wd||25,
+      _scraped:today,advisors:[{"newU":2,"used":10},{"newU":6,"used":4},{"newU":4,"used":6},{"newU":8,"used":2},{"newU":0,"used":1},{"newU":8,"used":2},{"newU":4,"used":6}],
       visits:{"total":65,"sold":30,"advisors":[{"visits":13,"sold":6},{"visits":14,"sold":5},{"visits":11,"sold":5},{"visits":10,"sold":5},{"visits":0,"sold":0},{"visits":10,"sold":5},{"visits":7,"sold":4}]}||prev.visits
     }));
   }
   document.addEventListener('DOMContentLoaded',function(){
     var sub=document.getElementById('navSub');
-    if(sub&&!sub.textContent.includes('Updated')){sub.textContent+=' · Updated Jun 20, 7:00 AM';}
+    if(sub&&!sub.textContent.includes('Updated')){sub.textContent+=' · Updated Jun 20, 9:00 AM';}
   });
 })();
 </script>
 <!-- AUTO-SEED-END -->
+
 
 
 
