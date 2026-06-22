@@ -115,7 +115,7 @@ body{font-family:var(--ff);font-size:14px;background:var(--bg);color:var(--tp);m
 <body>
 <!-- AUTO-SEED-START -->
 <script>
-window.SCRAPE_SEED={suv:23,sedan:9,ev:1,advisors:[{"newU":3,"used":10},{"newU":6,"used":5},{"newU":4,"used":6},{"newU":8,"used":2},{"newU":0,"used":1},{"newU":8,"used":3},{"newU":4,"used":6}],visits:{"total":72,"sold":31,"advisors":[{"visits":14,"sold":6},{"visits":17,"sold":5},{"visits":12,"sold":5},{"visits":11,"sold":5},{"visits":1,"sold":1},{"visits":10,"sold":5},{"visits":7,"sold":4}]}};
+window.SCRAPE_SEED={suv:24,sedan:9,ev:1,advisors:[{"newU":3,"used":10},{"newU":6,"used":5},{"newU":5,"used":6},{"newU":8,"used":2},{"newU":0,"used":1},{"newU":8,"used":3},{"newU":4,"used":6}],visits:{"total":74,"sold":32,"advisors":[{"visits":14,"sold":6},{"visits":17,"sold":5},{"visits":11,"sold":5},{"visits":13,"sold":5},{"visits":2,"sold":2},{"visits":10,"sold":5},{"visits":7,"sold":4}]}};
 (function(){
   var today='2026-06-22';
   var key='dar_v7';
@@ -124,18 +124,19 @@ window.SCRAPE_SEED={suv:23,sedan:9,ev:1,advisors:[{"newU":3,"used":10},{"newU":6
   if(!stored||stored._scraped!==today||stored.ev===undefined||stored.visits===undefined){
     var prev=stored||{};
     localStorage.setItem(key,JSON.stringify({
-      goal:prev.goal||60,suv:23,sedan:9,ev:1,wd:prev.wd||25,
-      _scraped:today,advisors:[{"newU":3,"used":10},{"newU":6,"used":5},{"newU":4,"used":6},{"newU":8,"used":2},{"newU":0,"used":1},{"newU":8,"used":3},{"newU":4,"used":6}],
-      visits:{"total":72,"sold":31,"advisors":[{"visits":14,"sold":6},{"visits":17,"sold":5},{"visits":12,"sold":5},{"visits":11,"sold":5},{"visits":1,"sold":1},{"visits":10,"sold":5},{"visits":7,"sold":4}]}||prev.visits
+      goal:prev.goal||60,suv:24,sedan:9,ev:1,wd:prev.wd||25,
+      _scraped:today,advisors:[{"newU":3,"used":10},{"newU":6,"used":5},{"newU":5,"used":6},{"newU":8,"used":2},{"newU":0,"used":1},{"newU":8,"used":3},{"newU":4,"used":6}],
+      visits:{"total":74,"sold":32,"advisors":[{"visits":14,"sold":6},{"visits":17,"sold":5},{"visits":11,"sold":5},{"visits":13,"sold":5},{"visits":2,"sold":2},{"visits":10,"sold":5},{"visits":7,"sold":4}]}||prev.visits
     }));
   }
   document.addEventListener('DOMContentLoaded',function(){
     var sub=document.getElementById('navSub');
-    if(sub&&!sub.textContent.includes('Updated')){sub.textContent+=' · Updated Jun 22, 3:00 PM';}
+    if(sub&&!sub.textContent.includes('Updated')){sub.textContent+=' · Updated Jun 22, 5:00 PM';}
   });
 })();
 </script>
 <!-- AUTO-SEED-END -->
+
 
 
 
@@ -416,10 +417,10 @@ const INV=[
   {model:"X3 30",s:"X3",ch:"BM612",d:34,p:57800,suv:true,av:true},
   {model:"X3 30",s:"X3",ch:"BM616",d:31,p:62550,suv:true,av:true},
   {model:"X3 30",s:"X3",ch:"BM627",d:13,p:58315,suv:true,av:true},
-  {model:"X3 30",s:"X3",ch:"BM630",d:10,p:59715,suv:true,av:true},
   {model:"X3 30",s:"X3",ch:"BM639",d:4,p:58200,suv:true,av:true},
   {model:"X3 30",s:"X3",ch:"BM638",d:4,p:59800,suv:true,av:true},
   {model:"X3 30",s:"X3",ch:"BM642",d:0,p:62050,suv:true,av:true},
+  {model:"X3 M50",s:"X3",ch:"BM644",d:1,p:74750,suv:true,av:true},
   {model:"X5 xDr40i",s:"X5",ch:"BM373",d:162,p:80025,suv:true,av:true},
   {model:"X5 xDr40i",s:"X5",ch:"BM484",d:102,p:80050,suv:true,av:true},
   {model:"X5 xDr40i",s:"X5",ch:"BM496",d:95,p:83350,suv:true,av:true},
