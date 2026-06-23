@@ -115,7 +115,7 @@ body{font-family:var(--ff);font-size:14px;background:var(--bg);color:var(--tp);m
 <body>
 <!-- AUTO-SEED-START -->
 <script>
-window.SCRAPE_SEED={suv:10,sedan:1,ev:0,advisors:[{"newU":1,"used":0},{"newU":1,"used":0},{"newU":1,"used":0},{"newU":4,"used":0},{"newU":0,"used":0},{"newU":3,"used":0},{"newU":1,"used":0}],visits:{"total":76,"sold":32,"advisors":[{"visits":14,"sold":6},{"visits":18,"sold":4},{"visits":12,"sold":6},{"visits":13,"sold":5},{"visits":1,"sold":1},{"visits":10,"sold":5},{"visits":8,"sold":5}]}};
+window.SCRAPE_SEED={suv:8,sedan:1,ev:0,advisors:[{"newU":1,"used":0},{"newU":1,"used":0},{"newU":0,"used":0},{"newU":3,"used":0},{"newU":0,"used":0},{"newU":3,"used":0},{"newU":1,"used":0}],visits:{"total":76,"sold":32,"advisors":[{"visits":14,"sold":6},{"visits":18,"sold":4},{"visits":12,"sold":6},{"visits":13,"sold":5},{"visits":1,"sold":1},{"visits":10,"sold":5},{"visits":8,"sold":5}]}};
 (function(){
   var today='2026-06-23';
   var key='dar_v7';
@@ -124,18 +124,19 @@ window.SCRAPE_SEED={suv:10,sedan:1,ev:0,advisors:[{"newU":1,"used":0},{"newU":1,
   if(!stored||stored._scraped!==today||stored.ev===undefined||stored.visits===undefined){
     var prev=stored||{};
     localStorage.setItem(key,JSON.stringify({
-      goal:prev.goal||60,suv:10,sedan:1,ev:0,wd:prev.wd||25,
-      _scraped:today,advisors:[{"newU":1,"used":0},{"newU":1,"used":0},{"newU":1,"used":0},{"newU":4,"used":0},{"newU":0,"used":0},{"newU":3,"used":0},{"newU":1,"used":0}],
+      goal:prev.goal||60,suv:8,sedan:1,ev:0,wd:prev.wd||25,
+      _scraped:today,advisors:[{"newU":1,"used":0},{"newU":1,"used":0},{"newU":0,"used":0},{"newU":3,"used":0},{"newU":0,"used":0},{"newU":3,"used":0},{"newU":1,"used":0}],
       visits:{"total":76,"sold":32,"advisors":[{"visits":14,"sold":6},{"visits":18,"sold":4},{"visits":12,"sold":6},{"visits":13,"sold":5},{"visits":1,"sold":1},{"visits":10,"sold":5},{"visits":8,"sold":5}]}||prev.visits
     }));
   }
   document.addEventListener('DOMContentLoaded',function(){
     var sub=document.getElementById('navSub');
-    if(sub&&!sub.textContent.includes('Updated')){sub.textContent+=' · Updated Jun 23, 1:00 PM';}
+    if(sub&&!sub.textContent.includes('Updated')){sub.textContent+=' · Updated Jun 23, 3:00 PM';}
   });
 })();
 </script>
 <!-- AUTO-SEED-END -->
+
 
 
 
@@ -738,7 +739,7 @@ const now=new Date();
 const {total:_wdTotal,elapsed:_wdElapsed}=workingDaysInfo();
 const _wdDay=now.getDay()===0?_wdElapsed:_wdElapsed+1;
 document.getElementById('navSub').textContent=now.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'})+' · Day '+_wdDay+' of '+_wdTotal+' · DAR BMW';
-const PROFIT={"month":"June 2026","updated":"6/23/2026","deals":23,"totalGross":132947,"frontGross":8558,"holdback":107263,"finProds":17126,"perUnit":{"front":372,"holdback":4664,"back":745,"total":5780},"flc":{"F":19,"L":2,"C":2},"advisors":[{"ini":"ZT","name":"Zach","units":5,"front":15582,"holdback":23614,"back":715,"total":39911},{"ini":"BM","name":"Brady","units":6,"front":-4552,"holdback":31923,"back":4984,"total":32354},{"ini":"SH","name":"Scott","units":4,"front":-2393,"holdback":20197,"back":4229,"total":22032},{"ini":"IK","name":"Ian","units":4,"front":-2056,"holdback":17970,"back":4320,"total":20234},{"ini":"DF","name":"Dennis","units":2,"front":1399,"holdback":6667,"back":1694,"total":9760},{"ini":"AB","name":"Adam","units":2,"front":579,"holdback":6893,"back":1185,"total":8656}],"finBreak":{"fi":10155,"nsd":0,"ceramic":3028,"gap":848,"bmwwt":0,"xpel":3095,"other":0}};
+const PROFIT={"month":"June 2026","updated":"6/23/2026","deals":26,"totalGross":147263,"frontGross":10324,"holdback":118614,"finProds":18325,"perUnit":{"front":397,"holdback":4562,"back":705,"total":5664},"flc":{"F":21,"L":2,"C":3},"advisors":[{"ini":"ZT","name":"Zach","units":5,"front":15582,"holdback":23614,"back":715,"total":39911},{"ini":"BM","name":"Brady","units":6,"front":-4552,"holdback":31923,"back":4984,"total":32354},{"ini":"IK","name":"Ian","units":5,"front":-1705,"holdback":21472,"back":4320,"total":24087},{"ini":"SH","name":"Scott","units":4,"front":-2393,"holdback":20197,"back":4229,"total":22032},{"ini":"DF","name":"Dennis","units":4,"front":2814,"holdback":14516,"back":2893,"total":20222},{"ini":"AB","name":"Adam","units":2,"front":579,"holdback":6893,"back":1185,"total":8656}],"finBreak":{"fi":10797,"nsd":0,"ceramic":3585,"gap":848,"bmwwt":0,"xpel":3095,"other":0}};
 function renderProfit(){
   if(!PROFIT.deals){
     document.getElementById('profitAlert').textContent='No profit data yet — run node profit-import.js to load this month\'s spreadsheet.';
