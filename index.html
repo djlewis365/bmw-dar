@@ -115,7 +115,7 @@ body{font-family:var(--ff);font-size:14px;background:var(--bg);color:var(--tp);m
 <body>
 <!-- AUTO-SEED-START -->
 <script>
-window.SCRAPE_SEED={suv:24,sedan:9,ev:1,advisors:[{"newU":3,"used":10},{"newU":6,"used":4},{"newU":5,"used":6},{"newU":8,"used":2},{"newU":0,"used":1},{"newU":8,"used":3},{"newU":4,"used":6}],visits:{"total":75,"sold":31,"advisors":[{"visits":14,"sold":6},{"visits":18,"sold":4},{"visits":11,"sold":5},{"visits":13,"sold":5},{"visits":2,"sold":2},{"visits":10,"sold":5},{"visits":7,"sold":4}]}};
+window.SCRAPE_SEED={suv:9,sedan:1,ev:0,advisors:[{"newU":1,"used":0},{"newU":1,"used":0},{"newU":1,"used":0},{"newU":4,"used":0},{"newU":0,"used":0},{"newU":3,"used":0},{"newU":0,"used":0}],visits:{"total":75,"sold":31,"advisors":[{"visits":14,"sold":6},{"visits":18,"sold":4},{"visits":12,"sold":6},{"visits":13,"sold":5},{"visits":1,"sold":1},{"visits":10,"sold":5},{"visits":7,"sold":4}]}};
 (function(){
   var today='2026-06-23';
   var key='dar_v7';
@@ -124,18 +124,19 @@ window.SCRAPE_SEED={suv:24,sedan:9,ev:1,advisors:[{"newU":3,"used":10},{"newU":6
   if(!stored||stored._scraped!==today||stored.ev===undefined||stored.visits===undefined){
     var prev=stored||{};
     localStorage.setItem(key,JSON.stringify({
-      goal:prev.goal||60,suv:24,sedan:9,ev:1,wd:prev.wd||25,
-      _scraped:today,advisors:[{"newU":3,"used":10},{"newU":6,"used":4},{"newU":5,"used":6},{"newU":8,"used":2},{"newU":0,"used":1},{"newU":8,"used":3},{"newU":4,"used":6}],
-      visits:{"total":75,"sold":31,"advisors":[{"visits":14,"sold":6},{"visits":18,"sold":4},{"visits":11,"sold":5},{"visits":13,"sold":5},{"visits":2,"sold":2},{"visits":10,"sold":5},{"visits":7,"sold":4}]}||prev.visits
+      goal:prev.goal||60,suv:9,sedan:1,ev:0,wd:prev.wd||25,
+      _scraped:today,advisors:[{"newU":1,"used":0},{"newU":1,"used":0},{"newU":1,"used":0},{"newU":4,"used":0},{"newU":0,"used":0},{"newU":3,"used":0},{"newU":0,"used":0}],
+      visits:{"total":75,"sold":31,"advisors":[{"visits":14,"sold":6},{"visits":18,"sold":4},{"visits":12,"sold":6},{"visits":13,"sold":5},{"visits":1,"sold":1},{"visits":10,"sold":5},{"visits":7,"sold":4}]}||prev.visits
     }));
   }
   document.addEventListener('DOMContentLoaded',function(){
     var sub=document.getElementById('navSub');
-    if(sub&&!sub.textContent.includes('Updated')){sub.textContent+=' · Updated Jun 23, 7:00 AM';}
+    if(sub&&!sub.textContent.includes('Updated')){sub.textContent+=' · Updated Jun 23, 11:00 AM';}
   });
 })();
 </script>
 <!-- AUTO-SEED-END -->
+
 
 
 
