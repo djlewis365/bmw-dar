@@ -393,7 +393,7 @@ window.SCRAPE_SEED={suv:25,sedan:10,ev:1,advisors:[{"newU":3,"used":10},{"newU":
   </div>
   <div class="card" style="margin-bottom:10px"><div class="ct">Needs photos — stock image or thin gallery (under 3 real photos)</div><div id="websiteNeedsPhotos"></div></div>
   <div class="card" style="margin-bottom:10px"><div class="ct">In DCS but not posted to website yet</div><div id="websiteNotPosted"></div></div>
-  <div class="card"><div class="ct">Listed on website but not currently in DCS (sold / stale?)</div><div id="websiteStale"></div></div>
+  <div class="card"><div class="ct">Listed on website but not currently in DCS — P1 (sold/committed) shown separately from true stale listings</div><div id="websiteStale"></div></div>
 </div>
 
 <script>
@@ -529,6 +529,7 @@ const WEBSITE=[
   {stock:"BN005",vin:"5UX23EM03V9436706",model:"New 2027 BMW X7 xDrive40i",real:0,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2027-BMW-X7-b0f2e486ac1837f47d123b9000e5ec4b.htm"},
   {stock:"BM540",vin:"WBY43HD01TFW55060",model:"New 2026 BMW i4 xDrive40",real:0,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-i4-ce5b7afbac184fff6390049273de970b.htm"},
 ];
+const P1_STOCKS=["BM089","BM597","BM635","BM641","BM640","BN005","BN027","BN012"];
 const INV=[
   {model:"M240xi Cp",s:"2",ch:"BM559",d:63,p:64905,suv:false,av:true},
   {model:"228xi GC",s:"2",ch:"BM515",d:85,p:46235,suv:false,av:true},
@@ -954,7 +955,10 @@ function renderWebsite(){
     .map(w=>({...w,d:invByStock[w.stock]?invByStock[w.stock].d:null}))
     .sort((a,b)=>(b.d??-1)-(a.d??-1));
   const notPosted=INV.filter(v=>!webStocks.has(v.ch));
-  const stale=WEBSITE.filter(w=>w.stock&&!dcsStocks.has(w.stock));
+  const staleAll=WEBSITE.filter(w=>w.stock&&!dcsStocks.has(w.stock));
+  const p1Set=new Set(P1_STOCKS);
+  const stale=staleAll.filter(w=>!p1Set.has(w.stock));
+  const p1Stale=staleAll.filter(w=>p1Set.has(w.stock));
 
   document.getElementById('wTotal').textContent=WEBSITE.length;
   document.getElementById('wMatched').textContent=matched.length;
@@ -978,8 +982,10 @@ function renderWebsite(){
     ?notPosted.map(v=>`<div class="row"><div class="rl"><div class="rm">${v.model} <span style="font-weight:400;color:var(--tm);font-size:11px;font-family:var(--fm)">${v.ch}</span></div><div style="font-size:11px;color:var(--ts)">${v.s} Series · ${v.d}d on lot</div></div><span class="badge b-gray">Not online</span></div>`).join('')
     :'<div style="color:var(--tm);font-size:12px;padding:8px 0">Every in-stock unit is posted online</div>';
 
-  document.getElementById('websiteStale').innerHTML=stale.length
-    ?stale.map(w=>`<div class="row"><div class="rl"><div class="rm">${w.model||w.stock} <span style="font-weight:400;color:var(--tm);font-size:11px;font-family:var(--fm)">${w.stock}</span></div></div><span class="badge b-amb">Check listing</span></div>`).join('')
+  document.getElementById('websiteStale').innerHTML=(stale.length+p1Stale.length)
+    ?[...stale.map(w=>`<div class="row"><div class="rl"><div class="rm">${w.model||w.stock} <span style="font-weight:400;color:var(--tm);font-size:11px;font-family:var(--fm)">${w.stock}</span></div></div><span class="badge b-amb">Check listing</span></div>`),
+      ...p1Stale.map(w=>`<div class="row"><div class="rl"><div class="rm">${w.model||w.stock} <span style="font-weight:400;color:var(--tm);font-size:11px;font-family:var(--fm)">${w.stock}</span></div><div style="font-size:11px;color:var(--ts)">Priority 1 in DCS — already committed to a customer</div></div><span class="badge b-blue">P1 · sold</span></div>`)
+     ].join('')
     :'<div style="color:var(--tm);font-size:12px;padding:8px 0">No stale listings found</div>';
 }
 renderLeaderboard();renderSales();renderPipeline();renderAging();renderInventory('All');renderPricing();renderProfit();renderVisits();renderWebsite();
