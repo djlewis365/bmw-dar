@@ -946,8 +946,13 @@ function renderWebsite(){
   const dcsStocks=new Set(INV.map(v=>v.ch));
   const webStocks=new Set(WEBSITE.map(w=>w.stock).filter(Boolean));
 
+  const invByStock={};INV.forEach(v=>{invByStock[v.ch]=v;});
+  const FRESH_DAYS=12;
+
   const matched=WEBSITE.filter(w=>w.stock&&dcsStocks.has(w.stock));
-  const needsPhotos=[...matched].filter(w=>w.real<3).sort((a,b)=>a.real-b.real);
+  const needsPhotos=[...matched].filter(w=>w.real<3)
+    .map(w=>({...w,d:invByStock[w.stock]?invByStock[w.stock].d:null}))
+    .sort((a,b)=>(b.d??-1)-(a.d??-1));
   const notPosted=INV.filter(v=>!webStocks.has(v.ch));
   const stale=WEBSITE.filter(w=>w.stock&&!dcsStocks.has(w.stock));
 
@@ -961,7 +966,12 @@ function renderWebsite(){
     `Comparing ${INV.length} DCS in-stock units against ${WEBSITE.length} live website listings.`;
 
   document.getElementById('websiteNeedsPhotos').innerHTML=needsPhotos.length
-    ?needsPhotos.map(w=>`<div class="row"><div class="rl"><div class="rm">${w.model||w.stock} <span style="font-weight:400;color:var(--tm);font-size:11px;font-family:var(--fm)">${w.stock}</span></div><div style="font-size:11px;color:var(--ts)">${w.real} real photo${w.real===1?'':'s'} · ${w.stockPh} stock photo${w.stockPh===1?'':'s'}</div></div>${w.real===0?'<span class="badge b-red">Stock only</span>':'<span class="badge b-amb">Thin gallery</span>'}</div>`).join('')
+    ?needsPhotos.map(w=>{
+      const dKnown=w.d!=null;
+      const fresh=dKnown&&w.d<=FRESH_DAYS;
+      const dayTxt=dKnown?`<span class="${fresh?'good':'bad'}" style="font-weight:500">${w.d}d on lot</span>${fresh?' · Fresh':' · Overdue'}`:'days unknown';
+      return `<div class="row"><div class="rl"><div class="rm">${w.model||w.stock} <span style="font-weight:400;color:var(--tm);font-size:11px;font-family:var(--fm)">${w.stock}</span></div><div style="font-size:11px;color:var(--ts)">${w.real} real photo${w.real===1?'':'s'} · ${w.stockPh} stock photo${w.stockPh===1?'':'s'} · ${dayTxt}</div></div>${w.real===0?'<span class="badge b-red">Stock only</span>':'<span class="badge b-amb">Thin gallery</span>'}</div>`;
+    }).join('')
     :'<div style="color:var(--tm);font-size:12px;padding:8px 0">All matched listings have a full photo gallery</div>';
 
   document.getElementById('websiteNotPosted').innerHTML=notPosted.length
