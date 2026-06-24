@@ -948,7 +948,7 @@ function renderWebsite(){
   const webStocks=new Set(WEBSITE.map(w=>w.stock).filter(Boolean));
 
   const invByStock={};INV.forEach(v=>{invByStock[v.ch]=v;});
-  const FRESH_DAYS=12;
+  const FRESH_DAYS=7;
 
   const matched=WEBSITE.filter(w=>w.stock&&dcsStocks.has(w.stock));
   const needsPhotos=[...matched].filter(w=>w.real<3)
