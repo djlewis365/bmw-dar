@@ -781,27 +781,27 @@ function renderSales(){
   const {total:wd,elapsed,remaining}=workingDaysInfo();
   const sold=STATE.advisors.reduce((s,a)=>s+a.newU,0);
   const totalUsed=STATE.advisors.reduce((s,a)=>s+a.used,0);
-  const pace=sold/Math.max(1,elapsed),needed=Math.max(0,goal-sold);
+  const pace=elapsed>0?sold/elapsed:null,needed=Math.max(0,goal-sold);
   const req=remaining>0?needed/remaining:0;
-  const proj=Math.round(pace*wd);
+  const proj=pace!==null?Math.round(pace*wd):null;
   const pct=Math.min(100,Math.round(sold/goal*100));
   const tpct=Math.min(100,Math.round((wd-remaining)/wd*100));
-  const pc=proj>=goal?'good':proj>=goal*.88?'warn':'bad';
-  const rc=req<=pace?'good':'warn';
+  const pc=proj!==null?(proj>=goal?'good':proj>=goal*.88?'warn':'bad'):'';
+  const rc=pace!==null&&req<=pace?'good':'warn';
   document.getElementById('salesMetrics').innerHTML=`
     <div class="mc"><div class="mc-l">New sold MTD</div><div class="mc-v">${sold}</div><div class="mc-s">of ${goal} goal</div></div>
     <div class="mc"><div class="mc-l">Used sold MTD</div><div class="mc-v" style="color:var(--ts)">${totalUsed}</div><div class="mc-s">all advisors</div></div>
-    <div class="mc"><div class="mc-l">Daily pace</div><div class="mc-v ${pc}">${pace.toFixed(1)}</div><div class="mc-s">new/day</div></div>
+    <div class="mc"><div class="mc-l">Daily pace</div><div class="mc-v ${pc}">${pace!==null?pace.toFixed(1):'—'}</div><div class="mc-s">new/day</div></div>
     <div class="mc"><div class="mc-l">Need/day</div><div class="mc-v ${rc}">${req.toFixed(1)}</div><div class="mc-s">to hit goal</div></div>
     <div class="mc"><div class="mc-l">Days left</div><div class="mc-v">${remaining}</div><div class="mc-s">working days</div></div>
-    <div class="mc"><div class="mc-l">Projection</div><div class="mc-v ${pc}">${proj}</div><div class="mc-s">${proj>=goal?'on track':'new cars'}</div></div>`;
+    <div class="mc"><div class="mc-l">Projection</div><div class="mc-v ${pc}">${proj!==null?proj:'—'}</div><div class="mc-s">${proj!==null?(proj>=goal?'on track':'new cars'):'no data yet'}</div></div>`;
   const gc=pct>=100?'#3aaa6e':pct>=75?'#e8a020':'#e05252';
   document.getElementById('goalBars').innerHTML=`
     <div class="row"><span style="font-size:12px;color:var(--ts);width:64px;flex-shrink:0">New sold</span>${barEl(pct,gc)}<span style="font-size:11px;font-family:var(--fm);width:30px;text-align:right">${pct}%</span></div>
     <div class="row"><span style="font-size:12px;color:var(--ts);width:64px;flex-shrink:0">Days used</span>${barEl(tpct,'#1C69D3')}<span style="font-size:11px;font-family:var(--fm);width:30px;text-align:right">${tpct}%</span></div>
     <div style="margin-top:10px;padding:9px 10px;background:var(--panel);border-radius:var(--radius);font-size:12px">
-      <span style="font-weight:500;color:var(--tp)">${pct>=tpct?'↑ Ahead of pace':'↓ Behind pace'}</span>
-      <span style="color:var(--ts)"> — ${pace.toFixed(1)}/day now, need ${req.toFixed(1)}/day</span></div>`;
+      <span style="font-weight:500;color:var(--tp)">${pace!==null?(pct>=tpct?'↑ Ahead of pace':'↓ Behind pace'):'Month starting'}</span>
+      <span style="color:var(--ts)">${pace!==null?' — '+pace.toFixed(1)+'/day now, need '+req.toFixed(1)+'/day':' — no days elapsed yet'}</span></div>`;
   const tot=(suvs+sedans+evs)||1,sp=Math.round(suvs/tot*100),evp=Math.round(evs/tot*100),sep=100-sp-evp;
   document.getElementById('mixBars').innerHTML=`
     <div class="row"><span style="font-size:12px;color:var(--ts);width:52px;flex-shrink:0">SUVs</span>${barEl(sp,'#1C69D3')}<span style="font-size:12px;font-weight:500;width:24px;text-align:right;color:var(--tp)">${suvs}</span></div>
@@ -809,11 +809,11 @@ function renderSales(){
     <div class="row"><span style="font-size:12px;color:var(--ts);width:52px;flex-shrink:0">EVs</span>${barEl(evp,'#7C3AED')}<span style="font-size:12px;font-weight:500;width:24px;text-align:right;color:var(--tp)">${evs}</span></div>
     <div style="height:10px;border-radius:3px;overflow:hidden;display:flex;margin:10px 0 4px"><div style="width:${sp}%;background:#1C69D3"></div><div style="width:${sep}%;background:#1E7A3C"></div><div style="width:${evp}%;background:#7C3AED"></div></div>
     <div style="display:flex;justify-content:space-between;font-size:11px"><span style="color:#378ADD">${sp}% SUV</span><span style="color:#3B6D11">${sep}% Sedan</span><span style="color:#9F7AEA">${evp}% EV</span></div>`;
-  const gap=proj-goal;
+  const gap=proj!==null?proj-goal:null;
   document.getElementById('projGrid').innerHTML=`
-    <div class="pt"><div class="pt-l">Projected</div><div class="pt-v ${pc}">${proj}</div><div class="pt-s">${gap>=0?'+'+gap+' over goal':Math.abs(gap)+' under goal'}</div></div>
+    <div class="pt"><div class="pt-l">Projected</div><div class="pt-v ${pc}">${proj!==null?proj:'—'}</div><div class="pt-s">${gap!==null?(gap>=0?'+'+gap+' over goal':Math.abs(gap)+' under goal'):'no data yet'}</div></div>
     <div class="pt"><div class="pt-l">Goal</div><div class="pt-v">${goal}</div><div class="pt-s">${remaining} days left</div></div>
-    <div class="pt"><div class="pt-l">Current pace</div><div class="pt-v">${pace.toFixed(1)}<span style="font-size:12px;font-weight:400"> /day</span></div><div class="pt-s">${elapsed} days in</div></div>
+    <div class="pt"><div class="pt-l">Current pace</div><div class="pt-v">${pace!==null?pace.toFixed(1):'—'}<span style="font-size:12px;font-weight:400">${pace!==null?' /day':''}</span></div><div class="pt-s">${elapsed} days in</div></div>
     <div class="pt"><div class="pt-l">Required pace</div><div class="pt-v ${rc}">${req.toFixed(1)}<span style="font-size:12px;font-weight:400"> /day</span></div><div class="pt-s">to reach ${goal}</div></div>`;
 }
 
