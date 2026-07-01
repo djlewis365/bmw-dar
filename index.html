@@ -470,57 +470,108 @@ function onAdvisorChange(){saveAdvisors();renderLeaderboard();renderSales();}
 function resetAll(){if(!confirm('Clear all advisor numbers for a new month?'))return;STATE.advisors=ADVISOR_DEFS.map(()=>({newU:0,used:0}));STATE.suv=0;STATE.sedan=0;STATE.ev=0;saveState(STATE);document.getElementById('i-suv').value=0;document.getElementById('i-sedan').value=0;document.getElementById('i-ev').value=0;renderLeaderboard();renderSales();}
 function copyReport(){
   const s=window.SCRAPE_SEED,p=window.PROFIT;
-  if(!s&&!p){alert('No scrape data on this page.');return;}
-  const adv=ADVISOR_DEFS.map((d,i)=>({
-    name:d.name,
-    new:STATE.advisors[i].newU,
-    used:STATE.advisors[i].used,
-  }));
-  const visits=STATE.visits?ADVISOR_DEFS.map((d,i)=>({
-    name:d.name,
-    visits:STATE.visits.advisors[i].visits,
-    sold:STATE.visits.advisors[i].sold,
-  })):null;
+  if(!s&&!p&&!INV.length){alert('No scrape data on this page.');return;}
+  const adv=ADVISOR_DEFS.map((d,i)=>({name:d.name,new:STATE.advisors[i].newU,used:STATE.advisors[i].used}));
+  const visits=STATE.visits?ADVISOR_DEFS.map((d,i)=>({name:d.name,visits:STATE.visits.advisors[i].visits,sold:STATE.visits.advisors[i].sold})):null;
   const lines=[];
-  lines.push('BMW Sun Motor Cars — '+( p?p.month:(new Date().toLocaleString('en-US',{month:'long',year:'numeric'}))+' (partial)')+' Monthly Report Data');
+
+  // Header
+  lines.push('BMW Sun Motor Cars — '+(p?p.month:(new Date().toLocaleString('en-US',{month:'long',year:'numeric'})))+' Monthly Report Data');
   lines.push('');
+
+  // Sales
+  const totalNew=adv.reduce((x,a)=>x+a.new,0),totalUsed=adv.reduce((x,a)=>x+a.used,0);
   lines.push('=== SOLD LOG (VinSolutions) ===');
-  lines.push('Total new BMW: '+(s?s.suv+s.sedan+(s.ev||0):adv.reduce((x,a)=>x+a.new,0)));
-  lines.push('Total used: '+adv.reduce((x,a)=>x+a.used,0));
+  lines.push('Total new BMW: '+totalNew+'  |  Total used: '+totalUsed);
   if(s){lines.push('Mix: '+s.suv+' SUV, '+s.sedan+' sedan, '+(s.ev||0)+' EV');}
   lines.push('');
   lines.push('Per advisor (new / used):');
   adv.forEach(a=>lines.push('  '+a.name+': '+a.new+' new, '+a.used+' used'));
+
+  // Visits
   if(visits){
-    lines.push('');
-    lines.push('=== SHOWROOM VISITS (Desk Log) ===');
     const tv=visits.reduce((x,a)=>x+a.visits,0),ts=visits.reduce((x,a)=>x+a.sold,0);
-    lines.push('Total: '+tv+' visits, '+ts+' sold ('+( tv?Math.round(ts/tv*100):0)+'% close rate)');
+    lines.push('');
+    lines.push('=== SHOWROOM VISITS ===');
+    lines.push('Total: '+tv+' visits, '+ts+' sold ('+(tv?Math.round(ts/tv*100):0)+'% close rate)');
     lines.push('');
     visits.filter(a=>a.visits>0).forEach(a=>lines.push('  '+a.name+': '+a.sold+' sold / '+a.visits+' visits ('+Math.round(a.sold/a.visits*100)+'%)'));
   }
+
+  // Profit
   if(p){
     lines.push('');
     lines.push('=== PROFIT ('+p.month+') ===');
-    lines.push('Deals: '+p.deals);
-    lines.push('Total gross: $'+p.totalGross.toLocaleString());
-    lines.push('Front end: $'+p.frontGross.toLocaleString());
-    lines.push('Holdback: $'+p.holdback.toLocaleString());
-    lines.push('F&I / back: $'+p.finProds.toLocaleString());
-    lines.push('Per unit total: $'+p.perUnit.total.toLocaleString());
-    lines.push('Avg days on lot: '+p.avgDol);
-    lines.push('FLC mix: '+p.flc.F+' Factory, '+p.flc.L+' Lease, '+p.flc.C+' Cash/Conv');
+    lines.push('Deals: '+p.deals+'  |  Total gross: $'+p.totalGross.toLocaleString());
+    lines.push('Front: $'+p.frontGross.toLocaleString()+'  |  Holdback: $'+p.holdback.toLocaleString()+'  |  F&I/back: $'+p.finProds.toLocaleString());
+    lines.push('Per unit: $'+p.perUnit.total.toLocaleString()+' total  ($'+p.perUnit.front.toLocaleString()+' front / $'+p.perUnit.holdback.toLocaleString()+' holdback / $'+p.perUnit.back.toLocaleString()+' back)');
+    lines.push('Avg days on lot: '+p.avgDol+'  |  FLC: '+p.flc.F+' Factory, '+p.flc.L+' Lease, '+p.flc.C+' Cash/Conv');
     lines.push('');
-    lines.push('Per advisor (profit):');
-    p.advisors.forEach(a=>lines.push('  '+a.name+': '+a.units+' units — $'+a.total.toLocaleString()+' total gross ($'+a.front.toLocaleString()+' front / $'+a.holdback.toLocaleString()+' holdback / $'+a.back.toLocaleString()+' back)'));
+    lines.push('Per advisor:');
+    p.advisors.forEach(a=>lines.push('  '+a.name+': '+a.units+' units — $'+a.total.toLocaleString()+' total ($'+a.front.toLocaleString()+' front / $'+a.holdback.toLocaleString()+' holdback / $'+a.back.toLocaleString()+' back)'));
     lines.push('');
-    lines.push('F&I breakdown:');
     const fb=p.finBreak;
-    lines.push('  Finance: $'+fb.fi.toLocaleString()+' | NSD: $'+fb.nsd.toLocaleString()+' | Ceramic: $'+fb.ceramic.toLocaleString()+' | GAP: $'+fb.gap.toLocaleString()+' | BMW WT: $'+fb.bmwwt.toLocaleString()+' | XPEL: $'+fb.xpel.toLocaleString()+' | Other: $'+fb.other.toLocaleString());
+    lines.push('F&I products: Finance $'+fb.fi.toLocaleString()+' | NSD $'+fb.nsd.toLocaleString()+' | Ceramic $'+fb.ceramic.toLocaleString()+' | GAP $'+fb.gap.toLocaleString()+' | BMW WT $'+fb.bmwwt.toLocaleString()+' | XPEL $'+fb.xpel.toLocaleString()+' | Other $'+fb.other.toLocaleString());
   }
+
+  // Pipeline / Inventory
+  if(INV.length){
+    const n=INV.length,totalVal=INV.reduce((s,v)=>s+v.p,0),avgAge=Math.round(INV.reduce((s,v)=>s+v.d,0)/n);
+    const aged90=INV.filter(v=>v.d>=90);
+    lines.push('');
+    lines.push('=== INVENTORY (DCS) ===');
+    lines.push('In stock: '+n+' units  |  Total list value: $'+Math.round(totalVal/1000)+'K  |  Avg list: $'+Math.round(totalVal/n/1000)+'K  |  Avg days on lot: '+avgAge+'d');
+    lines.push('Aged 90+: '+aged90.length+' units');
+
+    // Series breakdown
+    const bySeries={};INV.forEach(v=>{if(!bySeries[v.s])bySeries[v.s]=0;bySeries[v.s]++;});
+    lines.push('Series breakdown: '+Object.entries(bySeries).sort((a,b)=>b[1]-a[1]).map(([s,c])=>s+' Series: '+c).join(' | '));
+
+    // Aging buckets
+    lines.push('');
+    lines.push('Aging: 0–30d: '+INV.filter(v=>v.d<=30).length+' | 31–60d: '+INV.filter(v=>v.d>30&&v.d<=60).length+' | 61–90d: '+INV.filter(v=>v.d>60&&v.d<=90).length+' | 91–180d: '+INV.filter(v=>v.d>90&&v.d<=180).length+' | 180+d: '+INV.filter(v=>v.d>180).length);
+
+    if(aged90.length){
+      lines.push('');
+      lines.push('Units 90+ days on lot:');
+      aged90.sort((a,b)=>b.d-a.d).forEach(v=>lines.push('  '+v.model+' ['+v.ch+'] — '+v.d+'d, $'+v.p.toLocaleString()));
+    }
+  }
+
+  // Website
+  if(WEBSITE.length){
+    const dcsStocks=new Set(INV.map(v=>v.ch));
+    const webStocks=new Set(WEBSITE.map(w=>w.stock).filter(Boolean));
+    const invByStock={};INV.forEach(v=>{invByStock[v.ch]=v;});
+    const matched=WEBSITE.filter(w=>w.stock&&dcsStocks.has(w.stock));
+    const needsPhotos=matched.filter(w=>w.real<3).sort((a,b)=>{const da=invByStock[a.stock]?invByStock[a.stock].d:0,db=invByStock[b.stock]?invByStock[b.stock].d:0;return db-da;});
+    const notPosted=INV.filter(v=>!webStocks.has(v.ch));
+    const p1Set=new Set(P1_STOCKS);
+    const stale=WEBSITE.filter(w=>w.stock&&!dcsStocks.has(w.stock)&&!p1Set.has(w.stock));
+    lines.push('');
+    lines.push('=== WEBSITE ===');
+    lines.push('Live listings: '+WEBSITE.length+'  |  Matched to DCS: '+matched.length+'  |  Needs photos: '+needsPhotos.length+'  |  Not posted: '+notPosted.length+'  |  Stale: '+stale.length);
+    if(needsPhotos.length){
+      lines.push('');
+      lines.push('Needs photos (<3 real photos):');
+      needsPhotos.forEach(w=>{const d=invByStock[w.stock];lines.push('  '+w.model+' ['+w.stock+'] — '+w.real+' real photo'+(w.real===1?'':'s')+(d?' · '+d.d+'d on lot':''));});
+    }
+    if(notPosted.length){
+      lines.push('');
+      lines.push('In DCS but not posted online:');
+      notPosted.forEach(v=>lines.push('  '+v.model+' ['+v.ch+'] — '+v.d+'d on lot'));
+    }
+    if(stale.length){
+      lines.push('');
+      lines.push('Stale listings (online but not in DCS):');
+      stale.forEach(w=>lines.push('  '+(w.model||w.stock)+' ['+w.stock+']'));
+    }
+  }
+
   lines.push('');
   lines.push('---');
-  lines.push('Please build a concise monthly performance report from this data covering: overall new/used sales vs goal, per-advisor new car breakdown, profit summary, showroom visit close rates, and any highlights or concerns worth flagging.');
+  lines.push('Please build a concise monthly performance report from this data covering: overall new/used sales vs goal, per-advisor breakdown, profit summary with F&I highlights, showroom visit close rates, inventory health (aging/pipeline), website photo gaps, and any notable highlights or concerns worth flagging.');
+
   navigator.clipboard.writeText(lines.join('\n')).then(()=>{
     const btn=document.getElementById('copyReportBtn');
     btn.textContent='Copied!';
