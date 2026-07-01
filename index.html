@@ -470,7 +470,7 @@ function saveAdvisors(){ADVISOR_DEFS.forEach((_,i)=>{const ni=document.getElemen
 function onAdvisorChange(){saveAdvisors();renderLeaderboard();renderSales();}
 function resetAll(){if(!confirm('Clear all advisor numbers for a new month?'))return;STATE.advisors=ADVISOR_DEFS.map(()=>({newU:0,used:0}));STATE.suv=0;STATE.sedan=0;STATE.ev=0;saveState(STATE);document.getElementById('i-suv').value=0;document.getElementById('i-sedan').value=0;document.getElementById('i-ev').value=0;renderLeaderboard();renderSales();}
 function copyReport(){
-  const s=window.SCRAPE_SEED,p=window.PROFIT;
+  const s=window.SCRAPE_SEED,p=PROFIT;
   if(!s&&!p&&!INV.length){alert('No scrape data on this page.');return;}
   const adv=ADVISOR_DEFS.map((d,i)=>({name:d.name,new:STATE.advisors[i].newU,used:STATE.advisors[i].used}));
   const visits=STATE.visits?ADVISOR_DEFS.map((d,i)=>({name:d.name,visits:STATE.visits.advisors[i].visits,sold:STATE.visits.advisors[i].sold})):null;
