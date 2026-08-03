@@ -454,6 +454,7 @@ window.SCRAPE_SEED={suv:0,sedan:0,ev:0,advisors:[{"newU":0,"used":0},{"newU":0,"
     <button class="tab" onclick="show('pipeline')">Pipeline</button>
     <button class="tab" onclick="show('aging')">Aging</button>
     <button class="tab" onclick="show('inventory')">All units</button>
+    <button class="tab" onclick="show('incoming')">Incoming</button>
     <button class="tab" onclick="show('pricing')">Pricing</button>
     <button class="tab" onclick="show('profit')">Profit</button>
     <button class="tab" onclick="show('visits')">Visits</button>
@@ -528,6 +529,29 @@ window.SCRAPE_SEED={suv:0,sedan:0,ev:0,advisors:[{"newU":0,"used":0},{"newU":0,"
         <th style="width:90px">List price</th><th style="width:90px">Status</th>
       </tr></thead>
       <tbody id="invBody"></tbody>
+    </table>
+  </div>
+</div>
+
+<div id="pg-incoming" class="pg">
+  <div class="alert">Units on order, in production, or in transit — not yet on the lot. Informational only: committed (P1) units shown here are excluded from the DAR's sold counts, which come from VinSolutions.</div>
+  <div class="mg" style="margin-bottom:14px">
+    <div class="mc"><div class="mc-l">Total incoming</div><div class="mc-v" id="incTotal"></div><div class="mc-s">units</div></div>
+    <div class="mc"><div class="mc-l">Available</div><div class="mc-v good" id="incAvail"></div><div class="mc-s">open to sell on arrival</div></div>
+    <div class="mc"><div class="mc-l">Committed</div><div class="mc-v" id="incCommit"></div><div class="mc-s">P1 · already spoken for</div></div>
+    <div class="mc"><div class="mc-l">Pipeline value</div><div class="mc-v" id="incValue"></div><div class="mc-s">list price</div></div>
+  </div>
+  <div class="card" style="margin-bottom:14px"><div class="ct">By stage</div><div id="incStages"></div></div>
+  <div class="frow" id="incFilterRow" style="margin-bottom:8px"></div>
+  <div class="frow" id="incStatusRow" style="margin-bottom:10px"></div>
+  <div style="overflow-x:auto">
+    <table class="inv-tbl">
+      <thead><tr>
+        <th style="width:130px">Model</th><th style="width:90px">Series</th>
+        <th style="width:140px">Stage</th><th style="width:90px">ETA</th>
+        <th style="width:90px">List price</th><th style="width:100px">Status</th>
+      </tr></thead>
+      <tbody id="incBody"></tbody>
     </table>
   </div>
 </div>
@@ -893,7 +917,7 @@ const INV=[
   {model:"X1 xDr28i",s:"X1",ch:"BM716",d:7,p:51420,suv:true,av:false},
   {model:"X1 xDr28i",s:"X1",ch:"744263",d:2,p:50970,suv:true,av:false},
   {model:"X1 xDr28i",s:"X1",ch:"BM724",d:4,p:49320,suv:true,av:false},
-  {model:"X1 xDr28i",s:"X1",ch:"757157",d:4,p:51470,suv:true,av:false},
+  {model:"X1 xDr28i",s:"X1",ch:"BM727",d:4,p:51470,suv:true,av:false},
   {model:"X1 xDr28i",s:"X1",ch:"BM682",d:21,p:52620,suv:true,av:false},
   {model:"X1 xDr28i",s:"X1",ch:"BM707",d:11,p:48020,suv:true,av:false},
   {model:"X1 xDr28i",s:"X1",ch:"750821",d:2,p:51320,suv:true,av:false},
@@ -907,7 +931,7 @@ const INV=[
   {model:"XM Label",s:"?",ch:"BM668",d:30,p:161150,suv:false,av:false},
   {model:"X3 30 xDrive",s:"X3",ch:"BM709",d:11,p:60350,suv:true,av:false},
   {model:"530i xDrive",s:"5",ch:"BN044",d:4,p:71815,suv:false,av:false},
-  {model:"550e xDrive",s:"5",ch:"Y54370",d:4,p:87415,suv:false,av:false},
+  {model:"550e xDrive",s:"5",ch:"BN045",d:4,p:87415,suv:false,av:false},
   {model:"X7 xDr40i",s:"X7",ch:"BN022",d:56,p:97805,suv:true,av:true},
   {model:"X7 M60i",s:"X7",ch:"BN024",d:55,p:124055,suv:true,av:true},
   {model:"X5 M60i",s:"X5",ch:"BM675",d:25,p:104350,suv:true,av:false},
@@ -947,15 +971,154 @@ const INV=[
   {model:"X7 xDr40i",s:"X7",ch:"BN043",d:7,p:101200,suv:true,av:false},
   {model:"X7 xDr40i",s:"X7",ch:"BN040",d:11,p:97400,suv:true,av:false},
 ];
+const INCOMING=[
+  {model:"X1 xDr28i",s:"X1",stage:"In Transit to VDC",eta:"2026-08-05",p:49470,sold:false},
+  {model:"X1 xDr28i",s:"X1",stage:"In Transit to VDC",eta:"2026-08-05",p:50120,sold:false},
+  {model:"X1 xDr28i",s:"X1",stage:"In Transit to VDC",eta:"2026-08-05",p:47670,sold:false},
+  {model:"X1 xDr28i",s:"X1",stage:"In Transit to VDC",eta:"2026-08-16",p:51020,sold:false},
+  {model:"X1 xDr28i",s:"X1",stage:"In Transit to VDC",eta:"2026-08-16",p:48970,sold:false},
+  {model:"X1 xDr28i",s:"X1",stage:"In Transit to VDC",eta:"2026-08-16",p:49170,sold:false},
+  {model:"X1 M35i",s:"X1",stage:"In Transit to VDC",eta:"2026-08-16",p:59670,sold:false},
+  {model:"X1 xDr28i",s:"X1",stage:"In Transit to VDC",eta:"2026-08-16",p:49820,sold:false},
+  {model:"X1 xDr28i",s:"X1",stage:"In Transit to VDC",eta:"2026-08-16",p:49270,sold:false},
+  {model:"X1 xDr28i",s:"X1",stage:"In Transit to VDC",eta:"2026-08-16",p:49620,sold:false},
+  {model:"X1 xDr28i",s:"X1",stage:"In Transit to VDC",eta:"2026-08-16",p:51220,sold:false},
+  {model:"X1 xDr28i",s:"X1",stage:"In Transit to VDC",eta:"2026-08-16",p:52370,sold:false},
+  {model:"M440i xDrive ",s:"4",stage:"At Distribution Center",eta:"2026-08-08",p:87300,sold:true},
+  {model:"X1 xDr28i",s:"X1",stage:"At Distribution Center",eta:"2026-08-08",p:52520,sold:false},
+  {model:"X1 xDr28i",s:"X1",stage:"At Distribution Center",eta:"2026-08-08",p:52770,sold:false},
+  {model:"M440i xDrive ",s:"4",stage:"At Distribution Center",eta:"2026-08-08",p:73800,sold:false},
+  {model:"M340 xDrive",s:"3",stage:"Produced",eta:"2026-07-28",p:70400,sold:true},
+  {model:"M2 Cp",s:"?",stage:"Produced",eta:"2026-07-28",p:77380,sold:false},
+  {model:"M2 Cp",s:"?",stage:"Produced",eta:"2026-07-28",p:77180,sold:false},
+  {model:"230i xDrive C",s:"?",stage:"Produced",eta:"2026-07-28",p:54030,sold:false},
+  {model:"iX3 50 xDrive",s:"iX",stage:"Produced",eta:"2026-07-30",p:65100,sold:true},
+  {model:"M340 xDrive",s:"3",stage:"Produced",eta:"2026-07-30",p:71665,sold:false},
+  {model:"M2 CS",s:"?",stage:"Produced",eta:"2026-07-31",p:111830,sold:false},
+  {model:"230i xDrive C",s:"?",stage:"Produced",eta:"2026-07-31",p:54980,sold:false},
+  {model:"330 xDrive",s:"3",stage:"Produced",eta:"2026-07-31",p:59940,sold:false},
+  {model:"230i Cp",s:"?",stage:"Produced",eta:"2026-07-31",p:43910,sold:true},
+  {model:"M240xi Cp",s:"2",stage:"Produced",eta:"2026-07-31",p:63600,sold:true},
+  {model:"M2 Cp",s:"?",stage:"Produced",eta:"2026-07-31",p:75480,sold:false},
+  {model:"230i xDrive C",s:"?",stage:"Produced",eta:"2026-07-31",p:52880,sold:false},
+  {model:"M340 xDrive",s:"3",stage:"Produced",eta:"2026-07-31",p:72190,sold:false},
+  {model:"230i xDrive C",s:"?",stage:"Produced",eta:"2026-07-31",p:51030,sold:false},
+  {model:"iX3 50 xDrive",s:"iX",stage:"Produced",eta:"2026-08-03",p:65000,sold:true},
+  {model:"M340 xDrive",s:"3",stage:"Produced",eta:"2026-08-03",p:72090,sold:false},
+  {model:"X1 xDr28i",s:"X1",stage:"Produced",eta:"2026-08-04",p:49570,sold:false},
+  {model:"M2 Cp",s:"?",stage:"Produced",eta:"2026-08-05",p:99075,sold:true},
+  {model:"430i xDrive C",s:"4",stage:"Produced",eta:"2026-08-05",p:62305,sold:false},
+  {model:"430i xDrive C",s:"4",stage:"Produced",eta:"2026-08-06",p:73150,sold:true},
+  {model:"X1 xDr28i",s:"X1",stage:"Produced",eta:"2026-08-31",p:50770,sold:false},
+  {model:"X1 xDr28i",s:"X1",stage:"Produced",eta:"2026-08-31",p:54420,sold:false},
+  {model:"X1 xDr28i",s:"X1",stage:"Produced",eta:"2026-08-31",p:53220,sold:false},
+  {model:"X1 xDr28i",s:"X1",stage:"Produced",eta:"2026-08-31",p:53220,sold:false},
+  {model:"740 xDrive",s:"7",stage:"Produced",eta:"2026-08-31",p:121600,sold:false},
+  {model:"iX3 50 xDrive",s:"iX",stage:"In Production",eta:"2026-07-30",p:72235,sold:true},
+  {model:"i7 60 xDrive",s:"i7",stage:"In Production",eta:"2026-07-30",p:141650,sold:false},
+  {model:"740 xDrive",s:"7",stage:"In Production",eta:"2026-08-06",p:109985,sold:false},
+  {model:"740 xDrive",s:"7",stage:"In Production",eta:"2026-08-07",p:117285,sold:false},
+  {model:"430i xDrive C",s:"4",stage:"In Production",eta:"2026-08-10",p:71480,sold:false},
+  {model:"740 xDrive",s:"7",stage:"In Production",eta:"2026-09-10",p:125900,sold:false},
+  {model:"X1 xDr28i",s:"X1",stage:"In Production",eta:"2026-09-10",p:49950,sold:false},
+  {model:"X1 xDr28i",s:"X1",stage:"In Production",eta:"2026-09-10",p:48900,sold:false},
+  {model:"540i xDrive",s:"?",stage:"In Production",eta:"2026-09-11",p:81215,sold:false},
+  {model:"540i xDrive",s:"?",stage:"In Production",eta:"2026-09-11",p:80400,sold:false},
+  {model:"X1 xDr28i",s:"X1",stage:"In Production",eta:"2026-09-14",p:52100,sold:false},
+  {model:"X3 M50 xDrive",s:"X3",stage:"In Production",eta:"Wk32 · Aug 2026",p:74400,sold:false},
+  {model:"X3 30 xDrive",s:"X3",stage:"In Production",eta:"Wk32 · Aug 2026",p:56900,sold:false},
+  {model:"X3 30 xDrive",s:"X3",stage:"In Production",eta:"Wk32 · Aug 2026",p:61500,sold:false},
+  {model:"X3 30 xDrive",s:"X3",stage:"In Production",eta:"Wk32 · Aug 2026",p:57465,sold:false},
+  {model:"X3 M50 xDrive",s:"X3",stage:"In Production",eta:"Wk32 · Aug 2026",p:75000,sold:false},
+  {model:"X3 30 xDrive",s:"X3",stage:"In Production",eta:"Wk32 · Aug 2026",p:61750,sold:false},
+  {model:"X3 30 xDrive",s:"X3",stage:"In Production",eta:"Wk33 · Aug 2026",p:61465,sold:false},
+  {model:"X3 30 xDrive",s:"X3",stage:"In Production",eta:"Wk33 · Aug 2026",p:59615,sold:false},
+  {model:"X3 M50 xDrive",s:"X3",stage:"In Production",eta:"Wk33 · Aug 2026",p:75000,sold:true},
+  {model:"X6 xDr40i",s:"X6",stage:"In Production",eta:"Wk33 · Aug 2026",p:91800,sold:false},
+  {model:"X7 M60i",s:"X7",stage:"In Production",eta:"Wk33 · Aug 2026",p:133290,sold:true},
+  {model:"X6 xDr40i",s:"X6",stage:"In Production",eta:"Wk33 · Aug 2026",p:88625,sold:false},
+  {model:"X3 30 xDrive",s:"X3",stage:"In Production",eta:"Wk33 · Aug 2026",p:59515,sold:false},
+  {model:"X3 30 xDrive",s:"X3",stage:"In Production",eta:"Wk34 · Aug 2026",p:58665,sold:false},
+  {model:"X6 M60i",s:"X6",stage:"In Production",eta:"Wk34 · Aug 2026",p:108700,sold:true},
+  {model:"X3 30 xDrive",s:"X3",stage:"In Production",eta:"Wk34 · Aug 2026",p:58015,sold:false},
+  {model:"M340i",s:"3",stage:"On Order",eta:"Wk34 · Aug 2026",p:66590,sold:false},
+  {model:"X7 xDr40i",s:"X7",stage:"On Order",eta:"Wk34 · Aug 2026",p:108755,sold:false},
+  {model:"X3 30 xDrive",s:"X3",stage:"On Order",eta:"Wk35 · Aug 2026",p:60315,sold:false},
+  {model:"X3 30 xDrive",s:"X3",stage:"On Order",eta:"Wk35 · Aug 2026",p:57765,sold:false},
+  {model:"X3 30 xDrive",s:"X3",stage:"On Order",eta:"Wk35 · Aug 2026",p:62315,sold:false},
+  {model:"X3 30 xDrive",s:"X3",stage:"On Order",eta:"Wk35 · Aug 2026",p:57965,sold:false},
+  {model:"X3 30 xDrive",s:"X3",stage:"On Order",eta:"Wk35 · Aug 2026",p:60665,sold:false},
+  {model:"X3 30 xDrive",s:"X3",stage:"On Order",eta:"Wk35 · Aug 2026",p:59965,sold:false},
+  {model:"X3 30 xDrive",s:"X3",stage:"On Order",eta:"Wk35 · Aug 2026",p:59315,sold:false},
+  {model:"X7 xDr40i",s:"X7",stage:"On Order",eta:"Wk35 · Aug 2026",p:102555,sold:false},
+  {model:"M340 xDrive",s:"3",stage:"On Order",eta:"Wk35 · Aug 2026",p:72115,sold:false},
+  {model:"X3 M50 xDrive",s:"X3",stage:"On Order",eta:"Wk37 · Sep 2026",p:82145,sold:true},
+  {model:"X3 30 xDrive",s:"X3",stage:"On Order",eta:"Wk37 · Sep 2026",p:57800,sold:false},
+  {model:"X3 30 xDrive",s:"X3",stage:"On Order",eta:"Wk37 · Sep 2026",p:61000,sold:false},
+  {model:"X3 M50 xDrive",s:"X3",stage:"On Order",eta:"Wk37 · Sep 2026",p:74750,sold:false},
+  {model:"330 xDrive",s:"3",stage:"On Order",eta:"Wk37 · Sep 2026",p:58400,sold:false},
+  {model:"330 xDrive",s:"3",stage:"On Order",eta:"Wk37 · Sep 2026",p:60050,sold:false},
+  {model:"X1 xDr28i",s:"X1",stage:"On Order",eta:"Wk37 · Sep 2026",p:50700,sold:false},
+  {model:"X2 xDr28i",s:"X2",stage:"On Order",eta:"Wk37 · Sep 2026",p:49550,sold:false},
+  {model:"X7 xDr40i",s:"X7",stage:"On Order",eta:"Wk37 · Sep 2026",p:100200,sold:false},
+  {model:"X3 M50 xDrive",s:"X3",stage:"On Order",eta:"Wk38 · Sep 2026",p:74515,sold:false},
+  {model:"X3 30 xDrive",s:"X3",stage:"On Order",eta:"Wk38 · Sep 2026",p:58165,sold:false},
+  {model:"X3 30 xDrive",s:"X3",stage:"On Order",eta:"Wk38 · Sep 2026",p:59800,sold:false},
+  {model:"X1 xDr28i",s:"X1",stage:"On Order",eta:"Wk38 · Sep 2026",p:50350,sold:false},
+  {model:"X2 xDr28i",s:"X2",stage:"On Order",eta:"Wk38 · Sep 2026",p:55000,sold:false},
+  {model:"M3 Competi xD",s:"3",stage:"On Order",eta:"Wk38 · Sep 2026",p:108050,sold:true},
+  {model:"540i xDrive",s:"?",stage:"On Order",eta:"Wk38 · Sep 2026",p:77800,sold:false},
+  {model:"i7 60 xDrive",s:"i7",stage:"On Order",eta:"Wk38 · Sep 2026",p:136650,sold:false},
+  {model:"X5 40 xDrive",s:"X5",stage:"On Order",eta:"Wk38 · Sep 2026",p:89500,sold:false},
+  {model:"M3",s:"3",stage:"On Order",eta:"Wk39 · Sep 2026",p:123650,sold:true},
+  {model:"430i xDrive C",s:"4",stage:"On Order",eta:"Wk39 · Sep 2026",p:64550,sold:false},
+  {model:"X1 xDr28i",s:"X1",stage:"On Order",eta:"Wk39 · Sep 2026",p:50550,sold:false},
+  {model:"X3 M50 xDrive",s:"X3",stage:"On Order",eta:"Wk39 · Sep 2026",p:72550,sold:false},
+  {model:"X7 xDr40i",s:"X7",stage:"On Order",eta:"Wk39 · Sep 2026",p:98250,sold:false},
+  {model:"X3 30 xDrive",s:"X3",stage:"On Order",eta:"Wk39 · Sep 2026",p:57100,sold:false},
+  {model:"330 xDrive",s:"3",stage:"On Order",eta:"Wk39 · Sep 2026",p:54750,sold:false},
+  {model:"X7 xDr40i",s:"X7",stage:"On Order",eta:"Wk39 · Sep 2026",p:104000,sold:false},
+  {model:"X3 30 xDrive",s:"X3",stage:"On Order",eta:"Wk39 · Sep 2026",p:56950,sold:false},
+  {model:"X3 30 xDrive",s:"X3",stage:"On Order",eta:"Wk39 · Sep 2026",p:59100,sold:false},
+  {model:"X3 30 xDrive",s:"X3",stage:"On Order",eta:"Wk39 · Sep 2026",p:58350,sold:false},
+  {model:"XM Label",s:"?",stage:"On Order",eta:"Wk39 · Sep 2026",p:163650,sold:false},
+  {model:"740 xDrive",s:"7",stage:"On Order",eta:"Wk39 · Sep 2026",p:115800,sold:false},
+  {model:"X3 30 xDrive",s:"X3",stage:"On Order",eta:"Wk39 · Sep 2026",p:60350,sold:false},
+  {model:"X1 xDr28i",s:"X1",stage:"On Order",eta:"Wk39 · Sep 2026",p:50050,sold:false},
+  {model:"230i xDrive C",s:"?",stage:"On Order",eta:"Wk40 · Sep 2026",p:51650,sold:false},
+  {model:"X3 30 xDrive",s:"X3",stage:"On Order",eta:"Wk40 · Sep 2026",p:61900,sold:false},
+  {model:"X1 xDr28i",s:"X1",stage:"On Order",eta:"Wk40 · Sep 2026",p:47400,sold:false},
+  {model:"430i xDrive C",s:"4",stage:"On Order",eta:"Wk40 · Sep 2026",p:71450,sold:false},
+  {model:"X1 xDr28i",s:"X1",stage:"On Order",eta:"Wk40 · Sep 2026",p:47600,sold:false},
+  {model:"550e xDrive",s:"5",stage:"On Order",eta:"Wk40 · Sep 2026",p:88150,sold:false},
+  {model:"X5 40 xDrive",s:"X5",stage:"On Order",eta:"Wk40 · Sep 2026",p:87350,sold:false},
+  {model:"X6 xDr40i",s:"X6",stage:"On Order",eta:"Wk40 · Sep 2026",p:83850,sold:false},
+  {model:"X6 xDr40i",s:"X6",stage:"On Order",eta:"Wk41 · Oct 2026",p:85000,sold:false},
+  {model:"330 xDrive",s:"3",stage:"On Order",eta:"Wk41 · Oct 2026",p:54750,sold:false},
+  {model:"M3",s:"3",stage:"On Order",eta:"Wk47 · Nov 2026",p:123650,sold:false},
+  {model:"iX3 50 xDrive",s:"iX",stage:"On Order",eta:"Wk49 · Dec 2026",p:67300,sold:true},
+  {model:"iX3 50 xDrive",s:"iX",stage:"On Order",eta:"Wk50 · Dec 2026",p:66350,sold:true},
+  {model:"iX3 50 xDrive",s:"iX",stage:"On Order",eta:"Wk01 · Jan 2027",p:71000,sold:true},
+  {model:"X7 M60i",s:"X7",stage:"Order Bank",eta:"Wk10 · Mar 2026",p:130250,sold:true},
+  {model:"iX3 50 xDrive",s:"iX",stage:"Order Bank",eta:"Wk27 · Jul 2026",p:65200,sold:true},
+  {model:"M5",s:"5",stage:"Order Bank",eta:"Wk36 · Sep 2026",p:135200,sold:true},
+  {model:"M440i xDrive ",s:"4",stage:"Order Bank",eta:"Wk36 · Sep 2026",p:72700,sold:true},
+  {model:"iX3 50 xDrive",s:"iX",stage:"Order Bank",eta:"Wk36 · Sep 2026",p:68250,sold:true},
+  {model:"X3 M50 xDrive",s:"X3",stage:"Order Bank",eta:"Wk41 · Oct 2026",p:84115,sold:true},
+  {model:"X3 M50 xDrive",s:"X3",stage:"Order Bank",eta:"Wk45 · Nov 2026",p:82645,sold:true},
+  {model:"M440i xDrive ",s:"4",stage:"Order Bank",eta:"",p:87300,sold:true},
+];
 const SC={'X5':'#1C69D3','X3':'#378ADD','X1':'#85B7EB','X2':'#B5D4F4','X6':'#0C447C','X7':'#042C53','5':'#1E7A3C','3':'#3B6D11','4':'#639922','2':'#97C459','i4':'#1D9E75','7':'#9A5F00','8':'#BA7517','Z4':'#5D3FD3'};
 const SO=['X5','X3','X1','X2','X6','X7','5','3','4','2','Z4','i4','7','8'];
 let activeFilter='All',lbView='total';
+let activeIncFilter='All',activeIncStatus='All';
+const INC_STAGE_ORDER=['In Transit to VDC','At Distribution Center','Produced','In Production','On Order','Order Bank'];
 
 function show(p){
   document.querySelectorAll('.pg').forEach(x=>x.classList.remove('on'));
   document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
   document.getElementById('pg-'+p).classList.add('on');
-  document.querySelectorAll('.tab')[{sales:0,pipeline:1,aging:2,inventory:3,pricing:4,profit:5,visits:6,website:7}[p]].classList.add('on');
+  document.querySelectorAll('.tab')[{sales:0,pipeline:1,aging:2,inventory:3,incoming:4,pricing:5,profit:6,visits:7,website:8}[p]].classList.add('on');
 }
 function setLbView(v,el){lbView=v;['vt','vn','vu'].forEach(id=>document.getElementById(id).classList.remove('on'));el.classList.add('on');renderLeaderboard();}
 function barEl(pct,color){return`<div class="bw"><div class="bf" style="width:${Math.min(100,Math.round(pct))}%;background:${color}"></div></div>`;}
@@ -1125,6 +1288,31 @@ function renderInventory(filter){
 }
 
 function setFilter(s){activeFilter=s;renderInventory(s);}
+
+function renderIncoming(){
+  const n=INCOMING.length,avail=INCOMING.filter(v=>!v.sold),commit=INCOMING.filter(v=>v.sold);
+  const totalVal=INCOMING.reduce((s,v)=>s+v.p,0);
+  document.getElementById('incTotal').textContent=n;
+  document.getElementById('incAvail').textContent=avail.length;
+  document.getElementById('incCommit').textContent=commit.length;
+  document.getElementById('incValue').textContent=n?'$'+Math.round(totalVal/100000)/10+'M':'$0';
+  const byStage={};INCOMING.forEach(v=>{if(!byStage[v.stage])byStage[v.stage]={ct:0,commit:0};byStage[v.stage].ct++;if(v.sold)byStage[v.stage].commit++});
+  const stages=INC_STAGE_ORDER.filter(s=>byStage[s]);
+  const mx=Math.max(1,...stages.map(s=>byStage[s].ct));
+  document.getElementById('incStages').innerHTML=stages.map(s=>`<div class="row"><div class="rl"><div class="rm">${s}</div><div style="font-size:11px;color:var(--ts)">${byStage[s].commit} committed</div></div>${barEl(Math.round(byStage[s].ct/mx*100),'#1C69D3')}<span style="font-size:13px;font-weight:500;color:var(--tp)">${byStage[s].ct}</span></div>`).join('');
+
+  document.getElementById('incFilterRow').innerHTML=['All',...stages].map(s=>`<button class="fchip${s===activeIncFilter?' on':''}" onclick="setIncFilter('${s}')">${s}</button>`).join('');
+  document.getElementById('incStatusRow').innerHTML=['All','Available','Committed'].map(s=>`<button class="fchip${s===activeIncStatus?' on':''}" onclick="setIncStatus('${s}')">${s}</button>`).join('');
+
+  let list=activeIncFilter==='All'?INCOMING:INCOMING.filter(v=>v.stage===activeIncFilter);
+  if(activeIncStatus==='Available')list=list.filter(v=>!v.sold);
+  if(activeIncStatus==='Committed')list=list.filter(v=>v.sold);
+  document.getElementById('incBody').innerHTML=[...list]
+    .sort((a,b)=>INC_STAGE_ORDER.indexOf(a.stage)-INC_STAGE_ORDER.indexOf(b.stage))
+    .map(v=>`<tr><td style="font-weight:500;color:var(--tp)">${v.model}</td><td>${v.s}</td><td style="font-size:12px">${v.stage}</td><td style="font-family:var(--fm);font-size:11px">${v.eta||'—'}</td><td style="font-family:var(--fm);color:var(--tp)">${fmtFull(v.p)}</td><td>${v.sold?'<span class="badge b-blue">Committed</span>':'<span class="badge b-grn">Available</span>'}</td></tr>`).join('');
+}
+function setIncFilter(s){activeIncFilter=s;renderIncoming();}
+function setIncStatus(s){activeIncStatus=s;renderIncoming();}
 
 function renderPricing(){
   const FIXED=650,FE=1200;
@@ -1316,7 +1504,7 @@ function renderWebsite(){
      ].join('')
     :'<div style="color:var(--tm);font-size:12px;padding:8px 0">No stale listings found</div>';
 }
-renderLeaderboard();renderSales();renderPipeline();renderAging();renderInventory('All');renderPricing();renderProfit();renderVisits();renderWebsite();
+renderLeaderboard();renderSales();renderPipeline();renderAging();renderInventory('All');renderIncoming();renderPricing();renderProfit();renderVisits();renderWebsite();
 </script>
 </body>
 </html>
