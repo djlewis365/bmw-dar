@@ -115,7 +115,7 @@ body{font-family:var(--ff);font-size:14px;background:var(--bg);color:var(--tp);m
 <body>
 <!-- AUTO-SEED-START -->
 <script>
-window.SCRAPE_SEED={suv:30,sedan:14,ev:0,advisors:[{"newU":6,"used":8},{"newU":7,"used":6},{"newU":5,"used":7},{"newU":8,"used":8},{"newU":0,"used":0},{"newU":8,"used":7},{"newU":10,"used":7}],visits:{"total":6,"sold":3,"advisors":[{"visits":2,"sold":1},{"visits":1,"sold":0},{"visits":0,"sold":0},{"visits":2,"sold":2},{"visits":0,"sold":0},{"visits":0,"sold":0},{"visits":1,"sold":0}]}};
+window.SCRAPE_SEED={suv:5,sedan:2,ev:0,advisors:[{"newU":1,"used":1},{"newU":0,"used":1},{"newU":1,"used":0},{"newU":1,"used":1},{"newU":0,"used":1},{"newU":2,"used":1},{"newU":2,"used":3}],visits:{"total":10,"sold":3,"advisors":[{"visits":2,"sold":1},{"visits":2,"sold":0},{"visits":1,"sold":0},{"visits":3,"sold":2},{"visits":0,"sold":0},{"visits":0,"sold":0},{"visits":2,"sold":0}]}};
 (function(){
   var today='2026-10-05';
   var key='dar_v7';
@@ -124,18 +124,19 @@ window.SCRAPE_SEED={suv:30,sedan:14,ev:0,advisors:[{"newU":6,"used":8},{"newU":7
   if(!stored||stored._scraped!==today||stored.ev===undefined||stored.visits===undefined){
     var prev=stored||{};
     localStorage.setItem(key,JSON.stringify({
-      goal:prev.goal||60,suv:30,sedan:14,ev:0,wd:prev.wd||25,
-      _scraped:today,advisors:[{"newU":6,"used":8},{"newU":7,"used":6},{"newU":5,"used":7},{"newU":8,"used":8},{"newU":0,"used":0},{"newU":8,"used":7},{"newU":10,"used":7}],
-      visits:{"total":6,"sold":3,"advisors":[{"visits":2,"sold":1},{"visits":1,"sold":0},{"visits":0,"sold":0},{"visits":2,"sold":2},{"visits":0,"sold":0},{"visits":0,"sold":0},{"visits":1,"sold":0}]}||prev.visits
+      goal:prev.goal||60,suv:5,sedan:2,ev:0,wd:prev.wd||25,
+      _scraped:today,advisors:[{"newU":1,"used":1},{"newU":0,"used":1},{"newU":1,"used":0},{"newU":1,"used":1},{"newU":0,"used":1},{"newU":2,"used":1},{"newU":2,"used":3}],
+      visits:{"total":10,"sold":3,"advisors":[{"visits":2,"sold":1},{"visits":2,"sold":0},{"visits":1,"sold":0},{"visits":3,"sold":2},{"visits":0,"sold":0},{"visits":0,"sold":0},{"visits":2,"sold":0}]}||prev.visits
     }));
   }
   document.addEventListener('DOMContentLoaded',function(){
     var sub=document.getElementById('navSub');
-    if(sub&&!sub.textContent.includes('Updated')){sub.textContent+=' · Updated Oct 5, 11:01 AM';}
+    if(sub&&!sub.textContent.includes('Updated')){sub.textContent+=' · Updated Oct 5, 3:00 PM';}
   });
 })();
 </script>
 <!-- AUTO-SEED-END -->
+
 
 
 
@@ -1790,7 +1791,7 @@ const now=new Date();
 const {total:_wdTotal,elapsed:_wdElapsed}=workingDaysInfo();
 const _wdDay=now.getDay()===0?_wdElapsed:_wdElapsed+1;
 document.getElementById('navSub').textContent=now.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'})+' · Day '+_wdDay+' of '+_wdTotal+' · DAR BMW';
-const PROFIT={"month":"October 2026","updated":"10/5/2026","deals":0,"totalGross":0,"frontGross":0,"holdback":0,"finProds":0,"avgDol":0,"perUnit":{"front":0,"holdback":0,"back":0,"total":0},"flc":{"F":0,"L":0,"C":0},"advisors":[],"finBreak":{"fi":0,"nsd":0,"ceramic":0,"gap":0,"bmwwt":0,"xpel":0,"other":0}};
+const PROFIT={"month":"October 2026","updated":"10/5/2026","deals":1,"totalGross":4198,"frontGross":616,"holdback":3582,"finProds":0,"avgDol":54,"perUnit":{"front":616,"holdback":3582,"back":0,"total":4198},"flc":{"F":0,"L":0,"C":1},"advisors":[{"ini":"SH","name":"Scott","units":1,"front":616,"holdback":3582,"back":0,"total":4198,"avgDol":54}],"finBreak":{"fi":0,"nsd":0,"ceramic":0,"gap":0,"bmwwt":0,"xpel":0,"other":0}};
 function renderProfit(){
   if(PROFIT.deals==null){
     document.getElementById('profitAlert').textContent='No profit data yet — run node profit-import.js to load this month\'s spreadsheet.';
