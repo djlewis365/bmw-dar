@@ -115,27 +115,28 @@ body{font-family:var(--ff);font-size:14px;background:var(--bg);color:var(--tp);m
 <body>
 <!-- AUTO-SEED-START -->
 <script>
-window.SCRAPE_SEED={suv:20,sedan:9,ev:0,advisors:[{"newU":4,"used":2},{"newU":1,"used":7},{"newU":3,"used":2},{"newU":5,"used":6},{"newU":1,"used":1},{"newU":6,"used":4},{"newU":9,"used":9}],visits:{"total":57,"sold":26,"advisors":[{"visits":15,"sold":3},{"visits":11,"sold":5},{"visits":9,"sold":4},{"visits":10,"sold":6},{"visits":0,"sold":0},{"visits":6,"sold":5},{"visits":6,"sold":3}]}};
+window.SCRAPE_SEED={suv:23,sedan:9,ev:0,advisors:[{"newU":4,"used":2},{"newU":1,"used":7},{"newU":3,"used":2},{"newU":6,"used":6},{"newU":1,"used":1},{"newU":7,"used":4},{"newU":10,"used":9}],visits:{"total":59,"sold":27,"advisors":[{"visits":15,"sold":3},{"visits":11,"sold":5},{"visits":9,"sold":4},{"visits":10,"sold":6},{"visits":0,"sold":0},{"visits":8,"sold":6},{"visits":6,"sold":3}]}};
 (function(){
-  var today='2026-10-22';
+  var today='2026-10-23';
   var key='dar_v7';
   var stored;
   try{stored=JSON.parse(localStorage.getItem(key));}catch(e){}
   if(!stored||stored._scraped!==today||stored.ev===undefined||stored.visits===undefined){
     var prev=stored||{};
     localStorage.setItem(key,JSON.stringify({
-      goal:prev.goal||60,suv:20,sedan:9,ev:0,wd:prev.wd||25,
-      _scraped:today,advisors:[{"newU":4,"used":2},{"newU":1,"used":7},{"newU":3,"used":2},{"newU":5,"used":6},{"newU":1,"used":1},{"newU":6,"used":4},{"newU":9,"used":9}],
-      visits:{"total":57,"sold":26,"advisors":[{"visits":15,"sold":3},{"visits":11,"sold":5},{"visits":9,"sold":4},{"visits":10,"sold":6},{"visits":0,"sold":0},{"visits":6,"sold":5},{"visits":6,"sold":3}]}||prev.visits
+      goal:prev.goal||60,suv:23,sedan:9,ev:0,wd:prev.wd||25,
+      _scraped:today,advisors:[{"newU":4,"used":2},{"newU":1,"used":7},{"newU":3,"used":2},{"newU":6,"used":6},{"newU":1,"used":1},{"newU":7,"used":4},{"newU":10,"used":9}],
+      visits:{"total":59,"sold":27,"advisors":[{"visits":15,"sold":3},{"visits":11,"sold":5},{"visits":9,"sold":4},{"visits":10,"sold":6},{"visits":0,"sold":0},{"visits":8,"sold":6},{"visits":6,"sold":3}]}||prev.visits
     }));
   }
   document.addEventListener('DOMContentLoaded',function(){
     var sub=document.getElementById('navSub');
-    if(sub&&!sub.textContent.includes('Updated')){sub.textContent+=' · Updated Oct 22, 7:00 PM';}
+    if(sub&&!sub.textContent.includes('Updated')){sub.textContent+=' · Updated Oct 23, 1:00 PM';}
   });
 })();
 </script>
 <!-- AUTO-SEED-END -->
+
 
 
 
@@ -1240,36 +1241,34 @@ function syncLatest(){
 }
 
 const WEBSITE=[
-  {stock:"BM615",vin:"WBA23GG06T7V87277",model:"2026 BMW 228i xDrive",real:18,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-228i-bb403c34ac18162841248f683ed91512.htm"},
-  {stock:"BM515",vin:"WBA23GG01T7V39735",model:"2026 BMW 228i xDrive",real:17,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-228i-ce5b7615ac1810998925e011b64185a3.htm"},
-  {stock:"BN104",vin:"5YM23ET07V9620024",model:"2027 BMW X6 M Competition",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2027-BMW-X6-M-361e35e7ac1822fe7566488fd2bac20b.htm"},
-  {stock:"BM568",vin:"WBA23GG07T7V69760",model:"2026 BMW 228i xDrive",real:18,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-228i-8ce68dbaac1844adf5f3b36ac430c88b.htm"},
-  {stock:"BM794",vin:"5UX73GP05T9616604",model:"2026 BMW X3 M50 xDrive",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-361e34b9ac18067071592c04b0872a9c.htm"},
-  {stock:"BM538",vin:"WBA23GG01T7V48418",model:"2026 BMW 228i xDrive",real:22,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-228i-e3103fe0ac1837f53f8606c6af2fe396.htm"},
   {stock:"BM698",vin:"3MW33CM0XT8G55337",model:"2026 BMW 230i xDrive",real:18,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-230i-23bd01adac1831ddf3fc54588e7c5632.htm"},
+  {stock:"BM615",vin:"WBA23GG06T7V87277",model:"2026 BMW 228i xDrive",real:18,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-228i-bb403c34ac18162841248f683ed91512.htm"},
+  {stock:"BM538",vin:"WBA23GG01T7V48418",model:"2026 BMW 228i xDrive",real:22,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-228i-e3103fe0ac1837f53f8606c6af2fe396.htm"},
+  {stock:"BM515",vin:"WBA23GG01T7V39735",model:"2026 BMW 228i xDrive",real:17,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-228i-ce5b7615ac1810998925e011b64185a3.htm"},
+  {stock:"BM568",vin:"WBA23GG07T7V69760",model:"2026 BMW 228i xDrive",real:18,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-228i-8ce68dbaac1844adf5f3b36ac430c88b.htm"},
   {stock:"BM764",vin:"3MW33CM04T8G67919",model:"2026 BMW 230i xDrive",real:17,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-230i-d2d5693eac185911fc222d889b7743bd.htm"},
-  {stock:"BM765",vin:"3MW33CM06T8G61300",model:"2026 BMW 230i xDrive",real:16,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-230i-e248452dac1849ee428c30afe3ad6278.htm"},
   {stock:"BM757",vin:"3MW33CM01T8G66386",model:"2026 BMW 230i xDrive",real:17,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-230i-e248464dac180512dbb02efab9f8b95c.htm"},
-  {stock:"BM691",vin:"3MW89CW08T8G55760",model:"2026 BMW 330i xDrive",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-330i-23bd0444ac181c7f9d356bddf2c3dac5.htm"},
+  {stock:"BM765",vin:"3MW33CM06T8G61300",model:"2026 BMW 230i xDrive",real:16,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-230i-e248452dac1849ee428c30afe3ad6278.htm"},
   {stock:"BM756",vin:"3MW33CM03T8G69841",model:"2026 BMW 230i xDrive",real:17,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-230i-e2484baaac185c8404187ace1b333da9.htm"},
   {stock:"BM796",vin:"3MW89CW04T8G85676",model:"2026 BMW 330i xDrive",real:17,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-330i-121f1b01ac1831418a026fd3685631da.htm"},
+  {stock:"BM691",vin:"3MW89CW08T8G55760",model:"2026 BMW 330i xDrive",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-330i-23bd0444ac181c7f9d356bddf2c3dac5.htm"},
   {stock:"BM702",vin:"3MW89CW05T8G57806",model:"2026 BMW 330i xDrive",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-330i-23bd06b4ac185abe565e24b000e84739.htm"},
   {stock:"BM686",vin:"3MW89CW01T8G56541",model:"2026 BMW 330i xDrive",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-330i-3d7cc9a6ac1809e136d79eb29b04cdac.htm"},
+  {stock:"BM673",vin:"3MW89CW00T8G45773",model:"2026 BMW 330i xDrive",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-330i-9dd7708eac18475ffbc3f7c7e82d2896.htm"},
   {stock:"BN075",vin:"WBA63DA00VCY82698",model:"2027 BMW 430i xDrive",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2027-BMW-430i-253b8169ac1832e951f5fea72d14a742.htm"},
   {stock:"BM469",vin:"WBA33FB05TFW28347",model:"2026 BMW 430i xDrive",real:17,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-430i-5d470372ac1818839faaa56f3719c9fb.htm"},
-  {stock:"BM673",vin:"3MW89CW00T8G45773",model:"2026 BMW 330i xDrive",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-330i-9dd7708eac18475ffbc3f7c7e82d2896.htm"},
   {stock:"BN044",vin:"WBA53FJ0XVCY57086",model:"2027 BMW 530i xDrive",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2027-BMW-530i-38567252ac185abe565e24b0fe6f7821.htm"},
   {stock:"BN092",vin:"WBA63FJ02VCY90992",model:"2027 BMW 540i xDrive",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2027-BMW-540i-ca067e53ac1812d225eec517372661d2.htm"},
   {stock:"BN045",vin:"WBA13FK07VCY54370",model:"2027 BMW 550e xDrive",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/electric-new/BMW/2027-BMW-550e-47e51140ac1858fe65a8f852f15054ac.htm"},
-  {stock:"BN081",vin:"WBA63HZ07VCY81415",model:"2027 BMW 740i xDrive",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2027-BMW-740i-253b801cac1807712f4d462070c07472.htm"},
   {stock:"BN096",vin:"WBA63HZ07VCY75162",model:"2027 BMW 740i xDrive",real:20,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2027-BMW-740i-0654b050ac184a64f5d1c0fe7a298952.htm"},
-  {stock:"BN093",vin:"WBA63HZ05VCY88962",model:"2027 BMW 740i xDrive",real:16,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2027-BMW-740i-ca068348ac1829354b5a1418dae61391.htm"},
+  {stock:"BN081",vin:"WBA63HZ07VCY81415",model:"2027 BMW 740i xDrive",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2027-BMW-740i-253b801cac1807712f4d462070c07472.htm"},
   {stock:"BM767",vin:"3MF23DM02T8G67872",model:"2026 BMW M2 Base",real:18,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-M2-d2d565d3ac184d2738b6adbe430fd479.htm"},
   {stock:"BM766",vin:"3MF23DM07T8G69889",model:"2026 BMW M2 Base",real:20,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-M2-e2484a75ac18490df7541314cda095fe.htm"},
+  {stock:"BN093",vin:"WBA63HZ05VCY88962",model:"2027 BMW 740i xDrive",real:16,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2027-BMW-740i-ca068348ac1829354b5a1418dae61391.htm"},
   {stock:"BN014",vin:"WBS33HK08VCY06666",model:"2027 BMW M4 Competition xDrive",real:18,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2027-BMW-M4-d4ffbb5cac1837f47d123b90590c731e.htm"},
   {stock:"BM495",vin:"WBS83GV08TCW79555",model:"2026 BMW M5 Base",real:21,stockPh:2,url:"https://www.bmw.sunmotorcars.com/electric-new/BMW/2026-BMW-M5-20c0dfe9ac18168a1686c8790e566aa4.htm"},
-  {stock:"BM545",vin:"WBS83GV06TCX59789",model:"2026 BMW M5 Base",real:21,stockPh:2,url:"https://www.bmw.sunmotorcars.com/electric-new/BMW/2026-BMW-M5-ce5b6e2dac183a61373cfa70e9943547.htm"},
   {stock:"BM528",vin:"WBS83FK04TCX60115",model:"2026 BMW M5",real:21,stockPh:2,url:"https://www.bmw.sunmotorcars.com/electric-new/BMW/2026-BMW-M5-ce5b6ccaac18168675ffcd8b1f0a1bc6.htm"},
+  {stock:"BM545",vin:"WBS83GV06TCX59789",model:"2026 BMW M5 Base",real:21,stockPh:2,url:"https://www.bmw.sunmotorcars.com/electric-new/BMW/2026-BMW-M5-ce5b6e2dac183a61373cfa70e9943547.htm"},
   {stock:"BM412",vin:"WBAGV8C05TCX18752",model:"2026 BMW M850i i xDrive",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-M850i-9453e139ac185912d149e23d2d742c4b.htm"},
   {stock:"BN061",vin:"WBX13EF06V5771818",model:"2027 BMW X1 M35i",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2027-BMW-X1-d2d5648cac1856a98c1d5bcf111fc663.htm"},
   {stock:"BN083",vin:"WBX73EF09V5788025",model:"2027 BMW X1 xDrive28i",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2027-BMW-X1-0654b14fac1829bdcb8ca515611de47f.htm"},
@@ -1279,24 +1278,24 @@ const WEBSITE=[
   {stock:"BN062",vin:"WBX73EF03V5765596",model:"2027 BMW X1 xDrive28i",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2027-BMW-X1-42a34f63ac181a15172eb3956ae7f2ef.htm"},
   {stock:"BN051",vin:"WBX73EF00V5768553",model:"2027 BMW X1 xDrive28i",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2027-BMW-X1-42a35081ac18541152113ed6802b513d.htm"},
   {stock:"BN056",vin:"WBX73EF00V5771758",model:"2027 BMW X1 xDrive28i",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2027-BMW-X1-770c6d09ac1804b19b597a95b638b001.htm"},
+  {stock:"BN091",vin:"WBX73EF04V5817771",model:"2027 BMW X1 xDrive28i",real:18,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2027-BMW-X1-ca0685ddac184e0e3aa6268ce782a2fb.htm"},
   {stock:"BN102",vin:"WBX73EF01V5814519",model:"2027 BMW X1 xDrive28i",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2027-BMW-X1-ca0684a4ac184d71ed3716f70158a8da.htm"},
   {stock:"BN057",vin:"WBX73EF07V5777248",model:"2027 BMW X1 xDrive28i",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2027-BMW-X1-d2d56b58ac184801034af116b4719e73.htm"},
   {stock:"BN052",vin:"WBX73EF04V5780351",model:"2027 BMW X1 xDrive28i",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2027-BMW-X1-d2d56c5fac184801034af1168a5395ce.htm"},
   {stock:"BN060",vin:"WBX73EF02V5781708",model:"2027 BMW X1 xDrive28i",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2027-BMW-X1-d2d56d5fac1817c04f88581a72ac78c9.htm"},
-  {stock:"BN091",vin:"WBX73EF04V5817771",model:"2027 BMW X1 xDrive28i",real:18,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2027-BMW-X1-ca0685ddac184e0e3aa6268ce782a2fb.htm"},
-  {stock:"BM707",vin:"WBX73EF06T5735697",model:"2026 BMW X1 xDrive28i",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X1-04d700a2ac184759c8b579b44a36a431.htm"},
   {stock:"BN053",vin:"WBX73EF02V5782079",model:"2027 BMW X1 xDrive28i",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2027-BMW-X1-d2d56e74ac1859256078ea94fba64d93.htm"},
-  {stock:"BM724",vin:"WBX73EF09T5750503",model:"2026 BMW X1 xDrive28i",real:20,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X1-47e50ffdac1813cdd93b4713e374d7d9.htm"},
   {stock:"BN067",vin:"WBX73EF0XV5787210",model:"2027 BMW X1 xDrive28i",real:20,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2027-BMW-X1-d2d5706bac185911fc222d88006c12b0.htm"},
-  {stock:"BM491",vin:"WBX73EF03T5592692",model:"2026 BMW X1 xDrive28i",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X1-9b04cc22ac183a61373cfa70c8756207.htm"},
+  {stock:"BM707",vin:"WBX73EF06T5735697",model:"2026 BMW X1 xDrive28i",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X1-04d700a2ac184759c8b579b44a36a431.htm"},
+  {stock:"BM724",vin:"WBX73EF09T5750503",model:"2026 BMW X1 xDrive28i",real:20,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X1-47e50ffdac1813cdd93b4713e374d7d9.htm"},
   {stock:"BM419",vin:"WBX73EF00T5565434",model:"2026 BMW X1 xDrive28i",real:23,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X1-a3c6a22aac18203aee22bcff387ee14a.htm"},
+  {stock:"BM491",vin:"WBX73EF03T5592692",model:"2026 BMW X1 xDrive28i",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X1-9b04cc22ac183a61373cfa70c8756207.htm"},
   {stock:"BM682",vin:"WBX73EF0XT5732091",model:"2026 BMW X1 xDrive28i",real:18,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X1-bd116823ac180a40e707227349203f17.htm"},
   {stock:"BM747",vin:"5UX53GP06T9568506",model:"2026 BMW X3 30 xDrive",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-15c84348ac182cb634fa901d00199a56.htm"},
   {stock:"BM787",vin:"5UX53GP01T9612735",model:"2026 BMW X3 30 xDrive",real:18,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-17562900ac184ea5d591755738a886a8.htm"},
-  {stock:"BM788",vin:"5UX53GP03T9615037",model:"2026 BMW X3 30 xDrive",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-219231f6ac183f134617f9bd3793f103.htm"},
-  {stock:"BM671",vin:"5UX53GP00T9526719",model:"2026 BMW X3 30 xDrive",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-38567371ac182d12aed28c661f366c57.htm"},
   {stock:"BM791",vin:"5UX53GP09T9608349",model:"2026 BMW X3 30 xDrive",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-2192309aac18575e6445583a03e2a930.htm"},
+  {stock:"BM788",vin:"5UX53GP03T9615037",model:"2026 BMW X3 30 xDrive",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-219231f6ac183f134617f9bd3793f103.htm"},
   {stock:"BM792",vin:"5UX53GP01T9614999",model:"2026 BMW X3 30 xDrive",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-310529a7ac18265c5d7dcd3d86a870a6.htm"},
+  {stock:"BM671",vin:"5UX53GP00T9526719",model:"2026 BMW X3 30 xDrive",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-38567371ac182d12aed28c661f366c57.htm"},
   {stock:"BM760",vin:"5UX53GP05T9574913",model:"2026 BMW X3 30 xDrive",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-3efb3936ac184d5f647218b2db9e0a5d.htm"},
   {stock:"BM763",vin:"5UX53GP04T9576720",model:"2026 BMW X3 30 xDrive",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-4421a29bac181da0dd1bebc385a2cb1a.htm"},
   {stock:"BM762",vin:"5UX53GP05T9576354",model:"2026 BMW X3 30 xDrive",real:20,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-4421a40eac180f3d6414f10a9233ae70.htm"},
@@ -1306,25 +1305,26 @@ const WEBSITE=[
   {stock:"BM717",vin:"5UX53GP02T9543392",model:"2026 BMW X3 30 xDrive",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-8ffe63f5ac181c46cdfd0dfec1622f05.htm"},
   {stock:"BM718",vin:"5UX53GP03T9543420",model:"2026 BMW X3 30 xDrive",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-8ffe65a6ac184d2b5dd6c162aafb34c9.htm"},
   {stock:"BM773",vin:"5UX53GP08T9590006",model:"2026 BMW X3 30 xDrive",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-a5ecb830ac185fef39d0f00fe0faae17.htm"},
-  {stock:"BM723",vin:"5UX53GP03T9547189",model:"2026 BMW X3 30 xDrive",real:17,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-aa8c4b50ac185a7cf19ec6411d4ab40b.htm"},
   {stock:"BM722",vin:"5UX53GP00T9547330",model:"2026 BMW X3 30 xDrive",real:18,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-aa8c49faac1829477e81ca709df92896.htm"},
+  {stock:"BM723",vin:"5UX53GP03T9547189",model:"2026 BMW X3 30 xDrive",real:17,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-aa8c4b50ac185a7cf19ec6411d4ab40b.htm"},
   {stock:"BM726",vin:"5UX53GP08T9555420",model:"2026 BMW X3 30 xDrive",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-aeaddb8dac18477fe6a8802589107baf.htm"},
   {stock:"BM774",vin:"5UX53GP0XT9593134",model:"2026 BMW X3 30 xDrive",real:16,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-b588641eac185fef39d0f00ff59b33d6.htm"},
   {stock:"BM778",vin:"5UX53GP09T9595148",model:"2026 BMW X3 30 xDrive",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-c4d2cca4ac1820874a57f05dc4435913.htm"},
-  {stock:"BM779",vin:"5UX53GP05T9597902",model:"2026 BMW X3 30 xDrive",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-c4d2cf47ac1859095d9be20db9920a7e.htm"},
   {stock:"BM780",vin:"5UX53GP01T9597878",model:"2026 BMW X3 30 xDrive",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-c4d2ce18ac183ecbd73d4eaee901f2bb.htm"},
+  {stock:"BM779",vin:"5UX53GP05T9597902",model:"2026 BMW X3 30 xDrive",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-c4d2cf47ac1859095d9be20db9920a7e.htm"},
   {stock:"BM781",vin:"5UX53GP07T9598517",model:"2026 BMW X3 30 xDrive",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-ca0680c8ac185bc6fc1af9b5209ddf75.htm"},
   {stock:"BM782",vin:"5UX53GP06T9598928",model:"2026 BMW X3 30 xDrive",real:20,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-cf2cf272ac18317c333ce9bd845443a1.htm"},
   {stock:"BM734",vin:"5UX53GP06T9558932",model:"2026 BMW X3 30 xDrive",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-d2d572d8ac183327c49f3a7e943c9415.htm"},
   {stock:"BM735",vin:"5UX53GP06T9561684",model:"2026 BMW X3 30 xDrive",real:18,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-d2d57428ac185077ac747c1ed02c43ba.htm"},
   {stock:"BM784",vin:"5UX53GP01T9599405",model:"2026 BMW X3 30 xDrive",real:18,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-d97998e5ac1804e508f25d87d47d6ac9.htm"},
-  {stock:"BM742",vin:"5UX53GP04T9564048",model:"2026 BMW X3 30 xDrive",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-dd21ee31ac18099695d7935c590453b2.htm"},
   {stock:"BM786",vin:"5UX53GP01T9601377",model:"2026 BMW X3 30 xDrive",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-d9799aa1ac181130db090a6891778b34.htm"},
+  {stock:"BM742",vin:"5UX53GP04T9564048",model:"2026 BMW X3 30 xDrive",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-dd21ee31ac18099695d7935c590453b2.htm"},
   {stock:"BM740",vin:"5UX53GP04T9564695",model:"2026 BMW X3 30 xDrive",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-e2484cd3ac185184d8a067b1da67315e.htm"},
   {stock:"BM739",vin:"5UX53GP01T9564847",model:"2026 BMW X3 30 xDrive",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-ec94ebdbac180512dbb02efa527f734e.htm"},
   {stock:"BM789",vin:"5UX73GP02T9615247",model:"2026 BMW X3 M50 xDrive",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-21923322ac18389b7dde8372dbda4737.htm"},
-  {stock:"BM776",vin:"5UX73GP02T9597591",model:"2026 BMW X3 M50 xDrive",real:24,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-b588655cac18279fde168c3493b1064c.htm"},
+  {stock:"",vin:"",model:"2026 BMW X3 M50 xDrive",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-361e34b9ac18067071592c04b0872a9c.htm"},
   {stock:"BM770",vin:"5UX73GP04T9589427",model:"2026 BMW X3 M50 xDrive",real:20,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-8c3a8b2cac181fe2458d26f28ed8d1c0.htm"},
+  {stock:"BM776",vin:"5UX73GP02T9597591",model:"2026 BMW X3 M50 xDrive",real:24,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-b588655cac18279fde168c3493b1064c.htm"},
   {stock:"BM775",vin:"5UX73GP01T9597677",model:"2026 BMW X3 M50 xDrive",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-b58866c6ac1851979897d886e22df028.htm"},
   {stock:"BM738",vin:"5UX73GP07T9561086",model:"2026 BMW X3 M50 xDrive",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-dd21ecc3ac182cb6d83888abd32a1d49.htm"},
   {stock:"BN086",vin:"5UX63JF06V9587241",model:"2027 BMW X5 40 xDrive",real:20,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2027-BMW-X5-c4d2d079ac1851979897d886183bd062.htm"},
@@ -1333,6 +1333,7 @@ const WEBSITE=[
   {stock:"BN023",vin:"5UX43EX07V9483743",model:"2027 BMW X6 M60i",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2027-BMW-X6-938b5f60ac1807579f97843ce1ed2e31.htm"},
   {stock:"BN050",vin:"5UX33EX0XV9565168",model:"2027 BMW X6 xDrive40i",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2027-BMW-X6-01215e81ac18341fab2e75cbd63d5559.htm"},
   {stock:"BN085",vin:"5UX33EX08V9603433",model:"2027 BMW X6 xDrive40i",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2027-BMW-X6-ee255853ac1831a9b524f53a3d8147b1.htm"},
+  {stock:"BN104",vin:"5YM23ET07V9620024",model:"2027 BMW X6 M Competition",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2027-BMW-X6-M-361e35e7ac1822fe7566488fd2bac20b.htm"},
   {stock:"BN024",vin:"5UX33EM00V9498424",model:"2027 BMW X7 M60i",real:18,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2027-BMW-X7-938b60d8ac184a011a5bb41bccb705af.htm"},
   {stock:"BN094",vin:"5UX23EM07V9616075",model:"2027 BMW X7 xDrive40i",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2027-BMW-X7-1c6bea49ac180d50c4c90ee1a46bf342.htm"},
   {stock:"BN040",vin:"5UX23EM08V9550975",model:"2027 BMW X7 xDrive40i",real:22,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2027-BMW-X7-7b9ba4acac1804b19b597a95438fb2c6.htm"},
@@ -1340,27 +1341,29 @@ const WEBSITE=[
   {stock:"BN090",vin:"5YM33CS06V9594087",model:"2027 BMW XM Label",real:19,stockPh:2,url:"https://www.bmw.sunmotorcars.com/electric-new/BMW/2027-BMW-XM-0cf8ac1fac1844cced8e7ffc34ebce48.htm"},
   {stock:"BN079",vin:"WBX33HR08VDA50110",model:"2027 BMW iX3 50 xDrive",real:20,stockPh:3,url:"https://www.bmw.sunmotorcars.com/electric-new/BMW/2027-BMW-iX3-a6f15d19ac18279fde168c34bf3813c0.htm"},
   {stock:"BN108",vin:"WBS13HJ02VFX45533",model:"2027 BMW M3 Base",real:1,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2027-BMW-M3-5cf49f13ac1823a8a973034ccbf12d1b.htm"},
-  {stock:"BM790",vin:"5UX53GP09T9616628",model:"2026 BMW X3 30 xDrive",real:1,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-361e3392ac181a0e86387583f7dd8392.htm"},
-  {stock:"BM793",vin:"5UX53GP04T9618657",model:"2026 BMW X3 30 xDrive",real:1,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-3b44c2c4ac18408556963d5ec3f52a96.htm"},
-  {stock:"BM801",vin:"5UX53GP0XT9619148",model:"2026 BMW X3 30 xDrive",real:1,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-3b44c416ac18087bd4691992b77aa19b.htm"},
-  {stock:"BM803",vin:"5UX53GP08T9621948",model:"2026 BMW X3 30 xDrive",real:1,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-40784385ac18408556963d5efb5f5a94.htm"},
   {stock:"BM800",vin:"5UX53GP06T9622175",model:"2026 BMW X3 30 xDrive",real:1,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-40784228ac180d6fc0fc8e5f87f6f450.htm"},
+  {stock:"BM803",vin:"5UX53GP08T9621948",model:"2026 BMW X3 30 xDrive",real:1,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-40784385ac18408556963d5efb5f5a94.htm"},
   {stock:"BM807",vin:"5UX53GP00T9623807",model:"2026 BMW X3 30 xDrive",real:1,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-4591212aac1823ab36d78302e24d0250.htm"},
   {stock:"BM802",vin:"5UX53GP05T9622412",model:"2026 BMW X3 30 xDrive",real:1,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-45912268ac183112485ab916cf3d0cb9.htm"},
   {stock:"BM804",vin:"5UX53GP05T9623480",model:"2026 BMW X3 30 xDrive",real:1,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-459123fdac18461540c11b25ebb7f4a5.htm"},
   {stock:"BM806",vin:"5UX53GP06T9623746",model:"2026 BMW X3 30 xDrive",real:1,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-45912610ac1840e209bf44d29b461992.htm"},
   {stock:"BM805",vin:"5UX53GP06T9623911",model:"2026 BMW X3 30 xDrive",real:1,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-4ac4f5acac183112485ab916644e9f4f.htm"},
-  {stock:"BM799",vin:"5UX73GP02T9619167",model:"2026 BMW X3 M50 xDrive",real:1,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-3b44c53dac185afede2e802e68659451.htm"},
-  {stock:"BN100",vin:"5UX63JF08V9620787",model:"2027 BMW X5 40 xDrive",real:1,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2027-BMW-X5-361e37e4ac18087bd469199258be2b80.htm"},
-  {stock:"BN103",vin:"5UX63JF03V9617702",model:"2027 BMW X5 40 xDrive",real:1,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2027-BMW-X5-3c3b81b4ac185afede2e802e1fa51c72.htm"},
   {stock:"BN105",vin:"5UX33EM03V9624730",model:"2027 BMW X7 M60i",real:1,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2027-BMW-X7-459127beac1823ab36d783021ca50ffe.htm"},
   {stock:"BM797",vin:"3MW89CW08T8G88113",model:"2026 BMW 330i xDrive",real:1,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-330i-07ed9d66ac182bbee63c6cf3fbc2bcc0.htm"},
   {stock:"BN106",vin:"WBA63FJ06VCY90896",model:"2027 BMW 540i xDrive",real:1,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2027-BMW-540i-ca068202ac185bc6fc1af9b5ff07b454.htm"},
   {stock:"BM795",vin:"3MW69FT07T8G83188",model:"2026 BMW M340 i xDrive",real:1,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-M340-121f198eac183210c430dfaa2fb4c6ac.htm"},
+  {stock:"BN111",vin:"WBX73EF01V5831448",model:"2027 BMW X1 xDrive28i",real:1,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2027-BMW-X1-0290a900ac185c43e2a374ecde49b20f.htm"},
+  {stock:"BN112",vin:"WBX73EF02V5825478",model:"2027 BMW X1 xDrive28i",real:1,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2027-BMW-X1-0290aa48ac183bd6400d388c1edc2db3.htm"},
+  {stock:"BN110",vin:"WBX73EF06V5825838",model:"2027 BMW X1 xDrive28i",real:1,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2027-BMW-X1-0290ac9aac182bbee63c6cf382917739.htm"},
   {stock:"BN101",vin:"WBX73EF01V5819073",model:"2027 BMW X1 xDrive28i",real:1,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2027-BMW-X1-d9799e56ac180e99e8df5097440375cc.htm"},
-  {stock:"BN095",vin:"WBX73EF05V5814149",model:"2027 BMW X1 xDrive28i",real:1,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2027-BMW-X1-d9799fa4ac185b5f61b2aa7934645524.htm"},
   {stock:"BN107",vin:"WBX63GM00V5824730",model:"2027 BMW X2 xDrive28i",real:1,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2027-BMW-X2-dea02c7eac180e99e8df509750170f2b.htm"},
+  {stock:"BM790",vin:"5UX53GP09T9616628",model:"2026 BMW X3 30 xDrive",real:1,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-361e3392ac181a0e86387583f7dd8392.htm"},
+  {stock:"BM793",vin:"5UX53GP04T9618657",model:"2026 BMW X3 30 xDrive",real:1,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-3b44c2c4ac18408556963d5ec3f52a96.htm"},
+  {stock:"BM801",vin:"5UX53GP0XT9619148",model:"2026 BMW X3 30 xDrive",real:1,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-3b44c416ac18087bd4691992b77aa19b.htm"},
+  {stock:"BM799",vin:"5UX73GP02T9619167",model:"2026 BMW X3 M50 xDrive",real:1,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2026-BMW-X3-3b44c53dac185afede2e802e68659451.htm"},
   {stock:"BN099",vin:"5UX63JF05V9620701",model:"2027 BMW X5 40 xDrive",real:1,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2027-BMW-X5-31052c22ac18150404e3bc899fc90d6b.htm"},
+  {stock:"BN100",vin:"5UX63JF08V9620787",model:"2027 BMW X5 40 xDrive",real:1,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2027-BMW-X5-361e37e4ac18087bd469199258be2b80.htm"},
+  {stock:"BN103",vin:"5UX63JF03V9617702",model:"2027 BMW X5 40 xDrive",real:1,stockPh:2,url:"https://www.bmw.sunmotorcars.com/new/BMW/2027-BMW-X5-3c3b81b4ac185afede2e802e1fa51c72.htm"},
 ];
 const P1_STOCKS=["BM754","BM591","BN087","BM688","BN108","BN097","BN109","BM798","BN084","BN098"];
 // Demo units — on the website but intentionally never in DCS. Manually maintained
@@ -1875,7 +1878,7 @@ const now=new Date();
 const {total:_wdTotal,elapsed:_wdElapsed}=workingDaysInfo();
 const _wdDay=now.getDay()===0?_wdElapsed:_wdElapsed+1;
 document.getElementById('navSub').textContent=now.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'})+' · Day '+_wdDay+' of '+_wdTotal+' · DAR BMW';
-const PROFIT={"month":"October 2026","updated":"10/22/2026","deals":16,"totalGross":96888,"frontGross":15319,"holdback":67029,"finProds":14540,"avgDol":87,"perUnit":{"front":957,"holdback":4189,"back":909,"total":6056},"flc":{"F":7,"L":7,"C":2},"advisors":[{"ini":"BM","name":"Brady","units":3,"front":11570,"holdback":14813,"back":6378,"total":32761,"avgDol":145},{"ini":"AB","name":"Adam","units":4,"front":1834,"holdback":17835,"back":3424,"total":23092,"avgDol":61},{"ini":"SH","name":"Scott","units":5,"front":1473,"holdback":18811,"back":1863,"total":22146,"avgDol":51},{"ini":"ZT","name":"Zach","units":1,"front":3500,"holdback":4383,"back":774,"total":8657,"avgDol":59},{"ini":"DF","name":"Dennis","units":2,"front":-663,"holdback":6473,"back":766,"total":6576,"avgDol":65},{"ini":"IK","name":"Ian","units":1,"front":-2394,"holdback":4715,"back":1335,"total":3656,"avgDol":271}],"finBreak":{"fi":7512,"nsd":2000,"ceramic":3028,"gap":0,"bmwwt":0,"xpel":1000,"other":1000}};
+const PROFIT={"month":"October 2026","updated":"10/23/2026","deals":17,"totalGross":105175,"frontGross":18008,"holdback":71486,"finProds":15681,"avgDol":87,"perUnit":{"front":1059,"holdback":4205,"back":922,"total":6187},"flc":{"F":8,"L":7,"C":2},"advisors":[{"ini":"BM","name":"Brady","units":3,"front":11570,"holdback":14813,"back":6378,"total":32761,"avgDol":145},{"ini":"SH","name":"Scott","units":6,"front":4161,"holdback":23267,"back":3005,"total":30433,"avgDol":58},{"ini":"AB","name":"Adam","units":4,"front":1834,"holdback":17835,"back":3424,"total":23092,"avgDol":61},{"ini":"ZT","name":"Zach","units":1,"front":3500,"holdback":4383,"back":774,"total":8657,"avgDol":59},{"ini":"DF","name":"Dennis","units":2,"front":-663,"holdback":6473,"back":766,"total":6576,"avgDol":65},{"ini":"IK","name":"Ian","units":1,"front":-2394,"holdback":4715,"back":1335,"total":3656,"avgDol":271}],"finBreak":{"fi":7896,"nsd":2000,"ceramic":3785,"gap":0,"bmwwt":0,"xpel":1000,"other":1000}};
 function renderProfit(){
   if(PROFIT.deals==null){
     document.getElementById('profitAlert').textContent='No profit data yet — run node profit-import.js to load this month\'s spreadsheet.';
